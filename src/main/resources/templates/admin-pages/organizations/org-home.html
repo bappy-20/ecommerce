@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-14">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"> Information of an Organization</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="col-md-1">
+   
+    <a id="orgCreate" th:href="@{/superadmin/add-org}" style="margin-top: 31%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Create an Organization</a>
+    </div>
+    <p style="color:red;margin-left:30%;" id="result" class="box-title"></p>
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                     <th>#</th>
+                        <th>organization name</th>
+                        <th>Owner Name</th>
+                         <th>contact name</th>
+                        <th>mobile</th>
+                         <th>Email</th>
+                         <th>Address</th>
+                         <th>Website</th>
+                         <th>About</th>
+                         <th>Delete</th>
+                         <th>Edit</th>
+                         
+                        <!--  <th class="orgDelete" >#</th>
+                           <th class="orgEdit">#</th> -->
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+</div>
+<div layout:fragment="custom-scripts">
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/organization-list',
+        "sAjaxDataProp" : "",
+        "columns" : [
+        	   {
+                   data: 'logo',
+                   "render": function ( data, type, full, meta ) {
+                       if(data!=null) {
+                           return "<a target='_blank' href='"+baseurl+"/api/downloadFile1/"+data+"'><img alt='not' style='width:40px;height:40px;' src='"+baseurl+"/api/downloadFile1/"+data+"'/></a>";
+                       }
+                       return '<i class="fa fa-user-plus"> </i>';
+               }
+              
+            },
+        	{
+            data : 'orgName'
+           },
+           {
+               data : 'ownerName'
+           },
+           {
+             data : 'contactName'
+            },
+         {
+             data : 'mobile'
+            },
+         {
+          data : 'email'
+         },
+         {
+             data : 'address'
+            },
+      
+        {
+            data : 'website'
+        },
+        {
+            data : 'about'
+        }
+        ,
+        {
+            data: 'canDelete',
+            "render": function ( data, type, full, meta ) {
+            
+                    return "<a  style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+full.id+");' href='#'><i class='fa fa-trash'></i></a>";
+               
+        }
+       
+     },
+     {
+         data: 'canEdit',
+         "render": function ( data, type, full, meta ) {
+
+                 return "<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info orgEdit'  href='"+baseurl+"/superadmin/edit-org/"+full.id+"'><i class='fa fa-pencil'></i></a>";
+            
+            
+     }
+    
+  }
+       
+        ]
+    });
+
+});
+
+	function deleteEntry(id) {
+		let url = "/api/organizations/"+id;
+	    var msg = confirm("Are you sure you want to delete?");
+	    
+	    if (msg){
+	    	  $.ajax({
+	              type: "DELETE",
+	              url: url,
+	              contentType: 'application/json; charset=utf-8',
+	              dataType: "JSON",
+	              success: function (response) {
+	            	
+	            	    if(response.statusCode==500){
+	                        
+	            	    	  alert(response.message);
+	                    }else{
+	                         window.location.href = baseurl + "/superadmin/org";
+	                    }
+	              },
+	              error: function () {
+	                  alert("error");
+	              }
+	          });
+	    }
+	    	
+	                 
+	}
+
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Company</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row">
+
+			<div class="col-md-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">Company list</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div class="col-md-1">
+							<a id="companyCreate" th:href="@{/admin/add-company}"
+								style="margin-top: 31%; margin-bottom: 5px;"
+								class="btn btn-fill btn-info"><i class="fa fa-plus-square"
+								aria-hidden="true"></i>Create Company</a>
+						</div>
+
+						<table id="empTable" class="display" width="100%" cellspacing="0">
+
+							<thead style="color: #111;">
+								<tr>
+									<th>#</th>
+									<th>Company Name</th>
+									<th>Company Origin</th>
+									<th>Delete</th>
+									<th>Edit</th>
+									<!--  <th>Action</th> -->
+								</tr>
+							</thead>
+
+						</table>
+					</div>
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+
+	</div>
+	<!-- </div> -->
+	<div layout:fragment="custom-scripts">
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script th:src="@{/js/company.js}"></script>
+		<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/company-list1',
+        "sAjaxDataProp" : "",
+        dom: 'Bfrtip',
+        buttons: [
+             'excel', 'pdf', 'print'
+        ],
+        "columns" : [
+        	{
+                data: 'logo',
+                "render": function ( data, type, full, meta ) {
+                    if(data!=null) {
+                        return "<a target='_blank' href='"+baseurl+"/api/downloadFile1/"+data+"'><img alt='not' style='width:40px;height:40px;' src='"+baseurl+"/api/downloadFile1/"+data+"'/></a>";
+                    }
+                    return '<i class="fa fa-user-plus"> </i>';
+            }
+           
+         },
+            {
+                data : 'companyName'
+               }, 
+                {
+                 data : 'companyOrigin'
+                },
+                {
+                    data: 'canDelete',
+                    "render": function ( data, type, full, meta ) {
+                        if(data==true) {
+                            return "<a  style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+full.id+");' href='#'><i class='fa fa-trash'></i></a>";
+                        }else{
+                    
+                            return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                          
+                        }
+                }
+               
+             },
+             {
+                 data: 'canEdit',
+                 "render": function ( data, type, full, meta ) {
+                     if(data==true) {
+                         return "<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info orgEdit'  href='"+baseurl+"/admin/edit-company/"+full.id+"'><i class='fa fa-pencil'></i></a>";
+                     }else{
+                    
+                    	 return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                    	 
+                     }
+                    
+             }
+            
+          } 
+        
+            ]
+        });        
+
+    });
+
+/*]]>*/
+</script>
+
+	</div>
+</body>
+</html>

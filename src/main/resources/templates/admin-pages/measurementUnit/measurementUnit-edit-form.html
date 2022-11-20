@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Edit MeasurementUnit</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- <div class="row">
+        <div class="col-md-6"> -->
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Edit an MeasurementUnit</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+                   <form class="form-horizontal">
+                    <div class="box-body"> 
+                <div class="row"> 
+                    
+              <!--  <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Region</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="region_id" placeholder="Region Id..."/>
+                 <select class="form-control" id="region_id" name="region_id">
+                  <option value=""> - - Select a Region- - </option>
+                    <option th:each="region : ${region}" th:value="${region.id}"
+                            th:utext="${region.regionName}" />
+                  </select>
+                  </div>
+                </div>
+               </div> -->
+               
+               <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Name</label>
+                  <input type="hidden"  id="id"> 
+                  
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="name" placeholder="Name.."/>
+                  </div>
+                </div>
+                </div> 
+              <!-- /.box-body -->
+              </div>
+              </div>
+              
+              <div class="box-footer">
+                <a class="btn btn-default" th:href="@{/admin/measurementUnit}">Cancel</a>
+                <button onclick="submitMeasurementUnitEditForm();" class="btn btn-info pull-right">Update</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      
+      <!-- <div class="col-md-6">
+       <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Add a map</h3>
+            </div>
+           
+            <div class="box-body">
+            <div id="map" style="width: 100%; height:310px;"></div>
+ 
+  </div>
+            </div>
+            
+            </div> -->
+
+<!-- </div> -->
+<!-- </div> -->
+<div layout:fragment="custom-scripts"> 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/measurementUnit.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var id=/*[[${id}]]*/;
+
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+    getMeasurementUnit(id);
+    
+
+});
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

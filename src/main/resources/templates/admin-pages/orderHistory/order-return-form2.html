@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Return Ordered</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+        <div class="col-md-4">
+           <div class="box">
+            <div class="box-header">
+            
+              <h3 class="box-title">Return Ordered Product</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            
+              <div class="box-body"> 
+              <div class="row">
+             
+               <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Retail</label>
+               
+                  <div class="col-sm-8">
+                  <!--  <select class="form-control" id="retail_id" name="retail_id"> -->
+                    <select  id="retail_id" name="retail_id" class="form-control select1 select2-hidden-accessible" data-placeholder=" - - Select a Retail - - " style="width: 100%;" data-select2-id="8" tabindex="-1" aria-hidden="true">
+                  <option value=""> - - Select a Retail - - </option>
+                    <option th:each="retail : ${retail}" th:value="${retail.id}"
+                            th:utext="${retail.retailName}" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+            
+              </div>
+              <br>
+              <div class="row">
+              <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Order Number</label>
+
+                  <div class="col-sm-8">
+                 
+                  <!--    <select class="form-control" id="orderId" name="orderId"> -->
+                     <select  id="orderId" name="orderId" class="form-control select3 select2-hidden-accessible" data-placeholder=" - - Select an Order No. - - " style="width: 100%;" data-select2-id="9" tabindex="-1" aria-hidden="true">
+                 
+                  <option value=""> - - Select a Order No. - - </option>
+                    <option th:each="order : ${order}" th:value="${order.orderId}"
+                            th:utext="${order.orderId}" />
+                  </select>
+                  
+                  </div>
+                </div>
+               </div>
+              
+              </div>
+            <br>
+              <div class="row">
+              <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Total Return Price</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="total_price" />
+                  </div>
+                </div>
+               </div>
+              
+              </div>
+             
+              <br>
+             
+              <div class="row">
+              <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Return Date</label>
+
+                  <div class="col-sm-8">
+                    <input type="date"  class="form-control" id="return_date" />
+                  </div>
+                </div>
+               </div>
+              
+              </div>
+              <br>
+              <div class="row">
+              <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Return Reason</label>
+
+                  <div class="col-sm-8">
+                  <!--   <input  class="form-control" id="return_note" /> -->
+                    <textarea rows="3" cols="25" id="return_note" ></textarea>
+                  </div>
+                </div>
+               </div>
+              
+              </div>
+              <br>
+              <div class="row">
+              <div class="col-sm-12">
+              <button onclick="productListSubmitToServer1();" class="btn btn-info pull-right">Submit</button>
+   
+               </div>
+              
+              </div>
+              </div>
+             
+              <!-- /.box-footer -->
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        </div>
+        
+           <div id="productList" class="col-md-8">
+                <div class="box">
+           
+            <div class="box-body">
+       
+    <div class="row">
+        <div class="col-sm-12">
+         <h2>Product To Return</h2>
+            <table id="returnTable" class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <tr>
+                     	<!-- <th>#</th> -->
+                        <th hidden=true>Product Id</th>
+                        <th>Product Name</th>
+                        <th>Ordered Quantity</th>
+                         <th>Returned Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+   
+        </div>
+        
+        </div>
+      
+        </div>
+        
+            
+</div>
+</div>
+<div layout:fragment="custom-scripts">
+<script th:src="@{/js/order.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+	$('#productList').hide();
+	$('.select2').select2();
+	$('.select1').select2();
+	$('.select3').select2();
+	setBaseUrl(baseurl);
+	getDropDownValue();
+	
+});
+
+$(document).ready(function () {
+	
+	$(document).on('change','#retail_id',function(){
+		  var id = this.value; 
+         $.ajax({
+             type: "GET",               
+             url: baseurl+"/api/get-all-order-by-retail-name/"+id,         
+             cache: false,
+             timeout: 600000,
+             success: function (data) {  
+                 order(data);
+             },
+             error: function (e) {                  
+                 console.log("ERROR : ", e);
+                
+             }
+         });      
+		
+	});
+	
+	
+});
+
+function order(data) { 
+    
+    $('select[name="orderId"]').empty();
+    $('select[name="orderId"]').append('<option value=""> -- Please Select -- </option>');
+    $.each(data, function(idx, obj){ 
+         $('select[name="orderId"]')
+         .append('<option value="'+ obj.id +'">'+ obj.orderId +'</option>');
+    });
+}
+
+$(document).ready(function () {
+	
+	$(document).on('change','#orderId',function(){		  
+		  var orderId = $('#orderId').find(":selected").text();
+         $.ajax({
+             type: "GET",               
+             url: baseurl+"/api/get-order-list-by-order-id/"+orderId,         
+             cache: false,
+             timeout: 600000,
+             success: function (data) {  
+                 product(data.orderDetails);
+             },
+             error: function (e) {                  
+                 console.log("ERROR : ", e);
+                
+             }
+         });     
+		
+	});
+	
+	
+});
+
+function product(data) { 
+    
+    $('select[name="product_id"]').empty();
+    $('select[name="product_id"]').append('<option value=""> -- Please Select -- </option>');
+    $.each(data, function(idx, obj){ 
+         $('select[name="product_id"]')
+         .append('<option value="'+ obj.id +'">'+ obj.productName +'</option>');
+    });
+}
+
+
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

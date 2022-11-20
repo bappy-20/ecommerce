@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<script th:src="@{/js/attendance.js}"></script>
+</head>
+<body >
+<div layout:fragment="content">
+<div class="row">
+        <div class="col-md-12">
+ 
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+                <div class="box-header">
+                    <h4 style="margin-left: 42%;">Employee Name: <span id="empl_name"></span></h4>
+                    <h4 style="margin-left: 42%;">Employee Id: <span id="empl_id"></span></h4>
+                    <h4 style="margin-left: 42%;">Start Date: <span id="st_date"></span></h4>
+                    <h4 style="margin-left: 42%;">End Date: <span id="en_date"></span></h4>
+                </div>
+         
+            <div class="box-body">
+         
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Serial No</th>
+                        <th>Date</th>
+                        <th>In time</th>                       
+                        <th>Address In</th>                       
+                        <th>Out Time</th> 
+                        <th>Address Out</th> 
+                        <th>Status</th> 
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+         
+        </div>
+       
+      </div>
+
+</div>
+</div>
+</div>
+</div>
+
+<div layout:fragment="custom-scripts">
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var employeeId=/*[[${employeeId}]]*/;
+var startDate=/*[[${startDate}]]*/;
+var endDate=/*[[${endDate}]]*/;
+var employeeName=/*[[${employeeName}]]*/;
+
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+    submitAttendanceOfAnEmployee(employeeId,startDate,endDate,employeeName);
+    //submitAttendanceOfAnEmployee(employeeId,startDate,employeeName);
+});
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"> Assign Route list</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="col-md-1">
+    <a id="assignRouteCreate" th:href="@{/admin/add-assignRoute}" style="margin-top: 31%;margin-bottom:5px;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Create an AssignRoute</a>
+    </div> 
+    </div>
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Region Name</th>
+                        <th>Area Name</th>
+                        <th>Territory Name</th>
+                        <th>Distributor Name</th>
+                        <th>Employee Id</th>
+                        <th>Day Name</th>
+                        <th>Route Details</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/assign-Route',
+        "sAjaxDataProp" : "",
+        dom: 'Bfrtip',
+        buttons: [
+             'excel', 'pdf', 'print'
+        ],
+        "columns" : [
+        	{
+                data : 'regionName'
+               }, 
+                {
+                 data : 'areaName'
+                },
+                 {
+                 data : 'territoryName'
+                },
+               {
+                 data : 'distributorName'
+                },
+               {
+                 data : 'employeeId'
+                },
+               {
+                 data : 'dayName'
+                }, 
+               {
+                 data : 'routeDetails'
+                },               
+                {
+                    data: 'id',
+                    
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+oData.id+");' href='#'><i class='fa fa-trash'></i></a><a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info'  href='"+baseurl+"/admin/edit-assignRoute/"+oData.id+"'><i class='fa fa-pencil'></i></a>");
+               
+                    } 
+                }        
+            ]
+        });
+    });
+
+function deleteEntry(id) {
+	let url = baseurl+"/api/assign-Route/"+id;
+    var msg = confirm("Are you sure you want to delete?");
+    
+    if (msg){
+    	   $.ajax({
+              type: "DELETE",
+              url: url,
+              contentType: 'application/json; charset=utf-8',
+              dataType: "JSON",
+              success: function (response) {
+            	  alert("Deletion Successful!");
+            	  window.location.reload();
+              },
+              error: function () {
+                  alert("error");
+              }
+          }); 
+    }   	
+                 
+}
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

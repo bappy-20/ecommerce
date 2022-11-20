@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">List Of Product Wise Campaign</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="col-md-1">
+    <a id="btn" th:href="@{/admin/add-product-wise-campaign}" style="margin-top: 31%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Create a product wise Campaign</a>
+    </div> 
+  
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Campaign Name</th>
+                        <th>Product Name</th>
+                        <th>Offer Type</th>
+                        <th>Discount Type</th>
+                        <th>Discount Amount</th>
+                        <th>Discount On</th>
+                        <th>Require Quantity</th>
+                        <th>Free Item</th>
+                        <th>Free Item Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+            </table> 
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script th:src="@{/js/product-wise-campaign.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/product-wise-campaign-list1',
+        "sAjaxDataProp" : "",
+        "columns" : [
+            { data : 'campaignName'},
+            { data : 'productName'},
+            { data : 'offerType'},
+            { data : 'discountType'},
+            { data : 'discountAmount'},
+            { data : 'discountOn'},
+            { data : 'requiredQuantity'},
+            { data : 'freeProduct'},
+            { data : 'freeItemQuantity'},
+             {  data: 'id',
+                    
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+oData.id+");' href='#'><i class='fa fa-trash'></i></a><a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info'  href='"+baseurl+"/admin/edit-product-wise-campaign/"+oData.id+"'><i class='fa fa-pencil'></i></a>");
+               
+                    } 
+                }            
+            ]
+        });
+        
+
+    });
+
+ 
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

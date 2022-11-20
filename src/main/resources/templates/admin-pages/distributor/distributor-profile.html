@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+
+<head>
+<meta charset="UTF-8">
+<script th:src="@{/js/distributor.js}"></script>
+<title>Profile</title>
+<!--    <style >
+    .list-group-item {
+    position: relative;
+    display: block;
+    padding: 0px 8px;
+    margin-bottom: -12px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}   
+    </style> -->
+</head>
+<body>
+
+    <div layout:fragment="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+
+                    <section class="content-header">
+                       
+                        <ol class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                            <li><a href="#"></a></li>
+                            <li class="active">Distributor profile</li>
+                        </ol>
+                    </section>
+                    <section class="content">
+
+                        <div class="row">
+                            <div class="col-md-4" style="margin-left:25%;">
+                                <h1>Distributor Profile</h1>
+                                <!-- Profile Image -->
+                                <div class="box box-primary">
+                                    <div class="box-body box-profile">
+                                        <img class="profile-user-img img-responsive img-circle"
+                                            th:src="@{/api/downloadFile/}+${session.orglogo}"
+                                            alt="User profile picture">
+
+                                        <h3 class="profile-username text-center" id="distributorName"></h3>
+                                        <ul class="list-group list-group-unbordered ">
+
+                                            <li class="list-group-item "><b>Owner: </b> <span
+                                                id="distributorOwner"></span></li>
+                                            <li class="list-group-item "><b>Mobile: </b> <span
+                                                id="distributorPhone"></span></li>
+                                            <li class="list-group-item "><b> Address: </b> <span
+                                                id="distributorAddress"></span></li>
+                                           
+                                        </ul>
+
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                            <!-- /.col -->
+                           
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div layout:fragment="custom-scripts">
+        <script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var id=/*[[${id}]]*/;
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+    getdistributorProfile(id);
+    
+
+});
+/*]]>*/
+</script>
+    </div>
+</body>
+</html>

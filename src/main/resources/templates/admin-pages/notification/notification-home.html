@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+             
+               <div class="col-md-2">
+                <h3 class="box-title"> Notification list</h3>
+    <a id="notificationCreate" th:href="@{/admin/add-notification}" style="margin-top: 0%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Create an Notification</a>
+
+    </div> 
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+           
+
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                     <th>Notice Type</th>
+                        <th>Title</th>
+                        <th>Message</th>
+                        <th>File</th>
+                         <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+ </div>
+ <div class="row">
+ 
+ <div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Send Message</h4>
+              </div>
+              <div class="modal-body">
+           <div class="col-md-10">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#activity" data-toggle="tab">Employee Category</a></li>
+              <li><a href="#settings" data-toggle="tab">Employee</a></li>
+            </ul>
+            <div class="tab-content">
+             <input id="notification_id" type="hidden">
+              <div class="active tab-pane" id="activity">
+                <form class="form-horizontal">
+                 <input id="flag" type="hidden" value="category">
+                  <div class="form-group">
+                 
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                   
+                  <select class="form-control" id="emp_category" name="emp_category">
+                  <option value=""> - - Select an Category - - </option>
+                   <option value="all">All Employees </option>
+                    <option th:each="typeList : ${typeList}" th:value="${typeList.id}"
+                            th:utext="${typeList.userType}" />
+                  </select>
+                      </div>
+                  </div>
+                   <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-info" id="btngroup">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="tab-pane" id="settings">
+                <form class="form-horizontal">
+                 <input id="flag1" type="hidden" value="employee">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                    <div class="col-sm-10">
+                     <select class="form-control" id="emp_id" name="emp_id">
+                  <option value=""> - - Select an Employee  - - </option>
+                    <option th:each="emp : ${emp}" th:value="${emp.id}"
+                            th:utext="${emp.fullName}" />
+                  </select>
+                      </div>
+                  </div>
+                   <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-info" id="btnimei">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+                 
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+ </div>
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script th:src="@{/js/notification.js}"></script>	
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/notification-list-role',
+        "sAjaxDataProp" : "",
+        dom: 'Bfrtip',
+        buttons: [
+             'excel', 'pdf', 'print'
+        ],
+        "columns" : [
+        	 {
+                 data : 'notificationType'
+                },
+                {
+                 data : 'title'
+                },
+                 {
+                 data : 'message'
+                },
+               
+                {
+                    data: 'fileName',
+                    "render": function ( data, type, full, meta ) {
+                        if(data!=null) {
+                            return "<a target='_blank' href='"+baseurl+"/api/downloadFile1/"+data+"'><img alt='not' style='width:40px;height:40px;' src='"+baseurl+"/api/downloadFile1/"+data+"'/></a>";
+                        }
+                        return '<i class="fa fa-product-hunt"> </i>';
+                }
+               
+             },
+             {
+                 data: 'canDelete',
+                 "render": function ( data, type, full, meta ) {
+                     if(data==true) {
+                         return "<a  style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+full.id+");' href='#'><i class='fa fa-trash'></i></a>";
+                     }else{
+                 
+                         return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                       
+                     }
+             }
+            
+          },
+          {
+              data: 'canEdit',
+              "render": function ( data, type, full, meta ) {
+                  if(data==true) {
+                      return "<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info orgEdit'  href='"+baseurl+"/admin/edit-notification/"+full.id+"'><i class='fa fa-pencil'></i></a><a style='margin-right: 3px;padding: 3px 7px;' onclick='sendMessage("+full.id+");' href='#' class='btn btn-info' ><i class='fa fa-play'></i></a>";
+                  }else{
+                 
+                 	 return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                 	 
+                  }
+                 
+          }
+         
+       }               
+            ]
+        });
+        
+    });
+
+function sendMessage(id) {
+	 event.preventDefault();
+	 $('#notification_id').val(id);
+	 $('#modal-default').modal('show');	        
+}
+
+$(document).ready(function() {    
+    $("#btnimei").click(function(event) {        
+        event.preventDefault();        
+        let flag = $('#flag1').val();
+        let empId = $('#emp_id').val();
+        let notificationId = $('#notification_id').val();
+       
+        fire_ajax_submit(flag,empId,notificationId);
+
+    });
+    
+    $("#btngroup").click(function(event) {
+        event.preventDefault();    
+       
+        let flag = $('#flag').val();
+        
+        let empCat = $('#emp_category').val();
+        let notificationId = $('#notification_id').val();
+        // fire_ajax_submit(empCat,empCat,notificationId);
+        //alert("Notice will be sent within sometime")
+        fire_ajax_submit(flag,empCat,notificationId);
+    });
+
+});
+
+function fire_ajax_submit(flag,empId,notificationId) {
+    $.ajax({
+        type : "POST",
+        url : baseurl+"/api/send-notification/"+flag+"/"+empId+"/"+notificationId,
+        processData : false,
+        contentType : false,
+        cache : false,
+        timeout : 600000,
+        success : function(data) {
+        	//const obj = JSON.parse(data);
+        	//alert(JSON.stringify(obj.results));
+        	alert("Notice will be sent within sometime");
+            $('#message').modal('hide');
+             window.location.reload(); 
+        },
+        error : function(e) {
+            $("#result").text(e.responseText);
+            console.log("ERROR : ", e);
+            
+        }
+    });
+}
+
+$("#modal-default").on("hidden.bs.modal", function () {
+     window.location.reload(); 
+    
+});
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

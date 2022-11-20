@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title layout:title-pattern="$CONTENT_TITLE  $LAYOUT_TITLE"> :: পাইকার</title>
+
+  <title>Admin | Dashboard </title>
+ <link rel="icon"th:href="@{/images/logo-inovex.png}" type ="image/x-icon">
+        
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap.css}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{/dist/css/font-awesome.min.css}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" th:href="@{/dist/css/ionicons.min.css}">
+    <link rel="stylesheet" type="text/css"  th:href="@{/ssss/jquery.dataTables.css}" >
+ <link rel="stylesheet" type="text/css"  th:href="@{/ssss/dataTables.tableTools.min.css}" >
+  <link rel="stylesheet" type="text/css"  th:href="@{/ssss/buttons.dataTables.min.css}" >
+  <link rel="stylesheet" type="text/css"  th:href="@{/ssss/dataTables.jqueryui.min.css}" >
+  <!-- jvectormap -->
+  <link rel="stylesheet" th:href="@{/dist/css/jquery-jvectormap.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/dist/css/AdminLTE.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/select2.min.css}">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" th:href="@{/dist/css/all-skins.css}">
+   <link rel="stylesheet" th:href="@{/dist/css/pace.min.css}">  
+   <link rel="stylesheet"  th:href="@{/dropdown/src/dist/css/bootstrap-select.min.css}" />  
+   
+   <!-- datetime css -->
+    <link rel="stylesheet" th:href="@{/datetime/daterangepicker.css}">
+   <link rel="stylesheet" th:href="@{/datetime/bootstrap-datepicker.min.css}">
+    <link rel="stylesheet" th:href="@{/datetime/bootstrap-timepicker.min.css}">
+    
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a  th:href="@{/admin/home}" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <img width="50" height="50" th:src="@{/images/logo.jpeg}" class="user-image" alt="পাইকার">
+      <span class="logo-mini"><b>পাইকার</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>পাইকার</b></span>
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+       <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+        <li class="dropdown notifications-menu">
+            <a th:href="@{/admin/pending-order}" >
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning" th:text="${session.pending}"></span>
+            </a>
+          
+          </li>
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img th:src="@{/api/downloadFile/}+${session.img}" class="user-image" alt="User Image">
+              <span class="hidden-xs" th:text="${session.username}"> </span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+               <img th:src="@{/api/downloadFile/}+${session.img}" class="img-circle" alt="User Image">
+
+                <p th:text="${session.username}"></p>
+                <input type="hidden" id="role" th:value="${session.role}">
+                
+          
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+                <div class="row">
+                  <div class="col-xs-4 text-center">
+                   <a th:href="@{/admin/user/changepassword}"> Change
+                                                  Password</a>
+                  </div>
+                 
+                  <div class="col-xs-4 text-center">
+                      <a  th:href="@{/admin/get/distributor-profile}">Dist Profile</a>
+                  </div>
+                  
+                   <div class="col-xs-4 text-center">
+                      <a  th:href="@{/admin/get/organization-profile}">Org Profile</a>
+                  </div>
+                  
+                </div>
+                <!-- /.row -->
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                 <a th:href= "@{/admin/user/myprofile}" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+     <!--  <div class="user-panel">
+        <div class="pull-left image">
+          <img th:src="@{/api/downloadFile/}+${session.img}" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p th:text="${session.username}"></p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div> -->
+      <!-- search form -->
+    <!--   <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form> -->
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+       
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-cog"></i>
+            <span>Administrative</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <!--   <li id="Org"><a th:href="@{/admin/org}"><i class="fa fa-info-circle"></i>Create Organization</a></li>  -->        
+          <li id="Dist"><a th:href="@{/admin/distributor}"><i class="fa fa-info-circle"></i>Create Buyer</a></li>
+          <li id="supplier"><a th:href="@{/admin/supplier}"><i class="fa fa-info-circle"></i>Create Supplier</a></li>        
+                            
+          <!-- <li id="createrole"><a th:href="@{/admin/role}"><i class="fa fa-info-circle"></i>Create Role</a></li>  -->       
+        <!--  <li id="rolemanagement"><a th:href="@{/admin/manage-role}"><i class="fa fa-info-circle"></i>Manage Role</a></li>
+         --> <li id="webuser"><a th:href="@{/admin/user}"><i class="fa fa-info-circle"></i>Create User</a></li>
+        
+           </ul>
+        </li>
+        
+        
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa fa-info-circle"></i>
+            <span>Product Setup </span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li id="productCategory"><a th:href="@{/admin/category}"><i class="fa fa-info-circle"></i>Create Product Category</a></li>
+          <li id="measurementUnit"><a th:href="@{/admin/measurementUnit}"><i class="fa fa-info-circle"></i>Create Measurement Unit</a></li>  
+           <li id="company"><a th:href="@{/admin/company}"><i class="fa fa-info-circle"></i> Create Company</a></li>        
+           <li id="brand"><a th:href="@{/admin/brand}"><i class="fa fa-info-circle"></i> Create Brand</a></li>
+           <li id="product"><a th:href="@{/admin/product-model}"><i class="fa fa-info-circle"></i> Create Product</a></li>           
+           <li id="productBatch"><a th:href="@{/admin/product-batch}"><i class="fa fa-info-circle"></i> Create Product Batch</a></li>
+            <li id="mappingProduct"><a th:href="@{/admin/product-mapping}"><i class="fa fa-info-circle"></i> Mapping Product</a></li>
+           <li id="productPrice"><a th:href="@{/admin/price}"><i class="fa fa-info-circle"></i>Create Product Price</a></li>
+           
+            </ul>
+        </li>
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-shopping-cart"></i>
+            <span>Purchase Product </span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li id="productPurchase"><a th:href="@{/admin/incomingProduct}"><i class="fa fa-info-circle"></i> Product Purchase</a></li>           
+            </ul>
+        </li>   
+        
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa fa-info-circle"></i>
+            <span> Order  </span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li id="createorderecommerce"><a th:href="@{/admin/create-order-ecommerce}"><i class="fa fa-info-circle"></i>Order Create</a></li>
+          <li id="orderecommerce"><a th:href="@{/admin/order-ecommerce-home}"><i class="fa fa-info-circle"></i>Order List</a></li>
+            </ul>
+        </li> 
+                
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-bar-chart"></i>
+            <span>Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+           <li id="primaryInventoryStock"><a th:href="@{/admin/primary-inventory-stock}"><i class="fa fa-file"></i>Primary Inventory Stock</a></li>       
+            </ul>
+        </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+   
+      <ol class="breadcrumb">
+        <li><a th:href="@{/admin/home}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+<br>
+    <!-- Main content -->
+    <section class="content">
+<div layout:fragment="content">
+
+</div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 1.0.1
+    </div>
+    <strong>Copyright &copy; 2021 <a href="#">পাইকার</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">          
+        </ul>
+      </div>
+    
+    </div>
+  </aside>
+ 
+  <div class="control-sidebar-bg"></div>
+
+</div>
+
+<script th:src="@{/dist/js/jquery.min.js}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/dist/js/bootstrap.min.js}"></script>
+
+<script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+   <script type="text/javascript"  th:src="@{/ssss/dataTables.tableTools.min.js}"></script>
+  <script type="text/javascript"  th:src="@{/ssss/buttons.print.min.js}"></script>
+  <script type="text/javascript"  th:src="@{/ssss/buttons.colVis.min.js}"></script>
+  <script type="text/javascript"  th:src="@{/ssss/buttons.html5.min.js}"></script>
+   <script type="text/javascript"  th:src="@{/ssss/buttons.html5.min.js}"></script>
+   <script type="text/javascript"  th:src="@{/ssss/dataTables.select.min.js}"></script>
+   <script type="text/javascript"  th:src="@{/ssss/dataTables.buttons.js}"></script>
+   <script type="text/javascript" th:src="@{/ssss/pdfmake.min.js}"></script>    
+   <script type="text/javascript"  th:src="@{/ssss/buttons.flash.min.js}"></script> 
+   <script type="text/javascript"  th:src="@{/ssss/jszip.js}"></script>   
+   <script type="text/javascript"  th:src="@{/ssss/vfs_fonts.js}"></script> 
+<!-- FastClick -->
+<script th:src="@{/dist/js/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<!-- Sparkline -->
+<script th:src="@{/dist/js/jquery.sparkline.min.js}"></script>
+<!-- jvectormap  -->
+<script th:src="@{/dist/js/jquery-jvectormap-1.2.2.min.js}"></script>
+<script th:src="@{/dist/js/jquery-jvectormap-world-mill-en.js}"></script>
+<!-- SlimScroll -->
+<script th:src="@{/dist/js/jquery.slimscroll.min.js}"></script>
+<!-- ChartJS -->
+<script th:src="@{/dist/js/Chart.js}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script th:src="@{/dist/js/dashboard2.js}"></script>
+<script th:src="@{/dist/js/select2.full.min.js}"></script>
+<script th:src="@{/dist/js/pace.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/dist/js/demo.js}"></script>
+
+<script th:src="@{/dist/js/ckeditor.js}"></script>
+<script th:src="@{/dropdown/src/dist/js/bootstrap-select.min.js}" type="text/javascript"></script>
+<!-- datetime -->
+<script th:src="@{/datetime/jquery.inputmask.js}" ></script>
+<script th:src="@{/datetime/jquery.inputmask.date.extensions.js}" ></script>
+<script th:src="@{/datetime/jquery.inputmask.extensions.js}" ></script>
+
+<script th:src="@{/datetime/moment.min.js}" ></script>
+<script th:src="@{/datetime/daterangepicker.js}" ></script>
+<script th:src="@{/datetime/bootstrap-datepicker.min.js}" ></script>
+<script th:src="@{/datetime/bootstrap-timepicker.min.js}" ></script>
+<!-- form validation -->
+<script th:src="@{/dist/js/jquery.validate.min.js}"></script>
+<script th:src="@{/dist/js/additional-methods.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script th:src="@{/js/menu.js}"></script>
+ <script th:inline="javascript">
+/*<![CDATA[*/	
+	$(document).ready(function(){
+		getMenu();
+		
+	});
+
+/*]]>*/
+</script>
+ <div layout:fragment="custom-scripts">
+ $(document).ajaxStart(function() { Pace.restart(); }); 
+
+    </div>
+</body>
+</html>

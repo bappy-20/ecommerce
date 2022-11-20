@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+        <div class="col-md-12">       
+  
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+         <a th:href="@{/superadmin/org}">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-money"></i></span>
+
+            <div class="info-box-content">
+              <span style="font-weight: bold;" class="info-box-text">Create Organization</span>
+               </div>
+            <!-- /.info-box-content -->
+          </div>
+          </a>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+      <div class="col-md-3 col-sm-6 col-xs-12">
+         <a th:href="@{/superadmin/role}">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-money"></i></span>
+
+            <div class="info-box-content">
+              <span style="font-weight: bold;" class="info-box-text">Create User Type</span>
+               </div>
+            <!-- /.info-box-content -->
+          </div>
+          </a>
+          <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-calculator"></i></span>
+
+            <div class="info-box-content">
+              <span style="font-weight: bold;" class="info-box-text">Expense</span>
+                <span style="font-weight: normal;" class="info-box-number" th:text="'Today : '+${totalExpToday}"></span>
+               <span style="font-weight: normal;" class="info-box-number" th:text="'This Month : '+${totalExpMonth}"></span>
+                <span style="font-weight: normal;" class="info-box-number" th:text="'Total : '+${totalExp}"></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+          
+         
+      </div>
+
+</div>
+
+ 
+      
+     
+    
+</div>
+<div layout:fragment="custom-scripts">
+<script th:src="@{/js/home.js}"></script>
+<script th:src="@{/js/location.js}"></script>
+<script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3hltsx8RJ8bOckcXkm9PjJbr05kNxtow"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    setBaseUrl(baseurl); 
+    getTopSellingProduct();
+    getallEmpLocation();
+    getTodayAttendance();
+    getSaleBydate();
+
+});
+
+
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />        
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">  
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Monthly Target</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-12">
+              <div class="box-body">
+               
+                <div class="row">
+                                     
+                <div class="col-md-4">
+                 <div class="form-group">
+                  <label for="licenseNumber" class="col-sm-4 control-label">Select an Employee</label>
+                  <div class="col-sm-8">
+                   <select id="emp_id" name="emp_id" class="form-control select2 select2-hidden-accessible" data-placeholder=" - - Select an Employee - - " style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">                
+                   <option value=""> - - Please Select - - </option>
+                    <option th:each="emp : ${emp}" th:value="${emp.username}"
+                            th:utext="${emp.fullName}" />
+                  </select>
+                   </div>
+                </div>
+                </div>
+                
+                <div class="col-sm-4">
+               <div class="form-group"  id="date">
+                  <label for="amount" class="col-sm-4 control-label">Target Month</label>
+
+                  <div class="col-sm-8">
+                    <input type="month" class="form-control" id="target_month" placeholder="Target Date"/>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-4">
+               <div class="form-group"  >
+                  <label for="visit" class="col-sm-4 control-label">Number of visit</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="visit" placeholder="Visit Target"/>
+                  </div>
+                </div>
+              </div>
+                </div>
+               
+              </div>
+            
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+           <!--  <div class="box-header">
+             <div class="col-md-12">
+            <a id="btn-save" href="#" style="margin-left: 0%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Submit</a>
+            </div>
+            </div> -->
+            <!-- /.box-header -->
+            <div class="box-body"> 
+           
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Product Category</th>
+                        <th>Target Quantity</th>
+                        <th>Target Value</th>
+                    </tr>
+                </thead>
+
+            </table> 
+            <div class="row">
+       
+        </div>
+           </div>
+           <div class="fixed-bottom">
+             <div class="col-md-12">
+            <a id="btn-save" href="#" style="margin-left: 90%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Submit</a>
+            </div>
+            </div> 
+           
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+
+$(document).ready(function() {
+    $('.select2').select2();
+    $('.selectpicker').selectpicker(); 
+});
+var i=1;
+var dataTable = $('#empTable').DataTable({
+    "processing": true,
+    "serverSide": true,
+    "order":[],
+    "columnDefs": [ 
+    	{
+        "targets": 0,
+        "render": function ( data, type, row, meta ) {
+          return '<div style="display: none;" class="form-check"><input name="app" class="form-check-input" type="checkbox" value="' +data+ '" id="flexCheckDefault"></div>'+i++;
+        }
+      } ,{
+          "targets":4 ,
+          "render": function ( data, type, row, meta ) {
+            return '<div class="form-check"><input name="app" class="form-check-input" type="text" value="' +data+ '" id="quantity"></div>';
+          }
+        }  
+      ],
+    "ajax":{
+        url: baseurl+'/api/product-server-side',
+        type:"POST",
+        "dataSrc": "data"
+    },
+    createdRow:function(row, data, rowIndex)
+    {
+        $.each($('td', row), function(colIndex){
+            if(colIndex == 1)
+            {
+                $(this).attr('data-name', 'productName');
+                $(this).attr('class', 'productName');
+                $(this).attr('data-type', 'text');
+                $(this).attr('data-pk', data[0]);
+            }
+            if(colIndex == 2)
+            {
+                $(this).attr('data-name', 'category');
+                $(this).attr('class', 'category');
+                $(this).attr('data-type', 'text');
+                $(this).attr('data-pk', data[0]);
+            }
+            if(colIndex == 3)
+            {
+                $(this).attr('data-name', 'targetquantity');
+                $(this).attr('class', 'targetquantity');
+                $(this).attr('data-type', 'text');
+                $(this).attr('data-pk', data[0]);
+            }
+                     
+
+        });
+    }
+});
+$.fn.editable.defaults.mode = 'inline';
+$('#empTable').editable({
+    container:'body',
+    selector:'td.targetquantity', 
+    url:baseurl+'/api/get-product-price',
+    title:'Approved amount',
+    type:'POST',
+    validate:function(value){
+        if($.trim(value) == '')
+        {
+            return 'This field is required';
+        }else{
+        	
+        	
+        }
+    },
+    success: function(response, newValue) {
+    	$(this).closest('td').next().siblings().find('#quantity').val(response);
+    }
+});
+
+
+$("#btn-save").click(function(event) {
+   var empId=$("#emp_id").val();
+   //alert(empId);
+   var targetMonth=$("#target_month").val();
+   var targetMonth1 = targetMonth.split("/").reverse().join("-");   
+   //alert(targetMonth);
+   var visitNumber=$("#visit").val();
+   if(empId==""){
+       alert("Please select an employee first");
+   }else if(targetMonth==""){
+       alert("Please select targated month");
+   }else{
+	   var user =[];    
+	    $.each($("input[name='app']"), function(){	    	
+	    	 var productName=$(this).closest('td').next().text();
+	    	 var productQuantity=$(this).closest('td').next('td').next('td').next().text();
+	    	 
+	    	if(productQuantity=="" || productQuantity=='0'){
+	    		
+	    	}else{
+	    		   let target= {};	              
+	               var productCat=$(this).closest('td').next('td').next().text();
+	              
+	               var productValue=$(this).closest('td').next('td').next('td').next('td').siblings().find('input:text').val();
+	               target['empId']=empId;
+	               target['targetMonth']=targetMonth1;
+	               target['productName']=productName;
+	               target['category']=productCat;
+	               target['quantity']=productQuantity;
+	               target['totalValue']=productValue;      
+	               user.push(target);
+	    	}
+	     
+	    });
+	    
+	    //alert(user);
+	    submitToServer(empId,targetMonth1,visitNumber,user); 
+   }
+  
+ });
+    
+/* function submitToServer(empId,targetMonth1,visitNumber,user) {
+
+    let url = baseurl + "/api/set-product-target/"+empId+"/"+new Date(targetMonth1)+"/"+visitNumber;
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: url,
+        data: JSON.stringify(user),
+        dataType : "JSON",
+        success: function (result) {
+            alert("Target setup success");
+            window.location.href=baseurl+"/admin/monthlyTarget-summery";
+        },
+        error: function (e) {
+            console.log("ERROR: ", e);
+        }
+    });
+} */
+
+function submitToServer(empId,targetMonth1,visitNumber,user) {
+
+    let url = baseurl + "/api/set-product-target/"+empId+"/"+new Date(targetMonth1)+"/"+visitNumber;
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: url,
+        data: JSON.stringify(user),
+        dataType : "JSON",
+        success: function (result) {
+           // alert("Target setup success");
+            swal("Target setup success");
+            window.location.href=baseurl+"/admin/monthlyTarget-summery";
+        },
+        error: function (e) {
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

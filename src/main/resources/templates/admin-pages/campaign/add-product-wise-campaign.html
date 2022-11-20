@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Add Campaign</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+</head>
+<body>
+<div layout:fragment="content">
+<!-- <div class="row"> -->
+        <!-- <div class="col-md-6"> -->
+           <div class="box">
+             <br>
+              <div class="row">             
+               <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Campaign</label>
+                 
+                  <div class="col-sm-8">                
+                 <select id="camp" name="camp" data-live-search="true" data-live-search-style="startsWith" class="selectpicker">
+                  <option value=""> - - Select Campaign - - </option>
+                    <option th:each="campaignList : ${campaignList}" th:value="${campaignList.id}"
+                            th:utext="${campaignList.campaignName}" /> 
+                  </select>
+                  </div>
+                </div> 
+               </div>
+               
+                  <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Product List</label>
+                 
+                  <div class="col-sm-8">                
+                 <select id="prdList" name="prdlist" data-live-search="true" data-live-search-style="startsWith" class="selectpicker">
+                  <option value=""> - - Select Product - - </option>
+                    <option th:each="prdList : ${prdList}" th:value="${prdList.id}"
+                            th:utext="${prdList.productName}" /> 
+                  </select>
+                  </div>
+                </div> 
+               </div>
+               </div>
+                    <br>   
+       
+            	  <div class="row">
+              
+                <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Offer type</label>
+
+                  <div class="col-sm-8">
+                   
+                    <select class="form-control" id="offerType" name="offertype">
+                  <option value=""> - - Select Offer Type  - - </option>
+                    <option th:value="value" th:utext="value" />
+                    <option th:value="quantity" th:utext="quantity" />
+                  </select>
+                  </div>
+                </div>
+               </div> 
+                   <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Dealer Price</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="dealPrice" name="dealPrice" placeholder="Dp"/>
+                  </div>
+                </div>
+               </div> 
+               </div>
+                <br>
+               <div class="row">
+            
+                <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Retail Price</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="rtlPrice" name="rtlPrice" placeholder="Rp"/>
+                  </div>
+                </div>
+               </div> 
+                  <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">MRP</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="mrprice" name="mrprice" placeholder="Mrp"/>
+                  </div>
+                </div>
+               </div> 
+               </div>
+                                      
+              <br>
+         
+          </div>
+          
+           <div id="valuediv" class="box">
+           <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form class="form-horizontal">
+                           
+              <div class="box-body">
+              	 <div class="row">
+               <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Discount Type</label>               
+                  <div class="col-sm-8">                
+                 <select class="form-control" id="discountType" name="discount_type">
+                  <option value=""> - - Select Discount  - - </option>
+                             <option th:value="Tk" th:utext="Tk" />
+                   			<option th:value="Percentage" th:utext="Percentage" /> 
+                  </select>
+                  </div>
+                </div>
+               </div>
+                <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Discount Amount</label>
+                  
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="dis_amount" placeholder="DiscountAmount.."/>
+                  </div>
+                </div>
+               </div> 
+               
+                <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Discount On</label>               
+                  <div class="col-sm-8">                
+                 <select class="form-control" id="discount_on" name="price">
+                  <option value=""> - - Select Price - - </option>
+                          <option th:value="Dp" th:utext="Dp" />
+                   			<option th:value="Rp" th:utext="Rp" />
+                   			<option th:value="Mrp" th:utext="Mrp" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+                            
+              </div>
+              </div>
+
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          </div>
+          
+           <div id="quantitydiv" class="box">
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form class="form-horizontal">                              
+              <div class="box-body">
+              <div class="row">
+                <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Required Quantity</label>
+                  
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="quantityRequired" placeholder="quantityRequired"/>
+                  </div>
+                </div>
+               </div> 
+                              
+                <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">free Item</label>
+                 
+                  <div class="col-sm-8">                
+                 <select class="form-control" id="freeItem" name="free_Item">
+                  <option value=""> - - Select a Free Product - - </option>
+                    <option th:each="prdList : ${prdList}" th:value="${prdList.id}"
+                            th:utext="${prdList.productName}"/> 
+                  </select>
+                  </div>
+                </div> 
+               </div>
+               
+               <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Free item Quantity</label>
+                  
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="freeItemQuantity" placeholder="freeItemQuantity"/>
+                  </div>
+                </div>
+               </div> 
+               
+                                         
+              </div>
+              </div>
+              
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        
+        <div class="box-footer">
+                <a   th:href="@{/admin/product-wise-campaign}">Cancel</a>
+                <button onclick="prdCampSubmitToServer();" class="btn btn-info pull-right">Add to Table</button>
+              </div>             
+              <div class="row">
+        <div class="col-sm-10">
+            <h4> Products Of Campaign Type</h4>
+        </div>
+    </div>
+       <div class="row">
+        <div class="col-sm-12">
+            <table id="productTable" class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th hidden="true">Campaign Type</th>
+                        <th hidden="true">Campaign Id</th>
+                        <th>Campaign Name</th>
+                        <th hidden="true">Product Id</th>
+                        <th>Product Name</th>
+                        <th>Offer Type</th>
+                        <th>Discount Type</th>
+                        <th>Discount on</th>
+                        <th>Discount Amount</th>
+                        <th>Required Quantity</th>
+                        <th hidden="true">FreeItem Id</th>
+                        <th>Free Item</th>
+                        <th>Free Item Quantity</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div> 
+    
+     <div class="box-footer">
+                <a   th:href="@{/admin/add-product-wise-campaign}">Cancel</a>
+                <button onclick="submitPrdWiseCampaignForm2();" class="btn btn-info pull-right">Submit</button>
+              </div>  
+          
+        </div>
+<div layout:fragment="custom-scripts">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/product-wise-campaign.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var baseurl=/*[[${baseurl}]]*/;
+
+$(document).ready(function() {
+	$("#valuediv").hide();
+    $("#quantitydiv").hide();
+    setBaseUrl(baseurl); 
+    productWiseCampaignUpdate();
+    getDropDownValue();
+});
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

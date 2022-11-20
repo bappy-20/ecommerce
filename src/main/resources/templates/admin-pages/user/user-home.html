@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"> User list</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="row">
+             	<div class="col-md-2">
+             	    <a id="webuserCreate" th:href="@{/admin/add-user}" style="margin-top: 1%;margin-bottom:5px;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Create New User</a>            	            	
+             	</div>
+             	<!-- <div class="col-md-2">
+             	      <a id="usermappingCreate" th:href="@{/admin/map-user-to-market}" style="margin-top: 1%;margin-bottom:5px;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Map user to Market</a>   
+             	
+             	</div>
+             	<div class="col-md-2">
+             	   <a id="btn" th:href="@{/admin/map-user-to-territory}" style="margin-top: 1%;margin-bottom:5px;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Map user to Territory</a>
+             	
+             	</div>
+             	<div class="col-md-2">
+             	     <a id="usermappingCreate" th:href="@{/admin/map-user-to-area}" style="margin-top: 1%;margin-bottom:5px;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Map user to Area</a>
+             	
+             	</div>             	
+             	<div class="col-md-2">
+             	     <a id="regionCreate" th:href="@{/admin/map-user-to-region}" style="margin-top: 1%;margin-bottom:5px;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Mapping user to Region</a>
+             	
+             	</div> -->
+             	<!-- <div class="col-md-2">
+             	</div>
+             	<div class="col-md-2">
+             	</div> -->
+             
+             </div>
+             
+             </div> 
+            <div class="box-body">
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                         <th>Full Name</th>
+                         <th>User name</th>
+                         <th>Email</th>                  
+                         <th>User Type</th>
+                         <th>Mobile</th>
+                         <th>Profile Image</th>
+                         <th>NID Number</th>
+                        <!--  <th>Distributor Name</th>
+                         <th>Markets</th>
+                         <th>Territorys</th>
+                         <th>Areas</th>
+                         <th>Regions</th> -->
+                         <th>Delete</th>                        
+                         <th>Edit</th>
+                        <!--  <th>Action</th> -->
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+</div>
+<div layout:fragment="custom-scripts">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/user.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/user-list',
+        "sAjaxDataProp" : "",
+        dom: 'Bfrtip',
+        buttons: [
+             'excel', 'pdf', 'print'
+        ],
+        "columns" : [
+        	{
+            data : 'fullName'
+           }, 
+           
+          {
+             data : 'username'
+          },
+         {
+          data : 'email'
+         },
+        {
+            data : 'userType'
+        },
+        {
+            data : 'mobile'
+        },
+        /* {
+            data : 'profileImage'
+        } ,*/
+        {
+            data: 'profileImage',
+            "render": function ( data, type, full, meta ) {
+                if(data!=null) {
+                    return "<a target='_blank' href='"+baseurl+"/api/downloadFile1/"+data+"'><img alt='not' style='width:40px;height:40px;' src='"+baseurl+"/api/downloadFile1/"+data+"'/></a>";
+                }
+                return '<i class="fa fa-user-plus"> </i>';
+        }
+       
+     },
+        {
+            data : 'nidNumber'
+        },
+        /* {
+            data : 'distributorName'
+        },
+        {
+            data : 'markets'
+        },
+        {
+            data : 'territoryName'
+        },
+        {
+            data : 'areaName'
+        },
+        {
+            data : 'regionName'
+        }, */
+        {
+            data: 'canDelete',
+            "render": function ( data, type, full, meta ) {
+                if(data==true) {
+                    return "<a  style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+full.id+");' href='#'><i class='fa fa-trash'></i></a>";
+                }else{
+            
+                    return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                  
+                }
+        }
+       
+     },
+     {
+         data: 'canEdit',
+         "render": function ( data, type, full, meta ) {
+             if(data==true) {
+                 return "<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info orgEdit'  href='"+baseurl+"/admin/edit-user/"+full.id+"'><i class='fa fa-pencil'></i></a><a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info orgEdit'  href='"+baseurl+"/admin/user-profile/"+full.id+"'><i class='fa fa-user'></i></a>";
+             }else{
+            
+            	 return '<i class="fa fa-ban" aria-hidden="true"></i>';
+            	 
+             }
+            
+     }
+    
+  }         
+             
+        ]
+    });
+
+});
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Processed Requisition</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h4 class="box-title"> Distributor Requisition List</h4>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">   
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+                <thead style="color: #111;">
+                    <tr>
+                     <th>Distributor Name</th>    
+                        <th>Requisition Number</th>
+                         <th>Total Price</th>
+                        <th>Net Discount</th> 
+                         <th>Grand Total</th>       
+                           <th>Status</th>                                           
+                        <th>#</th>
+                    </tr>
+                </thead>
+
+            </table> 
+           </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/distributorRequisition.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+	setBaseUrl(baseurl);
+});
+
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/distributor-requisition-received-list',
+        "sAjaxDataProp" : "",
+        "columns" : [
+        	{
+                data : 'distName'
+               }, 
+                {
+                 data : 'requisitionNumber'
+                },
+                 {
+                 data : 'totalPrice'
+                },
+               {
+                 data : 'netDiscount'
+                }, 
+                {
+                    data : 'grandTotal'
+                   }, 
+                   {
+                       data : 'status'
+                      },
+                {
+                    data: 'id',
+                    
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+oData.id+");' href='#'><i class='fa fa-trash'></i></a><a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info'  href='"+baseurl+"/admin/recieved-requisition-details/"+oData.id+"'><i class='fa fa-pencil'></i></a>");
+               
+                    } 
+                }                     
+            ]
+        });
+        
+
+    });
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

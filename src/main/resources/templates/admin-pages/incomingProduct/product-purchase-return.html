@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Return Purchase</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+        <div class="col-md-4">
+           <div class="box">
+            <div class="box-header">
+            
+              <h3 class="box-title">Return Purchase Product</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            
+              <div class="box-body"> 
+                  <div class="row">
+              <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">P.O Number</label>
+
+                  <div class="col-sm-8">
+                 
+                 <!--     <select class="form-control" id="purchase_number" name="purchase_number"> -->
+                     <select  id="purchase_number" name="purchase_number" class="form-control select3 select2-hidden-accessible" data-placeholder=" - - Select a P.O - - " style="width: 100%;" data-select2-id="9" tabindex="-1" aria-hidden="true">
+                  
+                  <option value=""> - - Select a Purchase No. - - </option>
+                    <option th:each="purchase : ${purchaseList}" th:value="${purchase.purchaseNumber}"
+                            th:utext="${purchase.purchaseNumber}" />
+                  </select>
+                  
+                  </div>
+                </div>
+               </div>
+              
+              </div>
+            <br>
+              <div class="row">
+             
+               <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Supplier</label>
+                  <div class="col-sm-8">
+                    <select  id="supplier_id" name="supplier_id" class="form-control" disabled>
+                  <option value=""> - - Select a Supplier - - </option>
+                    <option th:each="supplier : ${supplier}" th:value="${supplier.id}"
+                            th:utext="${supplier.name}" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+            
+              </div>
+              <br>
+          <div class="row">
+              <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Net Deduction</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="net_deduction_price" />
+                  </div>
+                </div>
+               </div>
+              
+              </div>
+             
+              <br>
+              <div class="row">
+              <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Net Total</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="total_price" />
+                  </div>
+                </div>
+               </div>
+              
+              </div>
+             
+              <br>
+             
+              <div class="row">
+              <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Return Date</label>
+
+                  <div class="col-sm-8">
+                    <input type="date"  class="form-control" id="purchase_date" readonly />
+                  </div>
+                </div>
+               </div>
+              
+              </div>
+              <br>
+              <div class="row">
+              <div class="col-sm-12">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Reason</label>
+
+                  <div class="col-sm-8">
+                  <textarea rows="3" cols="25" id="purchase_note" ></textarea>
+                   
+                  </div>
+                </div>
+               </div>
+              
+              </div>
+              <br>
+              <div class="row">
+              <div class="col-sm-12">
+              <button onclick="returnProductListSubmitToServer();" class="btn btn-info pull-right">Submit</button>
+   
+               </div>
+              
+              </div>
+              </div>
+             
+              <!-- /.box-footer -->
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        </div>
+        
+                <div id="productList" class="col-md-8">
+                <div class="box">
+           
+            <div class="box-body">
+       
+    <div class="row">
+        <div class="col-sm-12">
+         <h2>Product To Return</h2>
+            <table id="returnTable" class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <tr>
+                     <th>#</th>
+                     <th hidden=true>Product Id</th>                    
+                        <th>Product Name</th>
+                         <th>Purchase Quantity</th>
+                        <th>Return Quantity</th>
+                        <th>Unit Price</th>
+                         <th>Deduction</th>
+                        <th>Total</th>
+                        
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+   
+        </div>
+        
+        </div>
+      
+        </div>
+    
+</div>
+</div>
+<div layout:fragment="custom-scripts">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/purchase-product.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+	document.getElementById('purchase_date').value = moment().format('YYYY-MM-DD');
+	$('#productList').hide();
+	$('.select2').select2();
+	$('.select1').select2();
+	$('.select3').select2();
+	setBaseUrl(baseurl);
+	getDropDownValue();
+	
+});
+
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

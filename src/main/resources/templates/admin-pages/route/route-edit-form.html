@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Add Route</title>
+<script th:src="@{/js/route.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- <div class="row"> -->
+        <!-- <div class="col-md-6"> -->
+           <div class="box">
+            <div class="box-header">
+            
+              <h3 class="box-title">Add a Route</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form class="form-horizontal" th:action="@{/admin/add-route}"
+                        th:object="${route}" method="post">
+                        
+                        <div class="row">
+                            <label class="col-sm-3 control-label">Region Name </label>
+                            <div class="col-sm-6">
+                                <select name="regionName" id="region" class="form-control"
+                                    required="required">
+                                    <option value="">--please select a Region --</option>
+                                    <option th:each="group : ${group}"
+                                        th:value="${group.id}" th:utext="${group.regionName}" />
+                                </select>
+
+                            </div>
+                        </div>
+                            
+                        <br>
+                        
+                            <div class="row">
+                            <label class="col-sm-3 control-label">Area Name </label>
+                            <div class="col-sm-6">
+                                <select name="areaName" id="area" class="form-control"
+                                    required="required">
+                                    
+                                </select>
+
+                            </div>
+                        </div>
+                        <br>
+                        
+                        <div class="row">
+                            <label class="col-sm-3 control-label">Territory Name </label>
+                            <div class="col-sm-6">
+                                <select name="territoryName" id="teritory" class="form-control"
+                                    required="required">
+                                    
+                                </select>
+
+                            </div>
+                        </div>
+                          <br>
+                        <div>
+                             <div class="row">
+                            <label class="col-sm-3 control-label">Route Name</label>
+                            <div class="col-sm-6">
+                                <input id="routeName" type="text" th:field="*{routeName}" class="form-control" required="required"/>
+                                <p th:errors="*{routeName}" class="help-block"></p>
+                            </div>
+                        </div>
+                        </div>
+                          <br>
+                            <div class="row">
+                            
+                            <div class="col-sm-4">
+                                <div class="subject-info-box-1" >
+                                  <select  multiple="multiple" id='lstBox1' class="form-control" style="height:300px;">
+                                    
+                                  </select>
+                                </div>
+                                </div>
+                                <div class="col-sm-1">
+                                <div class="subject-info-arrows text-center">
+                                  <input type='button' id='btnAllRight' value='>>' class="btn btn-default" /><br />
+                                  <input type='button' id='btnRight' value='>' class="btn btn-default" /><br />
+                                  <input type='button' id='btnLeft' value='<' class="btn btn-default" /><br />
+                                  <input type='button' id='btnAllLeft' value='<<' class="btn btn-default" />
+                                </div>
+                                </div>
+                                <div class="col-sm-4">
+                                <div class="subject-info-box-2">
+                                  <select th:field="*{markets}" multiple="multiple" id='lstBox2' class="form-control" style="height:300px;">
+                                    
+                                  </select>
+                                </div>
+                                
+                                <div class="clearfix"></div>
+                                
+
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" style="margin-left:23%;">
+                            <div class="col-sm-6" >
+                                <button type="submit" id="btn-save"
+                                    class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+
+                    </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        </div>
+
+<div layout:fragment="custom-scripts">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>        
+        <script th:inline="javascript">
+/*<![CDATA[*/   
+  var baseurl=/*[[${baseurl}]]*/;
+  var id=/*[[${id}]]*/;
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+    getRoute(id)
+});
+
+    $(document).ready(function () {
+        $("#region").change(function () {
+            var id = this.value; 
+         
+            $.ajax({
+                type: "GET",               
+                url: baseurl+"/api/region/"+id,         
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    /* alert(JSON.stringify(data.data.areas)); */
+                    area(data.data.areas);
+                //$("#distname").val(data);
+                },
+                error: function (e) {                  
+                    console.log("ERROR : ", e);
+                   
+                }
+            });         
+        });
+        
+        $("#area").change(function () {
+            var id = this.value;
+           
+            $.ajax({
+                type: "GET",               
+                url: baseurl+"/api/area/"+id,          
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    
+                    territory(data.data.territories);
+                //$("#distname").val(data);
+                },
+                error: function (e) {                  
+                    console.log("ERROR : ", e);
+                   
+                }
+            });         
+        });
+        
+        $("#teritory").change(function () {
+            var id = this.value;  
+           
+            $.ajax({
+                type: "GET",               
+                url: "/api/territory/"+id,          
+                cache: false,
+                timeout: 600000,
+                success: function (data) {                    
+                     retail(data.data.markets);                
+                },
+                error: function (e) {                  
+                    console.log("ERROR : ", e);
+                   
+                }
+            });         
+        });
+
+        
+        function area(data) {
+            
+            $("#area").empty(); //To reset cities
+            $("#area").append("<option value=''>--Select--</option>");
+
+            $.each(data, function(index, value) {
+                $("#area").append("<option value="+value.id+">" + value.areaName + "</option>")
+            }); 
+        } 
+        
+        function territory(data) {
+            $("#teritory").empty(); //To reset cities
+            $("#teritory").append("<option value=''>--Select--</option>");
+
+            $.each(data, function(index, value) {
+                $("#teritory").append("<option value="+value.id+">" + value.territoryName + "</option>")
+            });
+        } 
+        
+        function retail(data) {
+            $("#lstBox1").empty(); //To reset cities
+            
+            $.each(data, function(index, value) {
+                $("#lstBox1").append("<option value="+value.id+">" + value.marketName + "</option>")
+            });
+        }
+
+      } );
+      
+      
+    (function () {
+        $('#btnRight').click(function (e) {
+            var selectedOpts = $('#lstBox1 option:selected');
+            if (selectedOpts.length == 0) {
+                alert("Nothing to move.");
+                e.preventDefault();
+            }
+           //
+           $(selectedOpts).attr("selected","selected");
+            $('#lstBox2').append($(selectedOpts).clone());
+            $(selectedOpts).remove();
+            e.preventDefault();
+        });
+
+        $('#btnAllRight').click(function (e) {
+            var selectedOpts = $('#lstBox1 option');
+            if (selectedOpts.length == 0) {
+                alert("Nothing to move.");
+                e.preventDefault();
+            }
+            $(selectedOpts).attr("selected","selected");
+            $('#lstBox2').append($(selectedOpts).clone());
+            $(selectedOpts).remove();
+            e.preventDefault();
+        });
+
+        $('#btnLeft').click(function (e) {
+            var selectedOpts = $('#lstBox2 option:selected');
+            if (selectedOpts.length == 0) {
+                alert("Nothing to move.");
+                e.preventDefault();
+            }
+            //$(selectedOpts).attr("selected","selected");
+             $(selectedOpts).removeAttr('selected');
+            $('#lstBox1').append($(selectedOpts).clone());
+            $(selectedOpts).remove();
+            e.preventDefault();
+        });
+
+        $('#btnAllLeft').click(function (e) {
+            var selectedOpts = $('#lstBox2 option');
+            if (selectedOpts.length == 0) {
+                alert("Nothing to move.");
+                e.preventDefault();
+            }
+            $(selectedOpts).removeAttr('selected');
+            $('#lstBox1').append($(selectedOpts).clone());
+            $(selectedOpts).remove();
+            e.preventDefault();
+        });
+    }(jQuery));
+    
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

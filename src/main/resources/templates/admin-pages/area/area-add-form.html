@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Add Area</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- <div class="row"> -->
+        <!-- <div class="col-md-6"> -->
+           <div class="box">
+            <div class="box-header">
+            
+              <h3 class="box-title">Add an Area</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form id="AreaAddForm" class="form-horizontal">
+              <div class="box-body"> 
+              <div class="row">
+               
+               
+             <!--   <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Region</label>
+
+                  <div class="col-sm-8">
+                 <select class="form-control" id="region_id" name="regionname" required>
+                  <option value=""> - - Select a Region- - </option>
+                    <option th:each="region : ${region}" th:value="${region.id}"
+                            th:utext="${region.regionName}" />
+                  </select>
+                  </div>
+                </div>
+               </div> -->
+               
+                 <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-3 control-label">Select Regions</label>
+
+                  <div class="col-sm-8">
+                <select id="region_id" name="regionname" data-live-search="true" data-live-search-style="startsWith" class="selectpicker"> 
+                  <option value=""> - - Select a Regions- - </option>
+                    <option th:each="region : ${region}" th:value="${region.id}"
+                            th:utext="${region.regionName}" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+             
+                <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Area Name</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="area_name" name="areaname" placeholder="Area Name" required/>
+                  </div>
+                </div>
+               </div>
+              <!-- /.box-body -->
+              
+              </div>
+              </div>
+              <div class="box-footer">
+                <a   th:href="@{/admin/area}">Cancel</a>
+              <!--   <button onclick="submitAreaForm();" class="btn btn-info pull-right">Submit</button> -->
+                  <input class="btn btn-info pull-right" type="submit" value="Submit">
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        </div>
+
+<div layout:fragment="custom-scripts">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> 
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/area.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	var baseurl=/*[[${baseurl}]]*/;
+
+$(document).ready(function() {
+	setBaseUrl(baseurl);	
+});
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

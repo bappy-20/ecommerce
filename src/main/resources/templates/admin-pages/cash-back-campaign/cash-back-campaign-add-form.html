@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Design Cash Back</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+</head>
+<body>
+<div layout:fragment="content">
+           <div class="box">
+             <div class="box-header">
+            <h3 class="box-title">Add a Cash Back Campaign</h3> 
+             </div>        
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form class="form-horizontal">
+                  <div class="row">
+<!--                 <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Campaign Type</label>
+                 
+                  <div class="col-sm-8">                
+                 <select class="form-control" id="campType" name="campType">
+                  <option value=""> - - Select Campaign Type - - </option>
+                    <option th:each="camTypeList : ${camTypeList}" th:value="${camTypeList.id}"
+                            th:utext="${camTypeList.campaignType}" /> 
+                  </select>
+                  </div>
+                </div> 
+               </div>
+               <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Campaign</label>
+                 
+                  <div class="col-sm-8">                
+                 <select class="form-control" id="campaignId" name="campaignId">
+                  
+                  </select>
+                  </div>
+                </div> 
+               </div> -->
+               <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Campaign</label>
+                 
+                  <div class="col-sm-8">                
+                 <select id="campaignId" name="campaignId" data-live-search="true" data-live-search-style="startsWith" class="selectpicker">
+                  <option value=""> - - Select Campaign - - </option>
+                    <option th:each="campaignList : ${campaignList}" th:value="${campaignList.id}"
+                            th:utext="${campaignList.campaignName}" /> 
+                  </select>
+                  </div>
+                </div> 
+               </div>
+                <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Required Invoice Amount</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="requiredInvoiceAmount" placeholder="Required Invoice Amount"/>
+                  </div>
+                </div>
+               </div> 
+                 <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Discount Type</label>               
+                  <div class="col-sm-8">                
+                 <select class="form-control" id="discountType" name="discountType">
+                  <option value=""> - - Select Discount Type - - </option>
+                            <option th:value="BDT" th:utext="BDT" />
+                            <option th:value="Percentage" th:utext="Percentage" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+                <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Discount Amount</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="discountAmount" placeholder="Discount Amount"/>
+                  </div>
+                </div>
+               </div>        
+               
+              </div>
+                    
+              <div class="box-footer">
+                <a   th:href="@{/admin/cash-back-campaign}">Cancel</a>
+                <button onclick="submitForm();" class="btn btn-info pull-right">Submit</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          </div>
+     
+        </div>
+<div layout:fragment="custom-scripts">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/cash-back-campaign.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+   /*  getDropDownValue(); */
+});
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

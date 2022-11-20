@@ -1,0 +1,129 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
+#regForm {
+  background-color: #ffffff;
+  margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 100px;
+    margin-left: auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+}
+
+h1 {
+  text-align: center;  
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+
+
+.container>.duallistbox>.col{
+	
+	
+	float:left;
+	min-height:300px;
+	min-width: 30%;
+    min-height: 350px;
+    margin:5px 35px;
+	
+	
+}
+
+
+.container>.duallistbox>.col>select{{
+
+    min-width: 30%;
+    min-height: 350px;
+    margin:5px 10px;
+
+}
+.container>.duallistbox>.col>select{{
+
+    min-width: 200px;
+    min-height: 350px;
+
+}
+
+.container>.duallistbox>.col-md-1{
+	min-height:350px;
+	min-width:100px;
+	padding:7px;
+	border:1px solid red;
+}
+.container>.duallistbox>.col-md-1>button{
+	margin:5px auto;
+}
+
+
+.test_1{
+    min-height: 208px;
+    min-width: 244px;
+}
+
+
+
+

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row">
+
+			<div class="col-md-6">
+				<div class="box">
+					<div class="box-header">
+						<h4 class="box-title">Orders List (Today)</h4>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div class="row">
+							<a th:href="@{/admin/total-order/daily}" style="color: #111111;">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-icon bg-aqua"><i
+											class="fa fa-tasks"></i></span>
+
+										<div class="info-box-content">
+											<span class="info-box-text">Total</span> <span
+												class="info-box-number" th:text="${dailyTotal}"></span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+							</a>
+							<!-- /.col -->
+							<a th:href="@{/admin/pending-order}" style="color: #111111;">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-icon bg-red"><i
+											class="fa fa-spinner"></i></span>
+
+										<div class="info-box-content">
+											<span class="info-box-text">Pending</span> <span
+												class="info-box-number" th:text="${pending}">41,410</span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+							</a>
+							<!-- /.col -->
+						</div>
+						<!-- fix for small devices only -->
+						<div class="clearfix visible-sm-block"></div>
+						<div class="row">
+							<a th:href="@{/admin/ready-to-delivery-order}"
+								style="color: #111111;">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-icon bg-yellow"><i
+											class="fa fa-subway"></i></span>
+
+										<div class="info-box-content">
+											<span class="info-box-text">Ready To Delivery</span> <span
+												class="info-box-number" th:text="${readytoDelivery}">760</span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+							</a>
+							<!-- /.col -->
+							<a th:href="@{/admin/shipment-order}" style="color: #111111;">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-icon bg-yellow"><i
+											class="fa fa-subway"></i></span>
+
+										<div class="info-box-content">
+											<span class="info-box-text">Shipment</span> <span
+												class="info-box-number" th:text="${shipped}">2,000</span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+							</a>
+						</div>
+						<div class="row">
+							<a th:href="@{/admin/delivered-order/daily}"
+								style="color: #111111;">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-icon bg-green"><i
+											class="fa fa-tasks"></i></span>
+
+										<div class="info-box-content">
+											<span class="info-box-text">Delivered</span> <span
+												class="info-box-number" th:text="${dailyDelivered}">2,000</span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+							</a> <a th:href="@{/admin/canceled-order/daily}"
+								style="color: #111111;">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-icon bg-red"><i class="fa fa-ban"></i></span>
+
+										<div class="info-box-content">
+											<span class="info-box-text">Cancelled</span> <span
+												class="info-box-number" th:text="${dailyCanceled}">41,410</span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+							</a>
+						</div>
+
+						<!-- /.col -->
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="box" style="height: 379px;">
+					<div class="box-header">
+						<h4 class="box-title">Orders List (Monthly)</h4>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div class="row">
+							<a th:href="@{/admin/total-order/monthly}"
+								style="color: #111111;">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-icon bg-aqua"><i
+											class="fa fa-tasks"></i></span>
+
+										<div class="info-box-content">
+											<span class="info-box-text">Total</span> <span
+												class="info-box-number" th:text="${monthlyTotal}"></span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+							</a>
+							<!-- /.col -->
+							<a th:href="@{/admin/delivered-order/monthly}"
+								style="color: #111111;">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-icon bg-green"><i
+											class="fa fa-tasks"></i></span>
+
+										<div class="info-box-content">
+											<span class="info-box-text">Delivered</span> <span
+												class="info-box-number" th:text="${monthlyDelivered}">41,410</span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+							</a>
+							<!-- /.col -->
+						</div>
+						<!-- fix for small devices only -->
+						<div class="clearfix visible-sm-block"></div>
+						<div class="row">
+							<a th:href="@{/admin/canceled-order/monthly}"
+								style="color: #111111;">
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-icon bg-red"><i class="fa fa-ban"></i></span>
+
+										<div class="info-box-content">
+											<span class="info-box-text">Cancelled</span> <span
+												class="info-box-number" th:text="${monthlyCanceled}">760</span>
+										</div>
+										<!-- /.info-box-content -->
+									</div>
+									<!-- /.info-box -->
+								</div>
+							</a>
+							<!-- /.col -->
+
+						</div>
+
+
+						<!-- /.col -->
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-12">
+				<div class="box">
+					<div class="box-header">
+						<h4 class="box-title">Today's Orders</h4>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+
+						<table id="empTable" class="display" width="100%" cellspacing="0">
+
+							<thead style="color: #111;">
+								<tr>
+									<th>Order Id</th>
+									<th>Retail Name</th>
+									<th>Retail Address</th>
+									<th>Total</th>
+									<th>Discount</th>
+									<th>Grand Total</th>
+									<th>Due Amount</th>
+									<th>Collected Amount</th>
+									<th>Status</th>
+									<th>Date Receive</th>
+									<th>Delete</th>
+									<th>Edit</th>
+									<!-- <th>Action</th>  -->
+								</tr>
+							</thead>
+
+						</table>
+					</div>
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+	</div>
+	<!-- </div> -->
+	<div layout:fragment="custom-scripts">
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script th:src="@{/js/order_details.js}"></script>
+
+		<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/order-history-role',
+        "sAjaxDataProp" : "",
+        dom: 'Bfrtip',
+        buttons: [
+             'excel', 'pdf', 'print'
+        ],
+        "columns" : [
+        	{
+                data : 'orderId'
+               }, 
+                
+                {
+                 data : 'retailName'
+                },
+                 {
+                 data : 'retailAddress'
+                },
+               
+               {
+                 data : 'total'
+                }, 
+               {
+                 data : 'discount'
+                },
+                {
+                data : 'grandTotal'
+                },
+             
+               {
+                data : 'dueAmount'
+                },  
+               {
+                data : 'collectedAmount'
+                 },
+        
+                {
+                    data: 'orderStatus',
+                    "render": function ( data, type, full, meta ) {
+                        if(data=="Pending") {
+                        	 return '<span class="label label-danger pull-right">'+data+'</span>';
+                        }else if(data=="Ready-To-Delivery") {
+                             return '<span class="label label-warning pull-right">'+data+'</span>';
+                        }else if(data=="Shipped") {
+                             return '<span class="label label-info pull-right">'+data+'</span>';
+                        }else if(data=="Cancelled") {
+                             return '<span class="label label-danger pull-right">'+data+'</span>';
+                        }else if(data=="Delivered") {
+                             return '<span class="label label-success pull-right">'+data+'</span>';
+                        }else{
+                        	return '<span class="label label-default pull-right">'+data+'</span>';
+                        }
+                       
+                }
+               
+             },
+               {
+                data : 'dateReceive'
+                },
+                {
+                    data: 'canDelete',
+                    "render": function ( data, type, full, meta ) {
+                        if(data==true) {
+                            return "<a  style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+full.id+");' href='#'><i class='fa fa-trash'></i></a>";
+                        }else{
+                    
+                            return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                          
+                        }
+                }
+               
+             },
+             {
+                 data: 'canEdit',
+                 "render": function ( data, type, full, meta ) {
+                     if(data==true) {
+                         return "<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info orgEdit'  href='"+baseurl+"/admin/order-details/"+full.orderId+"'><i class='fa fa-pencil'></i></a>";
+                     }else{
+                    
+                    	 return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                    	 
+                     }
+                    
+             }
+            
+          }
+        
+            ]
+        });
+        
+
+    });
+
+
+/*]]>*/
+</script>
+
+	</div>
+</body>
+</html>
