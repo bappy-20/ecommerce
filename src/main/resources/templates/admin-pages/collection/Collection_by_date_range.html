@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Expense Report</title>
+
+<style type="text/css">
+
+   p {
+     
+	      text-align: center;
+       
+      }
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #e3e3e3;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #337ab7;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: default;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 0 5px;
+}
+/* .bootstrap-select .dropdown-menu {
+max-width:300px !important;
+max-height:175px !important;
+} */
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h4 class="box-title">Date Wise Collection</h4>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body">
+          
+                <div class="row">
+                                     
+                <div class="col-md-6">
+                 <div class="form-group">
+                  <label for="licenseNumber" class="col-sm-4 control-label">From</label>
+                  <div class="col-sm-8">
+                      <input name="fromDate" type="date" class="form-control" id="startDate" placeholder="date"></div>
+                </div>
+                </div>
+                
+                <div class="col-md-6">
+                <div class="form-group">
+                  <label for="licenseExpiredDate" class="col-sm-4 control-label">To</label>
+                   
+                  <div class="col-sm-8">
+                    <input type="date" name="toDate" class="form-control" id="endDate" placeholder="date">
+                  </div>
+                </div>
+                </div>
+                
+                </div>
+               
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <a class="btn btn-default" th:href="@{/admin/home}">Cancel</a>
+                <button type="submit" class="btn btn-info pull-right" onclick="submitColectionForm();">Submit</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+
+<div class="row">
+
+ <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Total Sum</h3>
+                          
+            </div>   
+                 <div class="box-body">
+                 <p>Totoal Amount : <span id="totalAmount"></span></p>
+                 <p>Received Amount : <span id="totalReceived"></span></p>
+                 <p>Due Amount : <span id="totalDue"></span></p>
+                 </div>       
+        </div>      
+      </div>
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Collection List</h3>
+            </div>
+         
+            <div class="box-body">
+         
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Order Id</th>
+                        <th>Received Amount</th>
+                         <th>Due Aount</th>                                                           
+                         <th>Total Amount</th> 
+                         <th>Colllection Date</th> 
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+         
+        </div>
+       
+      </div>
+
+</div>
+</div>
+<div layout:fragment="custom-scripts">
+ <script src="http://cdn.datatables.net/plug-ins/1.12.1/api/sum().js"></script>
+ <script src="https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>`
+ 
+<script th:src="@{/js/collection.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() { 
+    $('.selectpicker').selectpicker(); 
+    setBaseUrl(baseurl);
+});
+    
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

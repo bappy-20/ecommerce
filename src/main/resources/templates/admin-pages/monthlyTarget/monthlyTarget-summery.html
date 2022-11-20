@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Monthly Target for SR</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-12">
+              <div class="box-body">
+               
+                <div class="row">
+                                                   
+                <div class="col-sm-8">
+               <div class="form-group"  id="date">
+                  <label for="amount" class="col-sm-4 control-label">Target Month</label>
+
+                  <div class="col-sm-8">
+                    <input type="month" class="form-control" id="target_month2" placeholder="Target Date"/>
+                  </div>
+                </div>
+              </div>
+             <div class="col-md-3">
+            <a onclick="submitOrderTargetForSR();" href="#" style="margin-left: 0%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Submit</a>
+            </div>
+                </div>
+               
+              </div>
+            
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"> Monthly Target Summary</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="col-md-1">
+    <a id="targetSRCreate" th:href="@{/admin/monthlyTarget1}" style="margin-top: 31%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Create a MonthlyTarget</a>
+    </div>
+    <br>        
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                     <th>Employee Id</th>
+                        <th>Employee Name</th>
+                        <th>Target Quantity</th>
+                        <th>Target Value</th>
+                        <th>Target Month</th>
+                    </tr>
+                </thead>
+
+            </table> 
+           </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script src="https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script th:src="@{/js/monthlyTarget.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+
+$(document).ready(function() {
+    setBaseUrl(baseurl);    
+});
+
+$(document).ready(function() {
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/monthly-Target-summery',
+        "sAjaxDataProp" : "",
+        "columns" : [        	
+                {
+                    data: 'empId',
+                    "render": function (nTd, sData, oData, iRow, iCol) {
+                      return "<a href='"+baseurl+"/admin/monthlyTarget/"+oData.empId+"'>"+oData.empId+"</a>";
+                    }
+                },
+                {
+                    data : 'empName'
+                   },
+              
+               {
+                 data : 'targetquantity'
+                },
+               {
+                 data : 'targetTotalValue'
+                }, 
+               
+               {
+                data : 'targetMonth'
+                }
+            ]
+        });
+        
+
+    });
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

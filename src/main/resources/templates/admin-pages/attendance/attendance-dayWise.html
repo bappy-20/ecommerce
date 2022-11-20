@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body >
+<div layout:fragment="content">
+<div class="row">
+        <div class="col-md-12">
+       
+         <div class="row">
+        <div class="col-md-2 col-sm-6 col-xs-12">
+          <div class="info-box">
+           <!--  <span class="info-box-icon bg-aqua"></span> -->
+
+            <div class="info-box-content">
+              <span class="info-box-text">Total </span>
+              <span id="total" class="info-box-number" th:text="100"></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        
+          <div class="col-md-2 col-sm-6 col-xs-12">
+          <div class="info-box">
+           <!--  <span class="info-box-icon bg-aqua"></span> -->
+
+            <div class="info-box-content">
+              <span class="info-box-text">Present</span>
+              <span id="present" class="info-box-number" th:text="70"></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        
+          <div class="col-md-2 col-sm-6 col-xs-12">
+          <div class="info-box">
+           <!--  <span class="info-box-icon bg-aqua"></span> -->
+
+            <div class="info-box-content">
+              <span class="info-box-text">Late In</span>
+              <span id="late" class="info-box-number" th:text="5"></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+          <div class="col-md-2 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <!-- <span class="info-box-icon bg-aqua"></span> -->
+
+            <div class="info-box-content">
+              <span class="info-box-text">Early Out</span>
+              <span id="early" class="info-box-number" th:text="5"></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+          
+        </div>
+          <!-- <div class="col-md-2 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Absent</span>
+              <span id="absent" class="info-box-number" th:text="10"></span>
+            </div>
+            /.info-box-content
+          </div>
+          /.info-box
+          
+        </div> -->
+          <div class="col-md-2 col-sm-6 col-xs-12">
+          <div class="info-box">
+           <!--  <span class="info-box-icon bg-aqua"></span> -->
+
+            <div class="info-box-content">
+              <span class="info-box-text">In Leave</span>
+              <span id="leave" class="info-box-number" th:text="10"></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+          
+       
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+     
+        </div>
+        <!-- /.col -->
+      </div>
+          
+         
+      </div>
+
+</div>
+
+
+<div class="row">
+        <div class="col-md-12">
+          <div class="box">
+           
+            <div class="box-body">
+             <div class="col-md-8">
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body">
+                 
+                <div class="row">
+                                     
+                <div class="col-md-6">
+                 <div class="form-group">
+                  <label for="licenseNumber" class="col-sm-4 control-label">Select a date</label>
+                  <div class="col-sm-8">
+                      <input type="date" class="form-control" id="select_date" placeholder="date"></div>
+                </div>
+                 <div style="margin-left: 36%;">
+                     <button onclick="submitAttendanceByDateForm();" class="btn btn-info ">Search</button>
+                </div>
+                </div>
+                
+                
+                                   
+             </div>
+   
+              </div>
+             
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+
+
+<!-- <div class="row">
+
+    <div class="col-md-12">
+        
+         <div class="box">
+          
+            <div class="col align-self-center">
+           
+                <h3>Ateendance Sheet</h3> 
+            
+                <p>Date:<span id="select_date"></span></p>
+
+                <script>
+                    var dt = new Date();
+                    document.getElementById("select_date").innerHTML = dt.toLocaleDateString();
+                </script>
+                
+                <p>Day:</p>
+           
+            </div>
+            
+        </div>
+          
+    </div>
+ 
+</div>  -->   
+     
+            
+
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Employee Attendance</h3>
+            </div>
+         
+            <div class="box-body">
+         
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Serial No</th>
+                        <th>Employee Id</th>
+                        <th>Employee Name </th>                       
+                        <th>In Time</th> 
+                        <th>In Address</th> 
+                        <th>Out Time</th>
+                        <th>Out Address</th>  
+                        <th>Status</th> 
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+         
+        </div>
+       
+      </div>
+
+</div>
+</div>
+
+<div layout:fragment="custom-scripts">
+    <script th:src="@{/js/attendance.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+    var todayDate = new Date().toISOString().slice(0, 10);
+    attendanceSummery(todayDate); 
+
+});
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

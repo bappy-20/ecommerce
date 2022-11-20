@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h4 class="box-title">Orders List </h4>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+       
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                     <th>Order Id</th>
+                        <th>Retail Id</th>                        
+                        <th>Retail Name</th>
+                        <th>Retail Address</th>
+                        <th>Total</th>
+                        <th>Discount</th>
+                        <th>Grand Total</th>
+                        <th>Due Amount</th>
+                        <th>Collected Amount</th>
+                        <th>Status</th>
+                        <th>Date Receive</th>
+                         <th>Action</th> 
+                    </tr>
+                </thead>
+
+            </table> 
+           </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script th:src="@{/js/order_details.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/order-list',
+        "sAjaxDataProp" : "",
+        dom: 'Bfrtip',
+        buttons: [
+             'excel', 'pdf', 'print'
+        ],
+        "columns" : [
+        	{
+                data : 'orderId'
+               }, 
+               {
+                   data : 'retailId'
+                  }, 
+                {
+                 data : 'retailName'
+                },
+                 {
+                 data : 'retailAddress'
+                },
+               
+               {
+                 data : 'total'
+                }, 
+               {
+                 data : 'discount'
+                },
+                {
+                data : 'grandTotal'
+                },
+             
+               {
+                data : 'dueAmount'
+                },  
+               {
+                data : 'collectedAmount'
+                 },
+               {
+                data : 'status'
+                },
+               {
+                data : 'dateReceive'
+                },  
+                
+                 {
+                    data: 'orderId',
+                    
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+oData.id+");' href='#'><i class='fa fa-trash'></i></a><a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info'  href='"+baseurl+"/admin/order-details/"+oData.orderId+"'><i class='fa fa-pencil'></i></a>");
+               
+ 
+
+                    } 
+                } 
+             
+        
+            ]
+        });
+        
+
+    });
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

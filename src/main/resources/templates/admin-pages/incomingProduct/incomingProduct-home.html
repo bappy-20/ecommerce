@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">  Product List</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+       <!--      <div class="col-md-1">
+    <a id="btn" th:href="@{/admin/add-incomingProduct}" style="margin-top: 31%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Create an Incoming Product</a>
+    </div>  -->
+   
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Total Price</th>
+                         <th>Unit Price</th>
+                        <th>Received Quantity</th>                                             
+                       <!--  <th>#</th> -->
+                    </tr>
+                </thead>
+
+            </table> 
+           </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var id=/*[[${id}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/incoming-product-details/'+id,
+        "sAjaxDataProp" : "",
+        "columns" : [
+        	{
+                data : 'productName'
+               }, 
+                {
+                 data : 'purchasePrice'
+                },
+                {
+                 data : 'unitPrice'
+                },
+                 {
+                 data : 'receivedQty'
+                }          
+                /* {
+                    data: 'id',
+                    
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info'  href='"+baseurl+"/admin/edit-incomingProduct/"+oData.id+"'><i class='fa fa-pencil'></i></a>");
+               
+ 
+
+                    } 
+                }  */
+            
+        
+            ]
+        });
+        
+
+    });
+
+function deleteEntry(id) {
+	let url = "/api/incoming-Product/"+id;
+    var baseurl = confirm("Are you sure you want to delete?");
+    
+    if (baseurl){
+    	   $.ajax({
+              type: "DELETE",
+              url: url,
+              contentType: 'application/json; charset=utf-8',
+              dataType: "JSON",
+              success: function (response) {
+                  alert(response);
+            	  window.location.reload();
+              },
+              error: function () {
+                  alert("error");
+              }
+          }); 
+    }
+    	
+                 
+}
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

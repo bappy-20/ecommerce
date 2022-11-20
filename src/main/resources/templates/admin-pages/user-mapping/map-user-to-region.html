@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Mapping Region</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- <div class="row"> -->
+        <!-- <div class="col-md-6"> -->
+           <div class="box">
+            <div class="box-header">
+            
+              <h3 class="box-title">Mapping user to region</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body"> 
+              <div class="row">
+               
+               
+               <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-3 control-label">User List</label>
+
+                  <div class="col-sm-8">
+                 <select id="user_id" name="user_id" data-live-search="true" data-live-search-style="startsWith" class="selectpicker">                 
+                  <option  value=""> - - Select a User- - </option>
+                    <option th:each="user : ${users}" th:value="${user.id}"
+                            th:utext="${user.fullName +' - '+ user.mobile}" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+               
+                <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-3 control-label">Select Regions</label>
+
+                  <div class="col-sm-8">
+                <select id="regionss_id" name="regions_id" data-live-search="true" data-live-search-style="startsWith" class="selectpicker" multiple="multiple"> 
+                  <option value=""> - - Select a Regions- - </option>
+                    <option th:each="region : ${regions}" th:value="${region.id}"
+                            th:utext="${region.regionName}" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+               
+               
+               </div>
+              <!-- /.box-body -->
+              
+              </div>
+             
+              <div class="box-footer">
+                <a class="btn btn-danger" th:href="@{/admin/region}">Cancel</a>
+                <button onclick="submitMappingForm();" class="btn btn-info">Submit</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        </div>
+
+
+<div layout:fragment="custom-scripts">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+<script th:src="@{/js/region.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+	setBaseUrl(baseurl);
+	createCheckboxList();
+	
+});
+$("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+});
+
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

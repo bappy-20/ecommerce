@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Price Update Report</title>
+
+<style type="text/css">
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #e3e3e3;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #337ab7;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: default;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 0 5px;
+}
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h4 class="box-title">Price Update List </h4>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="row">
+               <div class="col-md-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-4 control-label">Product Name</label>
+               
+                  <div class="col-sm-8">
+                  <select id="product_id" name="product_id" class="form-control select2 select2-hidden-accessible" data-placeholder=" - - Select a Product - - " style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">
+                  <option value=""> - - Select a Product - - </option>
+                    <option th:each="product : ${product}" th:value="${product.id}"
+                            th:utext="${product.productName}" />
+                  </select>
+                  </div>
+                </div>
+          </div>
+          <div class="col-md-6">
+                 <div class="form-group">
+                  <label for="licenseNumber" class="col-sm-4 control-label">From</label>
+                  <div class="col-sm-8">
+                      <input name="fromDate" type="date" class="form-control" id="startDate" placeholder="date" required="required"></div>
+                </div>
+                </div>
+          </div>
+                <div class="row">                
+                <div class="col-md-6">
+                <div class="form-group">
+                  <label for="licenseExpiredDate" class="col-sm-4 control-label">To</label>
+                   
+                  <div class="col-sm-8">
+                    <input type="date" name="toDate" class="form-control" id="endDate" placeholder="date" required="required">
+                  </div>
+                </div>
+                </div>
+                                    
+                 <div class="col-md-6">
+                  <label for="licenseExpiredDate" class="col-sm-4 control-label"></label>
+                  
+                  <button type="submit" class="btn btn-info" onclick="submitpriceUpdate();">Submit</button>
+             
+                 </div>
+                </div>
+               
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <a class="btn btn-default" th:href="@{/admin/home}">Cancel</a>
+                </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Price Update List</h3>
+            </div>
+         
+            <div class="box-body">
+         
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+               <thead style="color: #111;">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>Dealer Price</th>
+                        <th>MRP</th>
+                       <!--  <th>Action</th> -->
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+         
+        </div>
+       
+      </div>
+</div>
+</div>
+<div layout:fragment="custom-scripts">
+<script th:src="@{/js/priceUpdateHistory.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() { 
+	$('.select2').select2();
+    setBaseUrl(baseurl);
+
+});
+    
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

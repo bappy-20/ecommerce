@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Order Details</title>
+ <style>
+ media print{
+  .box-text {
+
+    font-size: 27px !important; 
+    color: blue !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+}
+.container{
+            width: 80%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .brand-section{
+           background-color: #111;
+           padding: 10px 40px;
+        }
+        .logo{
+            width: 50%;
+        }
+
+        .row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .col-6{
+            width: 50%;
+            flex: 0 0 auto;
+        }
+        .text-white{
+            color: #fff;
+        }
+        .company-details{
+            float: right;
+            text-align: right;
+        }
+        .body-section{
+            padding: 16px;
+            border: 1px solid gray;
+        }
+        .heading{
+            font-size: 20px;
+            margin-bottom: 08px;
+        }
+        .sub-heading{
+            color: #262626;
+            margin-bottom: 05px;
+        }
+        table{
+            background-color: #fff;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table thead tr{
+            border: 1px solid #111;
+            background-color: #f2f2f2;
+        }
+        table td {
+            vertical-align: middle !important;
+            text-align: center;
+        }
+        table th, table td {
+            padding-top: 08px;
+            padding-bottom: 08px;
+        }
+        .table-bordered{
+            box-shadow: 0px 0px 5px 0.5px gray;
+        }
+        .table-bordered td, .table-bordered th {
+            border: 1px solid #dee2e6;
+        }
+        .text-right{
+            text-align: end;
+        }
+        .w-20{
+            width: 20%;
+        }
+        .float-right{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div layout:fragment="content">
+            <div class="row">
+             <div class="col-md-6">
+              
+                <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Order details</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <table class="table table-striped">
+    
+    <tbody>
+     
+      <tr>
+        <td style="font-size:15px;">Order Id</td>
+        <td style="font-size:15px;" th:text="${orderId}">orderId</td>
+      
+      </tr>
+       <tr>
+        <td style="font-size:15px;">Retail Id</td>
+        <td style="font-size:15px;" th:text="${retail_id}"></td>
+      
+      </tr>
+       <tr>
+        <td style="font-size:15px;">Retail Name</td>
+        <td style="font-size:15px;" th:text="${retail_name}"></td>
+      
+      </tr>
+        <tr>
+        <td style="font-size:15px;">Retail Address</td>
+        <td style="font-size:15px;" th:text="${retail_address}"></td>
+      
+      </tr>
+        <tr>
+        <td style="font-size:15px;">Distributor Name</td>
+        <td style="font-size:15px;" th:text="${distributor_name}"></td>
+      
+      </tr>
+        <tr>
+        <td style="font-size:15px;">Contact Phone</td>
+        <td style="font-size:15px;" th:text="${contact_phone}"></td>
+   </tr>
+          <tr>
+        <td style="font-size:15px;">Status</td>
+        <td style="font-size:15px;" th:text="${orderStatus}"></td>
+      
+      </tr>
+      
+    </tbody>
+  </table>
+            </div>
+            </div>
+            </div>
+            <div class="col-md-6">  
+               <div class="box" style="height: 318px;overflow:scroll;">
+            <div class="box-header">
+              <h3 class="box-title">Collections History</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+    <div class="table-responsive">
+      
+    <table class="table" >
+      <thead>     
+        <th>Total</th>
+        <th>Receive amount</th>
+        <th>Due amount</th>
+        <th>Date</th>
+              
+      </thead>
+       
+      <tbody>
+    
+       <tr th:each="collection: ${collections}">      
+          <td th:text="${collection.total}">  </td>
+           <td th:text="${collection.recieveAmount}"></td>
+          <td th:text="${collection.dueAmount}"></td>         
+          <td th:text="${collection.collectionDate}" ></td>    
+     
+     </tr>
+    <tr>
+
+   </tr>
+      
+      </tbody>
+     
+      
+    </table>
+    
+  </div>
+   </div>
+   </div>
+                  
+     </div>
+            </div>
+            
+                 <div class="row"> 
+                     <div class="col-md-12">
+                      <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Products Wise Order </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                  
+  <div class="table-responsive">
+    <table class="table" id="T">
+      <thead>
+     
+        <th>Product Id</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th>Discount</th>
+        <th>Discounted Price</th>
+        
+      
+      </thead>
+       
+      <tbody>
+      <form class="form-horizonta" >
+       <tr th:each="count : ${counts}">
+       
+          <td><input id="productId" type="text" class="form-control" th:value="${count.productId}" readonly/></td>
+           <td><input type="text" class="form-control" th:value="${count.productName}" readonly/></td>
+          <td><input id="proQuantity" type="text" class="form-control className" th:value="${count.productQuantity}" /></td>
+          <td><input id="total" type="text" class="form-control" th:value="${count.totalPrice}" /></td>       
+         <td><input id= "discounttt" type="text" class="form-control" th:value="${count.discountType}" readonly/></td>       
+         <td><input id="discountamount" type="text" class="form-control" th:value="${count.discountedPrice}" /></td>       
+        
+     </tr>     
+      
+       </form>
+       
+      </tbody>
+     
+      
+    </table>
+    
+    <table style="margin-left: 75%; width: 25%;">
+										<tr>
+										<td><b>Net Total : <span id="netTotal"
+													th:text="${total}+ '(TK)'">0
+														TK.</span></b></td>									
+										</tr>
+										<tr>
+										<td><b>Net Discount : <span id="netDiscount"
+													th:text="${discount}+ '(TK)'">0
+														TK.</span></b></td>	</tr>
+										<tr>
+											<td><b>Grand Total : <span id="netGrandTotal"
+													th:text="${grand_total}+ '(TK)'">0
+														TK.</span></b></td>
+														</tr>
+														<tr>
+   													<td>  <button  class="btn btn-info" id="btn-save">submit</button></td>
+ 													  </tr>
+							</table>
+    
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    
+  </div>
+              
+              <div class="row" id="deliveryDiv" >
+                     <div class="col-md-12">
+                      <div  class="box">
+       <button style="margin-left:10px;margin-top:10px;" class="btn btn-default" id="printbutton">Print</button>
+         <button style="margin-left:10px;margin-top:10px;" class="btn btn-info" id="btn1">Click for shipped</button>
+       
+            <div class="box-header">
+               <h4 class="card-title" style="margin-left: 40%;">Product Delivery details</h4>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="container">
+              <div id="printTable">
+        <div class="brand-section">
+            <div class="row">
+                <div class="col-6">
+                    <h1 class="text-white">পাইকার</h1>
+                </div>
+                <div class="col-6">
+                    <div class="company-details">
+                       <h3 style="color:#fff;" class="heading" th:text="${distributor_name}"></h3>
+                        <p class="text-white" th:text="${distributor_address}"></p>
+                        <p class="text-white" th:text="${distributor_phone}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="body-section">
+            <div class="row">
+                <div class="col-6">
+                    <p class="sub-heading" th:text="'Order No. '+${orderId}">Tracking No. fabcart2025 </p>
+                    <p class="sub-heading" th:text="'Order Date: '+${recieveDate}"> 20-20-2021 </p>
+                    <!-- <p class="sub-heading">Email Address: customer@gfmail.com </p> -->
+                </div>
+                <div class="col-6">
+                    <p class="sub-heading" th:text="'Retail Name:  '+${retail_name}"></p>
+                    <p class="sub-heading" th:text="'Address:  '+${retail_address}"></p>
+                    <p class="sub-heading" th:text="'Phone Number:  '+${contact_phone}"> </p>
+                   <!--  <p class="sub-heading">City,State,Pincode:  </p> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="body-section">
+            <h3 class="heading">Ordered Items</h3>
+            <br>
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                     <th  hidden=true class="w-20">Product Id</th>
+			          <th  class="w-20">Name</th>
+			        <th  class="w-20">Quantity</th>
+			        <th  class="w-20">Total Price</th>
+			         <th  class="w-20">Discount</th>
+			          <th  class="w-20">Grand total</th>
+                        
+                       
+                    </tr>
+                </thead>
+                <tbody>
+	         <tr th:each="deliveryDetails : ${delivery1}">
+	       
+	           <td hidden=true th:text="${deliveryDetails.productId}"></td>
+	           <td th:text="${deliveryDetails.productName}"></td>
+	          <td  th:text="${deliveryDetails.productQuantity}" ></td>
+	          <td th:text="${deliveryDetails.totalPrice}" ></td>       
+	         <td th:text="${deliveryDetails.discountType}" ></td>       
+	         <td  th:text="${deliveryDetails.discountedPrice}" ></td>       
+	        
+	     </tr>  
+                </tbody>
+            </table>
+            <br>
+            <table>
+            	<thead></thead>
+            	<tbody>
+            	<tr>
+                        <td colspan="4" class="text-right"> Total</td>
+                        <td th:text="${total1}+ '.00 (TK)'"> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right">Discount</td>
+                        <td th:text="${discount1}+ '.00 (TK)'"> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right">Grand Total</td>
+                        <td th:text="${grandTotal1}+ '.00 (TK)'"></td>
+                    </tr>
+            	</tbody>
+            </table>
+            <br>
+            <h3 class="heading" th:text="'Payment Status: '+${paymentStatus}"></h3>
+            <h3 class="heading" th:text="'Payment Mode: '+${paymentMethod}"></h3>
+             <h3 align="right" style="border-top:2px #111;" class="heading" >Customer's Signature</h3>
+            
+           
+        </div>
+
+        <div class="body-section">
+            <p>&copy; Copyright 2021 - পাইকার. All rights reserved. 
+                <a href="www.paikar.com" class="float-right">www.paikar.com</a>
+            </p>
+        </div>      
+    </div>    
+              
+              </div>
+           </div>
+         
+           </div>
+           </div>
+           </div>
+           
+              <div class="row">
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Assign delivery to ship</h4>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+            <div class="col-sm-10">
+               <form class="form-horizontal">
+              <div class="box-body"> 
+                
+               <div class="form-group">
+                  <label for="amount" class="col-sm-3 control-label">Employee </label>                  
+                  <div class="col-sm-8">                 
+                 <select id="emp_id" name="emp_id" class="form-control select2 select2-hidden-accessible" data-placeholder=" - - Select a Product - - " style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">                 
+                  <option value=""> - - Select an Employee  - - </option>
+                    <option th:each="user : ${user}" th:value="${user.id}"
+                            th:utext="${user.fullName}" />
+                  </select>
+                  </div>
+                </div>
+              
+               </div> 
+             
+              <div class="box-footer">
+                <a   th:href="@{/admin/orderHistory}">Cancel</a>
+                <button onclick="updateOrderStatus();" class="btn btn-info pull-right">Submit</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+               </div>
+            </div>
+               
+            </div>
+        </div>
+
+    </div>
+    <!-- /.modal-content -->
+</div>
+        </div>           
+    </div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script th:src="@{/js/order_details.js}"></script>
+<script th:src="@{/dist/js/print.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var orderId = [ /*[[${orderId}]]*/];
+var orderStatus = [ /*[[${orderStatus}]]*/];
+
+if(orderStatus=='Shipped'){
+	$('#btn-save').hide();
+	//$('#btn1').hide();
+}else if(orderStatus=='Pending'){
+    $('#deliveryDiv').hide();
+}
+$('#btn1').click(function (event) {
+    event.preventDefault();
+    $('#modal-default').modal('show');
+    
+});
+
+
+
+$(document).ready(function() {
+	 $('.select2').select2();
+	 
+/* 	 $(".className").change(function(){
+		 
+		 var productId=$(this).closest('td').siblings().find('#productId').val();
+			 var quantity=$(this).val();
+			 var tt=$(this);
+			// let url = baseurl + "/api/get-product-value/"+productId+"/"+quantity;
+			let url = baseurl + "/api/get-product-price/"+productId;
+			 var value=0;
+			 $.ajax({
+		            type: "GET",
+		            url: url,
+		            success: function (result) {
+		            	if(result.statusCode==200){
+		            		var totalNow = result.data.mrp *quantity;
+		            		//tt.closest('td').siblings().find('#total').val(result.totalPrice);
+		            		tt.closest('td').siblings().find('#total').val(totalNow);
+		            		
+		            		var discountNow = tt.closest('td').siblings().find('#discounttt').val();
+		            		var discountedAmount = totalNow - discountNow;
+		            		//tt.closest('td').siblings().find().val
+		            		tt.closest('td').siblings().find('#discountamount').val(discountedAmount);
+		            		  
+		            		sumTotal();
+		            		
+		            		
+		            	}
+		            	if(result.statusCode==203){
+		            		alert(result.message);
+		            		tt.closest('td').siblings().find('#total').val(k);
+	                        //tt.closest('td').siblings().find('#total').val(result.totalPrice);
+	                       // tt.closest('td').siblings().find('#discountamount').val(result.discounted);
+	                        }
+		            	if(result.statusCode==500){
+	                        alert("Something with goes wrong "+result.message);
+	                     }
+		            	if(result.statusCode==204){
+                         alert(result.message);
+                      }	            	
+		            },
+		            error: function (e) {
+		                console.log("ERROR: ", e);
+		            }
+		        });
+		 
+	 });
+		
+	function sumTotal(){
+	var table = document.getElementById("T"),
+				grandTotalValue = 0;
+			discountValue = 0;
+			totalValue = 0;
+      for(var i = 1; i < table.rows.length; i++)
+      {
+    	  grandTotalValue = grandTotalValue + parseInt(table.rows[i].cells[5].children[0].value);
+    	discountValue = discountValue + parseInt(table.rows[i].cells[4].children[0].value);
+    	totalValue = totalValue + parseInt(table.rows[i].cells[3].children[0].value); 
+      }
+     // alert(grandTotalValue+" "+discountValue+" "+totalValue);
+      $("#netGrandTotal").text(grandTotalValue + " Tk");
+      $("#netDiscount").text(discountValue + " Tk");
+      $("#netTotal").text(totalValue + " Tk");
+      
+      campaignAvailable(totalValue,discountValue,grandTotalValue);
+		}
+	
+	function campaignAvailable(totalValue,discountValue,grandTotalValue){
+		alert(totalValue+" "+discountValue+" "+grandTotalValue)
+		$.ajax({
+			 url: baseUrl+'/api/get-available-cash-back-campaign',
+			  type: "GET",
+			  dataType: "json",
+			  success:function(result) {
+				  if(result!=""){
+					  alert(result.campaignName)
+				  }
+				  
+			  }
+		});
+	} */
+	
+		
+		//alert("hi");
+		/* $.ajax({
+			  url: baseUrl+'/api/get-available-cash-back-campaign',
+			  type: "GET",
+			  dataType: "json",
+			  success:function(result) {
+				  //alert("hi");
+				  if(result!=""){
+					 // alert("hi")
+					  $.each(result, function(idx, obj){
+						  if(totalValue>=parseFloat(obj.requiredInvoiceAmount)){
+							  discountValue+= parseFloat(obj.discountAmount);
+							  grandTotalValue-=discountValue;
+							  
+						  }
+					  }	
+				  }
+			  }
+			
+		}); */
+	
+	function setVal(thisObj,result){		
+		$('#total').val(result);
+	}
+		
+	/* 
+	
+    $("#btn-save").click(function(event) {
+          event.preventDefault();
+          alert("hi")
+
+
+       });
+     */
+    
+});
+
+/* function printData()
+{
+   var divToPrint=document.getElementById("printTable");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+$('#printbutton').on('click',function(){
+printData();
+}) */
+
+function print() {
+    printJS({
+    printable: 'printTable',
+    type: 'html',
+    targetStyles: ['*']
+ })
+}
+
+document.getElementById('printbutton').addEventListener ("click", print)
+
+function updateOrderStatus(){
+	this.event.preventDefault();
+	var empId=$('#emp_id').val();
+	 let url = baseurl + "/api/update-order-status/"+empId+"/Shipped/"+orderId;
+	 $.ajax({
+         type: "GET",
+         url: url,
+         success: function (result) {
+            alert(result);
+            window.location.reload();
+         },
+         error: function (e) {
+             console.log("ERROR: ", e);
+         }
+     });
+}
+
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

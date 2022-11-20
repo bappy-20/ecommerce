@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Edit AssignRoute</title>
+<script th:src="@{/js/assignRoute.js}"></script>
+
+</head>
+<!-- <body onload="initMap()"> -->
+<body>
+<div layout:fragment="content">
+<!-- <div class="row">
+        <div class="col-md-6"> -->
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Edit an AssignRoute</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+                   <form class="form-horizontal">
+            		<div class="box-body"> 
+             	<div class="row"> 
+              		
+               <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="regionName" class="col-sm-2 control-label">Region Name</label>
+                  <input type="hidden"  id="id"> 
+                  
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="region_name" placeholder="Region Name.."/>
+                  </div>
+                </div>
+                </div> 
+                
+                 <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Area Name</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="area_name" placeholder="Area Name..."/>
+                  </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Territory Name</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="territory_name" placeholder="Territory Name.."/>
+                  </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Distributor Name</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="distributor_name" placeholder="Distributor Name..."/>
+                  </div>
+                </div>
+                </div>
+                
+                <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Emloyee Id</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="employee_id" placeholder="Emloyee Id..."/>
+                  </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Day Name</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="day_name" placeholder="Day Name..."/>
+                  </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Route Details</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="route_details" placeholder="Route Details..."/>
+                  </div>
+                </div>
+                </div>
+                
+                    
+        	 <!--  <div class="col-sm-6">
+            	 <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Employee Id</label>
+                  <input type="hidden"  id="id"> 
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="employee_id" placeholder="employeeId.."/>
+                  </div>
+                  <div class="col-sm-8">
+                   <input  class="form-control" id="employee_id" placeholder="employeeId.."/> 
+                  <p id="employee_id" placeholder="employeeId.."></p> 
+                   
+                  </div>
+                </div>
+                </div>   -->
+                              
+                              
+               
+                 
+                <!--  <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Mobile</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="mobile" placeholder="mobile"/>
+                  </div>
+                </div>
+                </div>
+                
+                 <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="departmentName" class="col-sm-2 control-label">Department Name</label>
+
+                  <div class="col-sm-8">
+                    <select class="form-control" id="department_name" name="departmentName">
+                  <option> - - Department name - - </option>
+                   <option value="Driver"> Driver</option>
+                   <option value="Admin"> Admin</option>
+                  </select>
+                  </div>
+                </div>
+               </div>
+               
+               <div class="col-sm-6">
+                  <div class="form-group">
+                  <label for="departmentName" class="col-sm-2 control-label">Department Name</label>
+
+                  <div class="col-sm-8">
+                    <select class="form-control" id="department_name" name="departmentName">
+                  <option> - - Department name - - </option>
+                   <option value="admin"> Admin</option>
+                   <option value="driver"> Driver</option>
+                  </select>
+                  </div>
+                </div>
+               </div>
+               
+                
+                <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Mobile</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="mobile" placeholder="mobile"/>
+                  </div>
+                </div>
+                </div>
+                
+                 <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Reporting Boss</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="reporting_boss" placeholder="reporting boss"/>
+                  </div>
+                </div>
+                </div>
+                 
+                 <div class="col-sm-6">
+                  <div class="form-group" id="date">
+                  <label for="amount" class="col-sm-2 control-label">Trip Date </label>
+
+                  <div class="col-sm-8">
+                     <input type="date" class="form-control" id="trip_date" placeholder="trip date">
+                  </div>
+                </div>
+                </div>
+                
+                 <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Trip Duration</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="trip_duration" placeholder="trip duration.."/>
+                  </div>
+                </div>
+                </div>
+                
+                 <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Trip StartPoint</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="trip_startpoint" placeholder="trip startpoint.."/>
+                  </div>
+                </div>
+                </div>
+                
+                 <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Trip EndPoint</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="trip_endpoint" placeholder="trip endpoint.."/>
+                  </div>
+                </div>
+                </div>
+                
+                 <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Number of Vistors</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="number_of_visitors" placeholder="number of visitors.."/>
+                  </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="purpose_of_Trip" class="col-sm-2 control-label">Purpose of Trip</label>
+
+                  <div class="col-sm-8">
+                    <select class="form-control" id="purpose_of_trip" name="PurposeOfTrip">
+                  <option> - - Purpose of Trip - - </option>
+                   <option value="factory visit"> Factory Visit</option>
+                   <option value="field visit"> Field Visit</option>
+                  </select>
+                  </div>
+                </div>
+               </div>
+                
+                 <div class="col-sm-6">
+                  <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Purpose of trip</label>
+
+                  <div class="col-sm-8">
+                    <select class="form-control" id="purpose_of_trip" name="PurposeOfTrip">
+                  <option> - - Purpose of Trip - - </option>
+                   <option value="factory visit"> Factory Visit</option>
+                   <option value="field visit"> Field Visit</option>
+                  </select>
+                  </div>
+                </div>
+               </div> -->
+               
+                <!-- <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="tripStatus" class="col-sm-2 control-label">Trip Status</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="trip_Staus" placeholder="trip status.."/>
+                  </div>
+                </div>
+                </div> -->
+             <!-- </div> -->
+             
+                 
+              <!-- /.box-body -->
+              </div>
+              </div>
+              
+              <div class="box-footer">
+                <a class="btn btn-default" th:href="@{/admin/assignRoute}">Cancel</a>
+                <button onclick="submitAssignRouteEditForm();" class="btn btn-info pull-right">Update</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      
+      <!-- <div class="col-md-6">
+       <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Add a map</h3>
+            </div>
+           
+            <div class="box-body">
+            <div id="map" style="width: 100%; height:310px;"></div>
+ 
+  </div>
+            </div>
+            
+            </div> -->
+
+<!-- </div> -->
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<!-- <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3hltsx8RJ8bOckcXkm9PjJbr05kNxtow"></script>        
+ -->
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var id=/*[[${id}]]*/;
+
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+    getAssignRoute(id);
+    
+
+});
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

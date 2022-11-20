@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">List of Campaign type</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="col-md-1">
+    <a id="btn" th:href="@{/admin/add-campaign-type}" style="margin-top: 31%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Create a campaign type</a>
+    </div> 
+  
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Campaign Type</th>
+                        <th>Note</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+
+            </table> 
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/campaign-type-role-list',
+        "sAjaxDataProp" : "",
+        "columns" : [
+            { data : 'campaignType'},
+            { data : 'note'},
+            {
+                data: 'canDelete',
+                "render": function ( data, type, full, meta ) {
+                    if(data==true) {
+                        return "<a  style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+full.id+");' href='#'><i class='fa fa-trash'></i></a>";
+                    }else{
+                
+                        return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                      
+                    }
+            }
+           
+         },
+         {
+             data: 'canEdit',
+             "render": function ( data, type, full, meta ) {
+                 if(data==true) {
+                     return "<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info orgEdit'  href='"+baseurl+"/admin/edit-campaign-type/"+full.id+"'><i class='fa fa-pencil'></i></a>";
+                 }else{
+                
+                	 return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                	 
+                 }
+                
+         }
+        
+      }
+            /* {  data: 'id',
+                    
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+oData.id+");' href='#'><i class='fa fa-trash'></i></a><a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info'  href='"+baseurl+"/admin/edit-campaign-type/"+oData.id+"'><i class='fa fa-pencil'></i></a>");
+               
+                    } 
+                }  */
+            
+            ]
+        });
+        
+
+    });
+
+function deleteEntry(id) {
+    let url = "/api/delete-campaign-type/"+id;
+    var baseurl = confirm("Are you sure you want to delete?");
+    
+    if (baseurl){
+           $.ajax({
+              type: "DELETE",
+              url: url,
+              contentType: 'application/json; charset=utf-8',
+              dataType: "JSON",
+              success: function (response) {
+                  alert(response);
+                  window.location.reload();
+              },
+              error: function () {
+                  alert("error");
+              }
+          }); 
+    }
+                 
+}
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

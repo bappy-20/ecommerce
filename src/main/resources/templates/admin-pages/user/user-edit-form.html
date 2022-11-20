@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Edit User</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+<link th:href="@{/file/css/fileinput.css}" rel="stylesheet"/>
+<link th:href="@{/file/themes/explorer-fas/theme.css}" rel="stylesheet"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Edit User Info</h3>
+            </div>
+            <!-- /.box-header -->
+              <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form id="userEditForm" class="form-horizontal" method="POST">
+             <div class="box-body">
+             
+               
+                <div class="row">
+               <div class="col-md-6">
+                 <div class="form-group">
+                  <label for="fullName" class="col-sm-2 control-label">Full Name</label>
+                   <div class="hidden" id="id"></div>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="fullName" name="fullname" placeholder="full name" required="required">
+                  </div>
+                </div>
+                
+               </div>
+               
+                 <div class="col-md-6">
+                  <div class="form-group">
+                  <label for="username" class="col-sm-4 control-label">User name</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="username" required="required">
+                  </div>
+                </div>
+                 </div>
+             </div>
+
+                <div class="row">
+                <div class=col-md-6>
+                <div class="form-group">
+                  <label for="email" class="col-sm-4 control-label">Email</label>
+
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="email" placeholder="email">
+                  </div>
+                </div>
+                </div>
+                <div class=col-md-6>
+                <div class="form-group">
+                  <label for="password" class="col-sm-4 control-label">Password</label>
+
+                  <div class="col-sm-8">
+                    <input type="password" class="form-control" id="password" placeholder="password">
+                  </div>
+                </div>
+                </div>
+                 </div>
+               
+              <div class= row>
+              <div class="col-md-6">
+               <div class="form-group">
+                  <label for="userType" class="col-sm-4 control-label">User Role</label>
+
+                  <div class="col-sm-8">
+                    <select id="userType" name="userType" data-live-search="true" data-live-search-style="startsWith" class="selectpicker" required="required">
+                  <option> - - Select User Role - - </option>
+                   <option th:each="role:${roles}" th:value="${role.name}" th:text="${role.name}"> 
+                  </select>
+                  </div>
+                </div>
+                </div>
+              <div class="col-md-6">
+              <div class="form-group">
+                  <label for="mobile" class="col-sm-4 control-label">Mobile</label>
+
+                  <div class="col-sm-8">
+                    <input type="number" class="form-control" id="mobile" placeholder=" ">
+                  </div>
+                </div>
+              </div>
+              </div>
+              
+              <div class="form-group">
+                  <label for="presentAddress" class="col-sm-2 control-label">Present Address</label>
+
+                  <div class="col-sm-10">
+                    <textarea class="form-control" id="presentAddress" placeholder="present address"></textarea>
+                  </div>
+                </div>
+                
+                <div class="row">
+                <div class="col-md-6">
+                <div class="form-group">
+                  <label for="nidNumber" class="col-sm-4 control-label">NID Number</label>
+
+                  <div class="col-sm-8">
+                    <input type="number" class="form-control" id="nidNumber" name="nid" placeholder="nid number" required="required">
+                  </div>
+                </div>
+                </div>
+                
+                <div class="col-md-6">
+                <div class="form-group">
+                  <label for="bloodGroup" class="col-sm-4 control-label">Blood Group</label>
+
+                  <div class="col-sm-8">
+                    <select class="form-control" id="bloodGroup">
+                    <option value=""> - - Select Group- - </option>                   
+                    <option>O(negative)</option>
+                    <option>O(positive)</option>
+                    <option>A(negative)</option>
+                    <option>A(positive)</option>
+                     <option>B(negative)</option>
+                    <option>B(positive)</option>
+                    <option>AB(negative)</option>
+                    <option>AB(positive)</option> 
+                  </select>
+                  </div>
+                </div>
+                </div>
+                </div>
+				
+                <div class="row">
+             <div class="col-md-6">
+             <div class="form-group">
+              <p id="error" style="color:red;margin-left:30%;"></p>
+                  <label for="profileImage" class="col-sm-4 control-label">Profile Image</label>
+                   <div class="col-sm-8"> 
+                  <table>
+                  <tr>
+                  <td><div class="btn btn-primary btn-sm float-right">
+                   <input type="text" class="form-control" id="profileImage" placeholder="selct image">                      
+                    </div></td>
+                    <td><button type="button" style="margin-left:3%;" class="btn btn-default" id="btn">Upload image</button>
+    </td>
+                  </tr>
+                  </table>             
+                                      
+                  
+                   
+                </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+             
+                 <div class="form-group">
+                  <label for="profileImage" class="col-sm-4 control-label">NID scan copy</label>
+                   <div class="col-sm-8"> 
+                  <table>
+                  <tr>
+                  <td><div class="btn btn-primary btn-sm float-right">
+                   <input type="text" class="form-control" id="nidImage" placeholder="selct image">                      
+                    </div></td>
+                    <td><button type="button" style="margin-left:3%;" class="btn btn-default" id="btn2">Upload image</button>
+    </td>
+                  </tr>
+                  </table>             
+                                      
+                  
+                   
+                </div>
+                </div>
+            </div>
+              </div>
+              
+            </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <a class="btn btn-default" th:href="@{/admin/user}">Cancel</a>
+              <!--   <button onclick="submitUserEditFrom();" class="btn btn-info pull-right">Update</button> -->
+             <input class="btn btn-info pull-right" type="submit" value="Update">
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Default Modal</h4>
+            </div>
+            <div class="modal-body">
+                <div class="file-loading" id="file">
+                    <input id="input-iconic" name="input-iconic" type="file">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.modal-content -->
+</div>
+<div class="modal fade" id="modal-default1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Default Modal</h4>
+            </div>
+            <div class="modal-body">
+                <div class="file-loading" id="file">
+                    <input id="input-iconic1" name="input-iconic1" type="file">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.modal-content -->
+</div>
+<div class="modal fade" id="modal-default2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Default Modal</h4>
+            </div>
+            <div class="modal-body">
+                <div class="file-loading" id="file">
+                    <input id="input-iconic2" name="input-iconic2" type="file">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.modal-content -->
+</div>
+        </div>
+
+<div layout:fragment="custom-scripts">
+<script th:src="@{/file/js/plugins/piexif.js}" type="text/javascript"></script>
+    <script th:src="@{/file/js/plugins/sortable.js}" type="text/javascript"></script>
+    <script th:src="@{/file/js/fileinput.js}" type="text/javascript"></script>
+    <script th:src="@{/file/js/locales/fr.js}" type="text/javascript"></script>
+    <script th:src="@{/file/js/locales/es.js}" type="text/javascript"></script>
+    <script th:src="@{/file/themes/fas/theme.js}" type="text/javascript"></script>
+    <script th:src="@{/file/themes/explorer-fas/theme.js}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+    <script th:src="@{/js/user.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var id=/*[[${id}]]*/;
+$('#btn').click(function (event) {
+    event.preventDefault();
+    $('#modal-default').modal('show');
+    
+});
+$('#btn1').click(function (event) {
+    event.preventDefault();
+    $('#modal-default1').modal('show');
+    
+});
+$('#btn2').click(function (event) {
+    event.preventDefault();
+    $('#modal-default2').modal('show');
+    
+});
+$("#input-iconic").fileinput({
+    uploadUrl: baseurl+"/admin/uploadtest",
+    uploadAsync: false,
+    minFileCount: 1,
+    maxFileCount: 1,
+    overwriteInitial: false,
+    initialPreviewAsData: true, // defaults markup
+    initialPreviewFileType: 'image', // image is the default and can be overridden in config below
+    initialPreviewConfig: [
+        {caption: "Business 1", filename: "Business-1.jpg", size: 762980, url: "/site/file-delete", key: 11},
+        {previewAsData: false, size: 823782, caption: "Business 2", filename: "Business-2.jpg", url: "/site/file-delete", key: 13}, 
+        {caption: "Lorem Ipsum", filename: "LoremIpsum.txt", type: "text", size: 1430, url: "/site/file-delete", key: 12}, 
+        {type: "pdf", size: 8000, caption: "PDF Sample", filename: "PDF-Sample.pdf", url: "/file-upload-batch/2", key: 14}, 
+        {type: "video", size: 375000, filetype: "video/mp4", caption: "Krajee Sample", filename: "KrajeeSample.mp4", url: "/file-upload-batch/2", key: 15} 
+    ],
+    uploadExtraData: {
+        img_key: "1000",
+        img_keywords: "happy, nature",
+    },
+    preferIconicPreview: true, // this will force thumbnails to display icons for following file extensions
+    previewFileIconSettings: { // configure your icon file extensions
+        'doc': '<i class="fas fa-file-word text-primary"></i>',
+        'xls': '<i class="fas fa-file-excel text-success"></i>',
+        'ppt': '<i class="fas fa-file-powerpoint text-danger"></i>',
+        'pdf': '<i class="fas fa-file-pdf text-danger"></i>',
+        'zip': '<i class="fas fa-file-archive text-muted"></i>',
+        'htm': '<i class="fas fa-file-code text-info"></i>',
+        'txt': '<i class="fas fa-file-alt text-info"></i>',
+        'mov': '<i class="fas fa-file-video text-warning"></i>',
+        'mp3': '<i class="fas fa-file-audio text-warning"></i>',
+        // note for these file types below no extension determination logic 
+        // has been configured (the keys itself will be used as extensions)
+        'jpg': '<i class="fas fa-file-image text-danger"></i>', 
+        'gif': '<i class="fas fa-file-image text-muted"></i>', 
+        'png': '<i class="fas fa-file-image text-primary"></i>'    
+    },
+    previewFileExtSettings: { // configure the logic for determining icon file extensions
+        'doc': function(ext) {
+            return ext.match(/(doc|docx)$/i);
+        },
+        'xls': function(ext) {
+            return ext.match(/(xls|xlsx)$/i);
+        },
+        'ppt': function(ext) {
+            return ext.match(/(ppt|pptx)$/i);
+        },
+        'zip': function(ext) {
+            return ext.match(/(zip|rar|tar|gzip|gz|7z)$/i);
+        },
+        'htm': function(ext) {
+            return ext.match(/(htm|html)$/i);
+        },
+        'txt': function(ext) {
+            return ext.match(/(txt|ini|csv|java|php|js|css)$/i);
+        },
+        'mov': function(ext) {
+            return ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i);
+        },
+        'mp3': function(ext) {
+            return ext.match(/(mp3|wav)$/i);
+        }
+    }
+   
+}).on('filesorted', function(e, params) {
+   
+}).on('fileuploaded', function(e, params) {
+   
+}).on('filebatchuploadcomplete', function(event, data) {
+
+}).on('filebatchuploadsuccess', function(event, data) {
+  var  response = data.response;
+  if(response.name=='error'){
+      $('#error').text("There is a file with this name already.please select new one!"); 
+  }else{
+      $('#error').text("");
+      $('#profileImage').val(response.name);
+  }
+  $('#modal-default').modal('hide');
+
+});
+$("#input-iconic1").fileinput({
+    uploadUrl: baseurl+"/admin/upload-license",
+    uploadAsync: false,
+    minFileCount: 1,
+    maxFileCount: 1,
+    overwriteInitial: false,
+    initialPreviewAsData: true, // defaults markup
+    initialPreviewFileType: 'image', // image is the default and can be overridden in config below
+    initialPreviewConfig: [
+        {caption: "Business 1", filename: "Business-1.jpg", size: 762980, url: "/site/file-delete", key: 11},
+        {previewAsData: false, size: 823782, caption: "Business 2", filename: "Business-2.jpg", url: "/site/file-delete", key: 13}, 
+        {caption: "Lorem Ipsum", filename: "LoremIpsum.txt", type: "text", size: 1430, url: "/site/file-delete", key: 12}, 
+        {type: "pdf", size: 8000, caption: "PDF Sample", filename: "PDF-Sample.pdf", url: "/file-upload-batch/2", key: 14}, 
+        {type: "video", size: 375000, filetype: "video/mp4", caption: "Krajee Sample", filename: "KrajeeSample.mp4", url: "/file-upload-batch/2", key: 15} 
+    ],
+    uploadExtraData: {
+        img_key: "1000",
+        img_keywords: "happy, nature",
+    },
+    preferIconicPreview: true, // this will force thumbnails to display icons for following file extensions
+    previewFileIconSettings: { // configure your icon file extensions
+        'doc': '<i class="fas fa-file-word text-primary"></i>',
+        'xls': '<i class="fas fa-file-excel text-success"></i>',
+        'ppt': '<i class="fas fa-file-powerpoint text-danger"></i>',
+        'pdf': '<i class="fas fa-file-pdf text-danger"></i>',
+        'zip': '<i class="fas fa-file-archive text-muted"></i>',
+        'htm': '<i class="fas fa-file-code text-info"></i>',
+        'txt': '<i class="fas fa-file-alt text-info"></i>',
+        'mov': '<i class="fas fa-file-video text-warning"></i>',
+        'mp3': '<i class="fas fa-file-audio text-warning"></i>',
+        // note for these file types below no extension determination logic 
+        // has been configured (the keys itself will be used as extensions)
+        'jpg': '<i class="fas fa-file-image text-danger"></i>', 
+        'gif': '<i class="fas fa-file-image text-muted"></i>', 
+        'png': '<i class="fas fa-file-image text-primary"></i>'    
+    },
+    previewFileExtSettings: { // configure the logic for determining icon file extensions
+        'doc': function(ext) {
+            return ext.match(/(doc|docx)$/i);
+        },
+        'xls': function(ext) {
+            return ext.match(/(xls|xlsx)$/i);
+        },
+        'ppt': function(ext) {
+            return ext.match(/(ppt|pptx)$/i);
+        },
+        'zip': function(ext) {
+            return ext.match(/(zip|rar|tar|gzip|gz|7z)$/i);
+        },
+        'htm': function(ext) {
+            return ext.match(/(htm|html)$/i);
+        },
+        'txt': function(ext) {
+            return ext.match(/(txt|ini|csv|java|php|js|css)$/i);
+        },
+        'mov': function(ext) {
+            return ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i);
+        },
+        'mp3': function(ext) {
+            return ext.match(/(mp3|wav)$/i);
+        }
+    }
+   
+}).on('filesorted', function(e, params) {
+   
+}).on('fileuploaded', function(e, params) {
+   
+}).on('filebatchuploadcomplete', function(event, data) {
+   
+}).on('filebatchuploadsuccess', function(event, data) {
+  var  response = data.response;
+  $('#licenseImage').val(response.name);
+  $('#modal-default1').modal('hide');
+
+});
+$("#input-iconic2").fileinput({
+    uploadUrl: baseurl+"/admin/upload-nid",
+    uploadAsync: false,
+    minFileCount: 1,
+    maxFileCount: 1,
+    overwriteInitial: false,
+    initialPreviewAsData: true, // defaults markup
+    initialPreviewFileType: 'image', // image is the default and can be overridden in config below
+    initialPreviewConfig: [
+        {caption: "Business 1", filename: "Business-1.jpg", size: 762980, url: "/site/file-delete", key: 11},
+        {previewAsData: false, size: 823782, caption: "Business 2", filename: "Business-2.jpg", url: "/site/file-delete", key: 13}, 
+        {caption: "Lorem Ipsum", filename: "LoremIpsum.txt", type: "text", size: 1430, url: "/site/file-delete", key: 12}, 
+        {type: "pdf", size: 8000, caption: "PDF Sample", filename: "PDF-Sample.pdf", url: "/file-upload-batch/2", key: 14}, 
+        {type: "video", size: 375000, filetype: "video/mp4", caption: "Krajee Sample", filename: "KrajeeSample.mp4", url: "/file-upload-batch/2", key: 15} 
+    ],
+    uploadExtraData: {
+        img_key: "1000",
+        img_keywords: "happy, nature",
+    },
+    preferIconicPreview: true, // this will force thumbnails to display icons for following file extensions
+    previewFileIconSettings: { // configure your icon file extensions
+        'doc': '<i class="fas fa-file-word text-primary"></i>',
+        'xls': '<i class="fas fa-file-excel text-success"></i>',
+        'ppt': '<i class="fas fa-file-powerpoint text-danger"></i>',
+        'pdf': '<i class="fas fa-file-pdf text-danger"></i>',
+        'zip': '<i class="fas fa-file-archive text-muted"></i>',
+        'htm': '<i class="fas fa-file-code text-info"></i>',
+        'txt': '<i class="fas fa-file-alt text-info"></i>',
+        'mov': '<i class="fas fa-file-video text-warning"></i>',
+        'mp3': '<i class="fas fa-file-audio text-warning"></i>',
+        // note for these file types below no extension determination logic 
+        // has been configured (the keys itself will be used as extensions)
+        'jpg': '<i class="fas fa-file-image text-danger"></i>', 
+        'gif': '<i class="fas fa-file-image text-muted"></i>', 
+        'png': '<i class="fas fa-file-image text-primary"></i>'    
+    },
+    previewFileExtSettings: { // configure the logic for determining icon file extensions
+        'doc': function(ext) {
+            return ext.match(/(doc|docx)$/i);
+        },
+        'xls': function(ext) {
+            return ext.match(/(xls|xlsx)$/i);
+        },
+        'ppt': function(ext) {
+            return ext.match(/(ppt|pptx)$/i);
+        },
+        'zip': function(ext) {
+            return ext.match(/(zip|rar|tar|gzip|gz|7z)$/i);
+        },
+        'htm': function(ext) {
+            return ext.match(/(htm|html)$/i);
+        },
+        'txt': function(ext) {
+            return ext.match(/(txt|ini|csv|java|php|js|css)$/i);
+        },
+        'mov': function(ext) {
+            return ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i);
+        },
+        'mp3': function(ext) {
+            return ext.match(/(mp3|wav)$/i);
+        }
+    }
+   
+}).on('filesorted', function(e, params) {
+   
+}).on('fileuploaded', function(e, params) {
+   
+}).on('filebatchuploadcomplete', function(event, data) {
+   
+}).on('filebatchuploadsuccess', function(event, data) {
+  var  response = data.response;
+  $('#nidImage').val(response.name);
+  $('#modal-default2').modal('hide');
+
+});
+$(document).ready(function() {
+	setBaseUrl(baseurl);
+	getUser(id);
+    
+
+});
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Edit Market</title>
+</head>
+<body>
+<div layout:fragment="content">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Edit a Market</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+                   <form id="marketEditForm" class="form-horizontal">
+            		<div class="box-body"> 
+             	<div class="row"> 
+              		
+              <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Territory</label>
+
+                  <div class="col-sm-8">
+                 <select class="form-control" id="territory_id" name="territory_id" required="required" disabled>
+                  <option value=""> - - Select a Territory- - </option>
+                    <option th:each="territory : ${territory}" th:value="${territory.id}"
+                            th:utext="${territory.territoryName}" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+               <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="regionName" class="col-sm-2 control-label">Market Name</label>
+                  <input type="hidden"  id="id"> 
+                  
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="market_name" name="marketname" placeholder="Market Name" required="required"/>
+                  </div>
+                </div>
+                </div> 
+                
+                 <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Address</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="address" placeholder="Address"/>
+                  </div>
+                </div>
+                </div>
+                
+          
+                 
+              <!-- /.box-body -->
+              </div>
+              </div>
+              
+              <div class="box-footer">
+                <a class="btn btn-default" th:href="@{/admin/market}">Cancel</a>
+               <!--  <button onclick="submitMarketEditForm();" class="btn btn-info pull-right">Update</button> -->
+               <input class="btn btn-info pull-right" type="submit" value="Update">
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      
+
+<div layout:fragment="custom-scripts">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/market.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var id=/*[[${id}]]*/;
+
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+    getMarket(id);
+    
+
+});
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

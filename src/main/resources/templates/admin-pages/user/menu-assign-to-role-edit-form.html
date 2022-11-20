@@ -1,0 +1,2858 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+
+<head>
+<meta charset="UTF-8">
+<title>Create Role</title>
+
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<div class="row" style="overflow: scroll; height: 800px;">
+			<div class="col-md-12">
+				<div class="box">
+					<div class="box-body">
+						<div class="card">
+							<h4 class="card-header">Modify Rights</h4>
+							<form>
+								<div class="card-body">
+									<input type="hidden" id="id">
+									<div class="form-group">
+										<label for="roleName" class="col-sm-4 control-label">User
+											Role</label>
+
+										<div class="col-sm-8">
+											<input type="text" class="form-control" id="roleName"
+												placeholder="email" readonly>
+
+										</div>
+									</div>
+
+									<h2>Administrative</h2>
+									<table class="table table-bordered table-hover"
+										id="administrative">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_0" title="create" usemap="0">
+														<label for="allcreate_0"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_0" title="read" usemap="0">
+														<label for="allread_0"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_0" title="edit" usemap="0">
+														<label for="alledit_0"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_0" title="del" usemap="0">
+														<label for="alldelete_0"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<!--      <tr>
+                            <td>1</td>
+                            <td id="Org" class="text-">
+                                Create Organization</td>
+                            <td>
+                                <div class="checkbox checkbox-success text-center">
+                                    <input type="checkbox" class="create_0" name="create[0][0][]" value="1" id="create_0_0">
+                                    <label for="create[0]01"></label>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="checkbox checkbox-success text-center">
+                                    <input type="checkbox" class="read_0" name="read[0][0][]" value="1" id="read_0_0">
+                                    <label for="read[0]0"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="checkbox checkbox-success text-center">
+                                    <input type="checkbox" class="edit_0" name="edit[0][0][]" value="1" id="edit_0_0">
+                                    <label for="edit[0]0"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="checkbox checkbox-success text-center">
+                                    <input type="checkbox" class="del_0" name="delete[0][0][]" value="1" id="delete_0_0">
+                                    <label for="delete[0]0"></label>
+                                </div>
+                            </td>
+
+
+                        </tr> -->
+											<tr>
+												<td>1</td>
+												<td id="Dist" class="text-">Create Distributor</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_0"
+															name="create[0][1][]" value="1" id="create_0_1">
+														<label for="create[0]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_0" name="read[0][1][]"
+															value="1" id="read_0_1"> <label for="read[0]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_0" name="edit[0][1][]"
+															value="1" id="edit_0_1"> <label for="edit[0]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_0" name="delete[0][1][]"
+															value="1" id="delete_0_1"> <label
+															for="delete[0]1"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="supplier" class="text-right">Create Supplier</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_0"
+															name="create[0][2][]" value="1" id="create_0_2">
+														<label for="create[0]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_0" name="read[0][2][]"
+															value="1" id="read_0_2"> <label for="read[0]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_0" name="edit[0][2][]"
+															value="1" id="edit_0_2"> <label for="edit[0]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_0" name="delete[0][2][]"
+															value="1" id="delete_0_2"> <label
+															for="delete[0]2"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="webuser" class="text-right">Create Web User</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_0"
+															name="create[0][3][]" value="1" id="create_0_3">
+														<label for="create[0]3"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_0" name="read[0][3][]"
+															value="1" id="read_0_3"> <label for="read[0]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_0" name="edit[0][3][]"
+															value="1" id="edit_0_3"> <label for="edit[0]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_0" name="delete[0][3][]"
+															value="1" id="delete_0_3"> <label
+															for="delete[0]3"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr hidden=true>
+												<td>4</td>
+												<td id="createrole" class="text-right">Create User Role</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_0"
+															name="create[0][4][]" value="1" id="create_0_4">
+														<label for="create[0]4"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_0" name="read[0][4][]"
+															value="1" id="read_0_4"> <label for="read[0]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_0" name="edit[0][4][]"
+															value="1" id="edit_0_4"> <label for="edit[0]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_0" name="delete[0][4][]"
+															value="1" id="delete_0_4"> <label
+															for="delete[0]4"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+											<tr>
+												<td>5</td>
+												<td id="rolemanagement" class="text-right">Manage User
+													Role</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_0"
+															name="create[0][5][]" value="1" id="create_0_5">
+														<label for="create[0]5"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_0" name="read[0][5][]"
+															value="1" id="read_0_5"> <label for="read[0]5"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_0" name="edit[0][5][]"
+															value="1" id="edit_0_5"> <label for="edit[0]5"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_0" name="delete[0][5][]"
+															value="1" id="delete_0_5"> <label
+															for="delete[0]5"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+										</tbody>
+									</table>
+
+									<h2>Employee Management</h2>
+									<table class="table table-bordered table-hover" id="employee">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_1" title="create" usemap="1">
+														<label for="allcreate_1"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_1" title="read" usemap="1">
+														<label for="allread_1"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_1" title="edit" usemap="1">
+														<label for="alledit_1"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_1" title="del" usemap="1">
+														<label for="alldelete_1"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="empType" class="text-">Create Employee Type</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_1"
+															name="create[1][0][]" value="1" id="create_1_0">
+														<label for="create[1]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_1" name="read[1][0][]"
+															value="1" id="read_1_0"> <label for="read[1]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_1" name="edit[1][0][]"
+															value="1" id="edit_1_0"> <label for="edit[1]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_1" name="delete[1][0][]"
+															value="1" id="delete_1_0"> <label
+															for="delete[1]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="appUser" class="text-right">Create App User</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_1"
+															name="create[1][1][]" value="1" id="create_1_1">
+														<label for="create[1]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_1" name="read[1][1][]"
+															value="1" id="read_1_1"> <label for="read[1]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_1" name="edit[1][1][]"
+															value="1" id="edit_1_1"> <label for="edit[1]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_1" name="delete[1][1][]"
+															value="1" id="delete_1_1"> <label
+															for="delete[1]1"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="targetSR" class="text-right">Setup Target SR</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_1"
+															name="create[1][2][]" value="1" id="create_1_2">
+														<label for="create[1]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_1" name="read[1][2][]"
+															value="1" id="read_1_2"> <label for="read[1]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_1" name="edit[1][2][]"
+															value="1" id="edit_1_2"> <label for="edit[1]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_1" name="delete[1][2][]"
+															value="1" id="delete_1_2"> <label
+															for="delete[1]2"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>4</td>
+												<td id="targetDE" class="text-right">Setup Target for
+													DE</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_1"
+															name="create[1][3][]" value="1" id="create_1_3">
+														<label for="create[1]3"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_1" name="read[1][3][]"
+															value="1" id="read_1_3"> <label for="read[1]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_1" name="edit[1][3][]"
+															value="1" id="edit_1_3"> <label for="edit[1]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_1" name="delete[1][3][]"
+															value="1" id="delete_1_3"> <label
+															for="delete[1]3"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+										</tbody>
+									</table>
+
+									<h2>Product Setup</h2>
+									<table class="table table-bordered table-hover"
+										id="productMenu">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_3" title="create" usemap="3">
+														<label for="allcreate_3"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_3" title="read" usemap="3">
+														<label for="allread_3"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_3" title="edit" usemap="3">
+														<label for="alledit_3"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_3" title="del" usemap="3">
+														<label for="alldelete_3"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="productCategory" class="text-">Create Product
+													Category</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_3"
+															name="create[3][0][]" value="1" id="create_3_0">
+														<label for="create[3]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_3" name="read[3][0][]"
+															value="1" id="read_3_0"> <label for="read[3]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_3" name="edit[3][0][]"
+															value="1" id="edit_3_0"> <label for="edit[3]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_3" name="delete[3][0][]"
+															value="1" id="delete_3_0"> <label
+															for="delete[3]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="measurementUnit" class="text-">Create
+													Measurement Unit</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_3"
+															name="create[3][1][]" value="1" id="create_3_1">
+														<label for="create[3]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_3" name="read[3][1][]"
+															value="1" id="read_3_1"> <label for="read[3]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_3" name="edit[3][1][]"
+															value="1" id="edit_3_1"> <label for="edit[3]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_3" name="delete[3][1][]"
+															value="1" id="delete_3_1"> <label
+															for="delete[3]1"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="company" class="text-right">Create Company</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_3"
+															name="create[3][2][]" value="1" id="create_3_2">
+														<label for="create[3]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_3" name="read[3][2][]"
+															value="1" id="read_3_2"> <label for="read[3]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_3" name="edit[3][2][]"
+															value="1" id="edit_3_2"> <label for="edit[3]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_3" name="delete[3][2][]"
+															value="1" id="delete_3_2"> <label
+															for="delete[3]2"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>4</td>
+												<td id="brand" class="text-right">Create Brand</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_3"
+															name="create[3][3][]" value="1" id="create_3_3">
+														<label for="create[3]3"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_3" name="read[3][3][]"
+															value="1" id="read_3_3"> <label for="read[3]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_3" name="edit[3][3][]"
+															value="1" id="edit_3_3"> <label for="edit[3]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_3" name="delete[3][3][]"
+															value="1" id="delete_3_3"> <label
+															for="delete[3]3"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>5</td>
+												<td id="product" class="text-right">Create Product</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_3"
+															name="create[3][4][]" value="1" id="create_3_4">
+														<label for="create[3]4"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_3" name="read[3][4][]"
+															value="1" id="read_3_4"> <label for="read[3]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_3" name="edit[3][4][]"
+															value="1" id="edit_3_4"> <label for="edit[3]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_3" name="delete[3][4][]"
+															value="1" id="delete_3_4"> <label
+															for="delete[3]4"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>6</td>
+												<td id="productBatch" class="text-right">Create Product
+													Batch</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_3"
+															name="create[3][4][]" value="1" id="create_3_5">
+														<label for="create[3]4"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_3" name="read[3][4][]"
+															value="1" id="read_3_5"> <label for="read[3]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_3" name="edit[3][4][]"
+															value="1" id="edit_3_5"> <label for="edit[3]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_3" name="delete[3][4][]"
+															value="1" id="delete_3_5"> <label
+															for="delete[3]4"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>7</td>
+												<td id="mappingProduct" class="text-right">Mapping
+													Product</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_3"
+															name="create[3][4][]" value="1" id="create_3_6">
+														<label for="create[3]4"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_3" name="read[3][4][]"
+															value="1" id="read_3_6"> <label for="read[3]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_3" name="edit[3][4][]"
+															value="1" id="edit_3_6"> <label for="edit[3]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_3" name="delete[3][4][]"
+															value="1" id="delete_3_6"> <label
+															for="delete[3]4"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>8</td>
+												<td id="productPrice" class="text-right">Create Product
+													Price</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_3"
+															name="create[3][4][]" value="1" id="create_3_7">
+														<label for="create[3]4"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_3" name="read[3][4][]"
+															value="1" id="read_3_7"> <label for="read[3]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_3" name="edit[3][4][]"
+															value="1" id="edit_3_7"> <label for="edit[3]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_3" name="delete[3][4][]"
+															value="1" id="delete_3_7"> <label
+															for="delete[3]4"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>9</td>
+												<td id="priceHistory" class="text-right">Product Price
+													History</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_3"
+															name="create[3][4][]" value="1" id="create_3_8">
+														<label for="create[3]4"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_3" name="read[3][4][]"
+															value="1" id="read_3_8"> <label for="read[3]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_3" name="edit[3][4][]"
+															value="1" id="edit_3_8"> <label for="edit[3]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_3" name="delete[3][4][]"
+															value="1" id="delete_3_8"> <label
+															for="delete[3]4"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+										</tbody>
+									</table>
+									<h2>Purchase Product</h2>
+									<table class="table table-bordered table-hover"
+										id="purchaseProduct">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_4" title="create" usemap="4">
+														<label for="allcreate_4"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_4" title="read" usemap="4">
+														<label for="allread_4"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_4" title="edit" usemap="4">
+														<label for="alledit_4"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_4" title="del" usemap="4">
+														<label for="alldelete_4"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="productPurchase" class="text-">Product Purchase</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_4"
+															name="create[4][0][]" value="1" id="create_4_0">
+														<label for="create[4]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_4" name="read[4][0][]"
+															value="1" id="read_4_0"> <label for="read[4]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_4" name="edit[4][0][]"
+															value="1" id="edit_4_0"> <label for="edit[4]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_4" name="delete[4][0][]"
+															value="1" id="delete_4_0"> <label
+															for="delete[4]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="returnPurchase" class="text-">Return Purchase
+													Product</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_4"
+															name="create[4][1][]" value="1" id="create_4_1">
+														<label for="create[4]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_4" name="read[4][1][]"
+															value="1" id="read_4_1"> <label for="read[4]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_4" name="edit[4][1][]"
+															value="1" id="edit_4_1"> <label for="edit[4]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_4" name="delete[4][1][]"
+															value="1" id="delete_4_1"> <label
+															for="delete[4]1"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+
+										</tbody>
+									</table>
+
+									<h2>Product Campaign</h2>
+									<table class="table table-bordered table-hover"
+										id="productCampaign">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_5" title="create" usemap="5">
+														<label for="allcreate_5"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_5" title="read" usemap="5">
+														<label for="allread_5"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_5" title="edit" usemap="5">
+														<label for="alledit_5"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_5" title="del" usemap="5">
+														<label for="alldelete_5"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="campaignType" class="text-">Create Campaign
+													Type</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_5"
+															name="create[5][0][]" value="1" id="create_5_0">
+														<label for="create[5]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_5" name="read[5][0][]"
+															value="1" id="read_5_0"> <label for="read[5]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_5" name="edit[5][0][]"
+															value="1" id="edit_5_0"> <label for="edit[5]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_5" name="delete[5][0][]"
+															value="1" id="delete_5_0"> <label
+															for="delete[5]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="campaign" class="text-">Create a Campaign</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_5"
+															name="create[5][1][]" value="1" id="create_5_1">
+														<label for="create[5]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_5" name="read[5][1][]"
+															value="1" id="read_5_1"> <label for="read[5]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_5" name="edit[5][1][]"
+															value="1" id="edit_5_1"> <label for="edit[5]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_5" name="delete[5][1][]"
+															value="1" id="delete_5_1"> <label
+															for="delete[5]1"></label>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="cashBackCampaign" class="text-right">Design
+													Cash Back Campaign</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_5"
+															name="create[5][2][]" value="1" id="create_5_2">
+														<label for="create[5]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_5" name="read[5][2][]"
+															value="1" id="read_5_2"> <label for="read[5]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_5" name="edit[5][2][]"
+															value="1" id="edit_5_2"> <label for="edit[5]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_5" name="delete[5][2][]"
+															value="1" id="delete_5_2"> <label
+															for="delete[5]2"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+
+										</tbody>
+									</table>
+
+									<h2>Distributor Requisition</h2>
+									<table class="table table-bordered table-hover"
+										id="DistributorRequisition">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_6" title="create" usemap="6">
+														<label for="allcreate_6"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_6" title="read" usemap="6">
+														<label for="allread_6"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_6" title="edit" usemap="6">
+														<label for="alledit_6"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_6" title="del" usemap="6">
+														<label for="alldelete_6"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="requisition" class="text-">Create Requisition</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_6"
+															name="create[6][0][]" value="1" id="create_6_0">
+														<label for="create[6]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_6" name="read[6][0][]"
+															value="1" id="read_6_0"> <label for="read[6]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_6" name="edit[6][0][]"
+															value="1" id="edit_6_0"> <label for="edit[6]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_6" name="delete[6][0][]"
+															value="1" id="delete_6_0"> <label
+															for="delete[6]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="supplyChainRequisition" class="text-">Supply
+													chain Requisition</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_6"
+															name="create[6][1][]" value="1" id="create_6_1">
+														<label for="create[6]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_6" name="read[6][1][]"
+															value="1" id="read_6_1"> <label for="read[6]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_6" name="edit[6][1][]"
+															value="1" id="edit_6_1"> <label for="edit[6]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_6" name="delete[6][1][]"
+															value="1" id="delete_6_1"> <label
+															for="delete[6]1"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="operationRequisition" class="text-right">
+													Operation Requisition</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_6"
+															name="create[6][2][]" value="1" id="create_6_2">
+														<label for="create[6]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_6" name="read[6][2][]"
+															value="1" id="read_6_2"> <label for="read[6]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_6" name="edit[6][2][]"
+															value="1" id="edit_6_2"> <label for="edit[6]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_6" name="delete[6][2][]"
+															value="1" id="delete_6_2"> <label
+															for="delete[6]2"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>4</td>
+												<td id="approvedRequisition" class="text-right">
+													Approved Requisition</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_6"
+															name="create[6][3][]" value="1" id="create_6_3">
+														<label for="create[6]3"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_6" name="read[6][3][]"
+															value="1" id="read_6_3"> <label for="read[6]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_6" name="edit[6][3][]"
+															value="1" id="edit_6_3"> <label for="edit[6]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_6" name="delete[6][3][]"
+															value="1" id="delete_6_3"> <label
+															for="delete[6]3"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>5</td>
+												<td id="verifiedRequisition" class="text-right">
+													Verified Requisition</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_6"
+															name="create[6][4][]" value="1" id="create_6_4">
+														<label for="create[6]4"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_6" name="read[6][4][]"
+															value="1" id="read_6_4"> <label for="read[6]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_6" name="edit[6][4][]"
+															value="1" id="edit_6_4"> <label for="edit[6]4"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_6" name="delete[6][4][]"
+															value="1" id="delete_6_4"> <label
+															for="delete[6]4"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>6</td>
+												<td id="deliveredRequisition" class="text-right">
+													Delivered Requisition</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_6"
+															name="create[6][5][]" value="1" id="create_6_5">
+														<label for="create[6]5"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_6" name="read[6][5][]"
+															value="1" id="read_6_5"> <label for="read[6]5"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_6" name="edit[6][5][]"
+															value="1" id="edit_6_5"> <label for="edit[6]5"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_6" name="delete[6][5][]"
+															value="1" id="delete_6_5"> <label
+															for="delete[6]5"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+
+										</tbody>
+									</table>
+									<h2>GEO Mapping</h2>
+									<table class="table table-bordered table-hover" id="geoMapping">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_7" title="create" usemap="7">
+														<label for="allcreate_7"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_7" title="read" usemap="7">
+														<label for="allread_7"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_7" title="edit" usemap="7">
+														<label for="alledit_7"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_7" title="del" usemap="7">
+														<label for="alldelete_7"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="region" class="text-">Create Region</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_7"
+															name="create[7][0][]" value="1" id="create_7_0">
+														<label for="create[7]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_7" name="read[7][0][]"
+															value="1" id="read_7_0"> <label for="read[7]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_7" name="edit[7][0][]"
+															value="1" id="edit_7_0"> <label for="edit[7]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_7" name="delete[7][0][]"
+															value="1" id="delete_7_0"> <label
+															for="delete[7]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="area" class="text-">Create Area</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_7"
+															name="create[7][1][]" value="1" id="create_7_1">
+														<label for="create[7]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_7" name="read[7][1][]"
+															value="1" id="read_7_1"> <label for="read[7]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_7" name="edit[7][1][]"
+															value="1" id="edit_7_1"> <label for="edit[7]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_7" name="delete[7][1][]"
+															value="1" id="delete_7_1"> <label
+															for="delete[7]1"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="territory" class="text-right">Create Territory</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_7"
+															name="create[7][2][]" value="1" id="create_7_2">
+														<label for="create[7]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_7" name="read[7][2][]"
+															value="1" id="read_7_2"> <label for="read[7]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_7" name="edit[7][2][]"
+															value="1" id="edit_7_2"> <label for="edit[7]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_7" name="delete[7][2][]"
+															value="1" id="delete_7_2"> <label
+															for="delete[7]2"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>4</td>
+												<td id="market" class="text-right">Create Market</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_7"
+															name="create[7][3][]" value="1" id="create_7_3">
+														<label for="create[7]3"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_7" name="read[7][3][]"
+															value="1" id="read_7_3"> <label for="read[7]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_7" name="edit[7][3][]"
+															value="1" id="edit_7_3"> <label for="edit[7]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_7" name="delete[7][3][]"
+															value="1" id="delete_7_3"> <label
+															for="delete[7]3"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+
+										</tbody>
+									</table>
+
+									<h2>Retail Management</h2>
+									<table class="table table-bordered table-hover"
+										id="retailManagement">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_8" title="create" usemap="8">
+														<label for="allcreate_8"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_8" title="read" usemap="8">
+														<label for="allread_8"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_8" title="edit" usemap="8">
+														<label for="alledit_8"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_8" title="del" usemap="8">
+														<label for="alldelete_8"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="retailType" class="text-">Create Retail Type</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_8"
+															name="create[8][0][]" value="1" id="create_8_0">
+														<label for="create[8]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_8" name="read[8][0][]"
+															value="1" id="read_8_0"> <label for="read[8]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_8" name="edit[8][0][]"
+															value="1" id="edit_8_0"> <label for="edit[8]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_8" name="delete[8][0][]"
+															value="1" id="delete_8_0"> <label
+															for="delete[8]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="retail" class="text-right">Create Retail</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_8"
+															name="create[8][1][]" value="1" id="create_8_1">
+														<label for="create[8]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_8" name="read[8][1][]"
+															value="1" id="read_8_1"> <label for="read[8]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_8" name="edit[8][1][]"
+															value="1" id="edit_8_1"> <label for="edit[8]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_8" name="delete[8][1][]"
+															value="1" id="delete_8_1"> <label
+															for="delete[8]1"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="pendingRetail" class="text-right">Pending
+													Retail</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_8"
+															name="create[8][2][]" value="1" id="create_8_2">
+														<label for="create[8]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_8" name="read[8][2][]"
+															value="1" id="read_8_2"> <label for="read[8]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_8" name="edit[8][2][]"
+															value="1" id="edit_8_2"> <label for="edit[8]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_8" name="delete[8][2][]"
+															value="1" id="delete_8_2"> <label
+															for="delete[8]2"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>4</td>
+												<td id="retailComplain" class="text-right">Retail
+													Complain</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_8"
+															name="create[8][3][]" value="1" id="create_8_3">
+														<label for="create[8]3"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_8" name="read[8][3][]"
+															value="1" id="read_8_3"> <label for="read[8]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_8" name="edit[8][3][]"
+															value="1" id="edit_8_3"> <label for="edit[8]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_8" name="delete[8][3][]"
+															value="1" id="delete_8_3"> <label
+															for="delete[8]3"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+
+										</tbody>
+									</table>
+									<h2>Route Management</h2>
+									<table class="table table-bordered table-hover"
+										id="routeManagement">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_9" title="create" usemap="9">
+														<label for="allcreate_9"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_9" title="read" usemap="9">
+														<label for="allread_9"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_9" title="edit" usemap="9">
+														<label for="alledit_9"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_9" title="del" usemap="9">
+														<label for="alldelete_9"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="route" class="text-">Create Route</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_9"
+															name="create[9][0][]" value="1" id="create_9_0">
+														<label for="create[9]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_9" name="read[9][0][]"
+															value="1" id="read_9_0"> <label for="read[9]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_9" name="edit[9][0][]"
+															value="1" id="edit_9_0"> <label for="edit[9]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_9" name="delete[9][0][]"
+															value="1" id="delete_9_0"> <label
+															for="delete[9]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="assignRoute" class="text-right">Assign Route</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_9"
+															name="create[9][1][]" value="1" id="create_9_1">
+														<label for="create[9]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_9" name="read[9][1][]"
+															value="1" id="read_9_1"> <label for="read[9]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_9" name="edit[9][1][]"
+															value="1" id="edit_9_1"> <label for="edit[9]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_9" name="delete[9][1][]"
+															value="1" id="delete_9_1"> <label
+															for="delete[9]1"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+
+										</tbody>
+									</table>
+
+									<h2>Order Management</h2>
+									<table class="table table-bordered table-hover"
+										id="orderManagement">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_10" title="create" usemap="10">
+														<label for="allcreate_10"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_10" title="read" usemap="10">
+														<label for="allread_10"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_10" title="edit" usemap="10">
+														<label for="alledit_10"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_10" title="del" usemap="10">
+														<label for="alldelete_10"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="orderDetails" class="text-">Order Details</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_10"
+															name="create[10][0][]" value="1" id="create_10_0">
+														<label for="create[10]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_10"
+															name="read[10][0][]" value="1" id="read_10_0"> <label
+															for="read[10]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_10"
+															name="edit[10][0][]" value="1" id="edit_10_0"> <label
+															for="edit[10]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_10"
+															name="delete[10][0][]" value="1" id="delete_10_0">
+														<label for="delete[10]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="returnOrder" class="text-right">Return Order</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_10"
+															name="create[10][1][]" value="1" id="create_10_1">
+														<label for="create[10]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_10"
+															name="read[10][1][]" value="1" id="read_10_1"> <label
+															for="read[10]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_10"
+															name="edit[10][1][]" value="1" id="edit_10_1"> <label
+															for="edit[10]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_10"
+															name="delete[9][1][]" value="1" id="delete_10_1">
+														<label for="delete[10]1"></label>
+													</div>
+												</td>
+
+											</tr>
+
+
+										</tbody>
+									</table>
+
+									<h2>Expense Management</h2>
+									<table class="table table-bordered table-hover"
+										id="expenseManagement">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_11" title="create" usemap="11">
+														<label for="allcreate_11"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_11" title="read" usemap="11">
+														<label for="allread_11"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_11" title="edit" usemap="11">
+														<label for="alledit_11"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_11" title="del" usemap="11">
+														<label for="alldelete_11"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="expenseType" class="text-">Create Expense Type</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_11"
+															name="create[11][0][]" value="1" id="create_11_0">
+														<label for="create[11]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_11"
+															name="read[11][0][]" value="1" id="read_11_0"> <label
+															for="read[11]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_11"
+															name="edit[11][0][]" value="1" id="edit_11_0"> <label
+															for="edit[11]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_11"
+															name="delete[11][0][]" value="1" id="delete_11_0">
+														<label for="delete[11]0"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="expense" class="text-right">Create Expense</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_11"
+															name="create[11][1][]" value="1" id="create_11_1">
+														<label for="create[11]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_11"
+															name="read[11][1][]" value="1" id="read_11_1"> <label
+															for="read[11]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_11"
+															name="edit[11][1][]" value="1" id="edit_11_1"> <label
+															for="edit[11]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_11"
+															name="delete[11][1][]" value="1" id="delete_11_1">
+														<label for="delete[11]1"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="approvedExpense" class="text-right">Approved
+													Expense</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_11"
+															name="create[11][2][]" value="1" id="create_11_2">
+														<label for="create[11]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_11"
+															name="read[11][2][]" value="1" id="read_11_2"> <label
+															for="read[11]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_11"
+															name="edit[11][2][]" value="1" id="edit_11_2"> <label
+															for="edit[11]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_11"
+															name="delete[11][2][]" value="1" id="delete_11_2">
+														<label for="delete[11]2"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>4</td>
+												<td id="dateWiseExpense" class="text-right">Date Wise
+													Expense</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_11"
+															name="create[11][3][]" value="1" id="create_11_3">
+														<label for="create[11]3"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_11"
+															name="read[11][3][]" value="1" id="read_11_3"> <label
+															for="read[11]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_11"
+															name="edit[11][3][]" value="1" id="edit_11_3"> <label
+															for="edit[11]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_11"
+															name="delete[11][3][]" value="1" id="delete_11_3">
+														<label for="delete[11]3"></label>
+													</div>
+												</td>
+
+											</tr>
+
+											<tr>
+												<td>5</td>
+												<td id="dateWisePendingExpense" class="text-right">
+													Date Wise Pending Expense</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_11"
+															name="create[11][3][]" value="1" id="create_11_4">
+														<label for="create[11]3"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_11"
+															name="read[11][3][]" value="1" id="read_11_4"> <label
+															for="read[11]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_11"
+															name="edit[11][3][]" value="1" id="edit_11_4"> <label
+															for="edit[11]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_11"
+															name="delete[11][3][]" value="1" id="delete_11_4">
+														<label for="delete[11]3"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>6</td>
+												<td id="expenseBy" class="text-right">Expense By Type</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_11"
+															name="create[11][3][]" value="1" id="create_11_5">
+														<label for="create[11]3"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_11"
+															name="read[11][3][]" value="1" id="read_11_5"> <label
+															for="read[11]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_11"
+															name="edit[11][3][]" value="1" id="edit_11_5"> <label
+															for="edit[11]3"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_11"
+															name="delete[11][3][]" value="1" id="delete_11_5">
+														<label for="delete[11]3"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+										</tbody>
+									</table>
+
+									<h2>Attendance Management</h2>
+									<table class="table table-bordered table-hover"
+										id="attendanceManagement">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_12" title="create" usemap="12">
+														<label for="allcreate_12"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_12" title="read" usemap="12">
+														<label for="allread_12"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_12" title="edit" usemap="12">
+														<label for="alledit_12"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_12" title="del" usemap="12">
+														<label for="alldelete_12"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="dateWiseAttendance" class="text-">Date Wise
+													Attendance</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_12"
+															name="create[12][0][]" value="1" id="create_12_0">
+														<label for="create[12]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_12"
+															name="read[12][0][]" value="1" id="read_12_0"> <label
+															for="read[12]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_12"
+															name="edit[12][0][]" value="1" id="edit_12_0"> <label
+															for="edit[12]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_12"
+															name="delete[12][0][]" value="1" id="delete_12_0">
+														<label for="delete[12]0"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="employeWiseAttedance" class="text-right">
+													Employee wise Attendance</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_12"
+															name="create[12][1][]" value="1" id="create_12_1">
+														<label for="create[12]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_12"
+															name="read[12][1][]" value="1" id="read_12_1"> <label
+															for="read[12]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_12"
+															name="edit[12][1][]" value="1" id="edit_12_1"> <label
+															for="edit[12]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_12"
+															name="delete[12][1][]" value="1" id="delete_12_1">
+														<label for="delete[12]1"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="dailyAttendance" class="text-right">Daily
+													Attendance</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_12"
+															name="create[12][2][]" value="1" id="create_12_2">
+														<label for="create[12]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_12"
+															name="read[12][2][]" value="1" id="read_12_2"> <label
+															for="read[12]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_12"
+															name="edit[12][2][]" value="1" id="edit_12_2"> <label
+															for="edit[12]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_12"
+															name="delete[12][2][]" value="1" id="delete_12_2">
+														<label for="delete[12]2"></label>
+													</div>
+												</td>
+
+											</tr>
+
+
+										</tbody>
+									</table>
+
+									<h2>Leave Management</h2>
+									<table class="table table-bordered table-hover"
+										id="leaveManagement">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_13" title="create" usemap="13">
+														<label for="allcreate_13"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_13" title="read" usemap="13">
+														<label for="allread_13"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_13" title="edit" usemap="13">
+														<label for="alledit_13"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_13" title="del" usemap="13">
+														<label for="alldelete_13"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="leave" class="text-">Create Leave</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_13"
+															name="create[13][0][]" value="1" id="create_13_0">
+														<label for="create[13]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_13"
+															name="read[13][0][]" value="1" id="read_13_0"> <label
+															for="read[13]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_13"
+															name="edit[13][0][]" value="1" id="edit_13_0"> <label
+															for="edit[13]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_13"
+															name="delete[13][0][]" value="1" id="delete_13_0">
+														<label for="delete[13]0"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="pendingLeave" class="text-right">Pending Leave</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_13"
+															name="create[13][1][]" value="1" id="create_13_1">
+														<label for="create[13]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_13"
+															name="read[13][1][]" value="1" id="read_13_1"> <label
+															for="read[13]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_13"
+															name="edit[13][1][]" value="1" id="edit_13_1"> <label
+															for="edit[13]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_13"
+															name="delete[8][1][]" value="1" id="delete_13_1">
+														<label for="delete[13]1"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="approvedLeave" class="text-right">Approved
+													Leave</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_13"
+															name="create[13][2][]" value="1" id="create_13_2">
+														<label for="create[13]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_13"
+															name="read[13][2][]" value="1" id="read_13_2"> <label
+															for="read[13]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_13"
+															name="edit[13][2][]" value="1" id="edit_13_2"> <label
+															for="edit[13]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_13"
+															name="delete[13][2][]" value="1" id="delete_13_2">
+														<label for="delete[13]2"></label>
+													</div>
+												</td>
+											</tr>
+
+
+										</tbody>
+									</table>
+
+									<h2>Track User</h2>
+									<table class="table table-bordered table-hover"
+										id="trackUserTable">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_14" title="create" usemap="14">
+														<label for="allcreate_14"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_14" title="read" usemap="14">
+														<label for="allread_14"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_14" title="edit" usemap="14">
+														<label for="alledit_14"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_14" title="del" usemap="14">
+														<label for="alldelete_14"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="trackUser" class="text-">Track users</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_14"
+															name="create[14][0][]" value="1" id="create_14_0">
+														<label for="create[14]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_14"
+															name="read[14][0][]" value="1" id="read_14_0"> <label
+															for="read[14]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_14"
+															name="edit[14][0][]" value="1" id="edit_14_0"> <label
+															for="edit[14]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_14"
+															name="delete[14][0][]" value="1" id="delete_14_0">
+														<label for="delete[14]0"></label>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="trackingAllUsers" class="text-right">Tracking
+													all users</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_14"
+															name="create[14][1][]" value="1" id="create_14_1">
+														<label for="create[14]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_14"
+															name="read[14][1][]" value="1" id="read_14_1"> <label
+															for="read[14]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_14"
+															name="edit[14][1][]" value="1" id="edit_14_1"> <label
+															for="edit[14]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_14"
+															name="delete[14][1][]" value="1" id="delete_14_1">
+														<label for="delete[14]1"></label>
+													</div>
+												</td>
+
+											</tr>
+
+
+
+										</tbody>
+									</table>
+
+									<h2>Visit History</h2>
+									<table class="table table-bordered table-hover"
+										id="visitHistory">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_15" title="create" usemap="15">
+														<label for="allcreate_15"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_15" title="read" usemap="15">
+														<label for="allread_15"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_15" title="edit" usemap="15">
+														<label for="alledit_15"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_15" title="del" usemap="15">
+														<label for="alldelete_15"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="employeeVisitReport" class="text-">Employee
+													Visit Report</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_15"
+															name="create[8][0][]" value="1" id="create_15_0">
+														<label for="create[8]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_15" name="read[8][0][]"
+															value="1" id="read_15_0"> <label for="read[8]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_15" name="edit[8][0][]"
+															value="1" id="edit_15_0"> <label for="edit[8]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_15"
+															name="delete[8][0][]" value="1" id="delete_15_0">
+														<label for="delete[8]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+										</tbody>
+									</table>
+
+									<h2>Notice Management</h2>
+									<table class="table table-bordered table-hover"
+										id="noticeManagement">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_16" title="create" usemap="16">
+														<label for="allcreate_16"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_16" title="read" usemap="16">
+														<label for="allread_16"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_16" title="edit" usemap="16">
+														<label for="alledit_16"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_16" title="del" usemap="16">
+														<label for="alldelete_16"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="notification" class="text-">Send Notification</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_16"
+															name="create[8][0][]" value="1" id="create_16_0">
+														<label for="create[8]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_16" name="read[8][0][]"
+															value="1" id="read_16_0"> <label for="read[8]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_16" name="edit[8][0][]"
+															value="1" id="edit_16_0"> <label for="edit[8]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_16"
+															name="delete[8][0][]" value="1" id="delete_16_0">
+														<label for="delete[8]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+										</tbody>
+									</table>
+
+									<h2>Reports</h2>
+									<table class="table table-bordered table-hover" id="reports">
+
+										<thead>
+											<tr>
+												<th>Si No.</th>
+												<th>Menu Title</th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allcreate"
+															value="1" id="allcreate_17" title="create" usemap="17">
+														<label for="allcreate_17"><strong>Can
+																Create</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="allread"
+															value="1" id="allread_17" title="read" usemap="17">
+														<label for="allread_17"><strong>Can read</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alledit"
+															value="1" id="alledit_17" title="edit" usemap="17">
+														<label for="alledit_17"><strong>Can Edit</strong></label>
+													</div></th>
+												<th><div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="allcheck" name="alldelete"
+															value="1" id="alldelete_17" title="del" usemap="17">
+														<label for="alldelete_17"><strong>Can
+																Delete</strong></label>
+													</div></th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td id="productInventory" class="text-">Product
+													Inventory</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_17"
+															name="create[8][0][]" value="1" id="create_17_0">
+														<label for="create[8]0"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_17" name="read[8][0][]"
+															value="1" id="read_17_0"> <label for="read[8]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_17" name="edit[8][0][]"
+															value="1" id="edit_17_0"> <label for="edit[8]0"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_17"
+															name="delete[8][0][]" value="1" id="delete_17_0">
+														<label for="delete[8]0"></label>
+													</div>
+												</td>
+
+
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="pendingOrder" class="text-right">Pending Order</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_17"
+															name="create[8][1][]" value="1" id="create_17_1">
+														<label for="create[8]1"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_17" name="read[8][1][]"
+															value="1" id="read_17_1"> <label for="read[8]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_17" name="edit[8][1][]"
+															value="1" id="edit_17_1"> <label for="edit[8]1"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_17"
+															name="delete[8][1][]" value="1" id="delete_17_1">
+														<label for="delete[8]1"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="deliveredOrder" class="text-right">Delivered
+													Order</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_17"
+															name="create[8][2][]" value="1" id="create_17_2">
+														<label for="create[8]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_17" name="read[8][2][]"
+															value="1" id="read_17_2"> <label for="read[8]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_17" name="edit[8][2][]"
+															value="1" id="edit_17_2"> <label for="edit[8]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_17"
+															name="delete[8][2][]" value="1" id="delete_17_2">
+														<label for="delete[8]2"></label>
+													</div>
+												</td>
+
+											</tr>
+											<tr>
+												<td>4</td>
+												<td id="retailWiseOrder" class="text-right">Retail Wise
+													Order</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_17"
+															name="create[8][2][]" value="1" id="create_17_3">
+														<label for="create[8]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_17" name="read[8][2][]"
+															value="1" id="read_17_3"> <label for="read[8]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_17" name="edit[8][2][]"
+															value="1" id="edit_17_3"> <label for="edit[8]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_17"
+															name="delete[8][2][]" value="1" id="delete_17_3">
+														<label for="delete[8]2"></label>
+													</div>
+												</td>
+
+											</tr>
+
+											<tr>
+												<td>5</td>
+												<td id="dateWiseProductDelivery" class="text-right">
+													Date Product Delivery</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="create_17"
+															name="create[8][2][]" value="1" id="create_17_4">
+														<label for="create[8]2"></label>
+													</div>
+												</td>
+
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="read_17" name="read[8][2][]"
+															value="1" id="read_17_4"> <label for="read[8]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="edit_17" name="edit[8][2][]"
+															value="1" id="edit_17_4"> <label for="edit[8]2"></label>
+													</div>
+												</td>
+												<td>
+													<div class="checkbox checkbox-success text-center">
+														<input type="checkbox" class="del_17"
+															name="delete[8][2][]" value="1" id="delete_17_4">
+														<label for="delete[8]2"></label>
+													</div>
+												</td>
+
+
+											</tr>
+
+										</tbody>
+									</table>
+
+									<div class="form-group text-right">
+										<button onclick="prepareDataForSubmit()"
+											class="btn btn-info w-md m-b-5">Save</button>
+									</div>
+
+
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div layout:fragment="custom-scripts">
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script th:src="@{/js/user.js}"></script>
+		<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var id=/*[[${id}]]*/;
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+    getRole(id);
+    
+});
+/*]]>*/
+</script>
+	</div>
+</body>
+</html>

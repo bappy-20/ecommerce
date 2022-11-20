@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Order Details</title>
+<style>
+media print { .box-text { font-size:27px!important;
+	color: blue !important;
+	-webkit-print-color-adjust: exact !important;
+}
+
+}
+.container {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.brand-section {
+	background-color: #111;
+	padding: 10px 40px;
+}
+
+.logo {
+	width: 50%;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.col-6 {
+	width: 50%;
+	flex: 0 0 auto;
+}
+
+.text-white {
+	color: #fff;
+}
+
+.company-details {
+	float: right;
+	text-align: right;
+}
+
+.body-section {
+	padding: 16px;
+	border: 1px solid gray;
+}
+
+.heading {
+	font-size: 20px;
+	margin-bottom: 08px;
+}
+
+.sub-heading {
+	color: #262626;
+	margin-bottom: 05px;
+}
+
+table {
+	background-color: #fff;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table thead tr {
+	border: 1px solid #111;
+	background-color: #f2f2f2;
+}
+
+table td {
+	vertical-align: middle !important;
+	text-align: center;
+}
+
+table th, table td {
+	padding-top: 08px;
+	padding-bottom: 08px;
+}
+
+.table-bordered {
+	box-shadow: 0px 0px 5px 0.5px gray;
+}
+
+.table-bordered td, .table-bordered th {
+	border: 1px solid #dee2e6;
+}
+
+.text-right {
+	text-align: end;
+}
+
+.w-20 {
+	width: 20%;
+}
+
+.float-right {
+	float: right;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row" id="deliveryDiv">
+			<div class="col-md-12">
+				<div class="box">
+					
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div class="container">
+						<div class="row">
+                    <div class="col-md-2">
+                    <button style="margin-left: 0%; margin-top: 10px;"
+                        class="btn btn-default" id="printbutton">Print</button>
+                    </div>
+                    <div class="col-md-8">
+                    <h4 class="card-title" style="margin-left: 40%;">Product
+                            Requisition details</h4>
+                    </div>
+                    </div>
+							<div id="printTable">
+								<div class="brand-section">
+									<div class="row">
+										<div class="col-6">
+											<h1 th:text="${org.orgName}" class="text-white">পাইকার</h1>
+										</div>
+										<div class="col-6">
+											<div class="company-details">
+												<h3 style="color: #fff;" class="heading"
+													th:text="${org.orgName}"></h3>
+												<p class="text-white" th:text="${org.address}"></p>
+												<p class="text-white" th:text="${org.mobile}"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="body-section">
+									<div class="row">
+										<div class="col-6">
+											<p class="sub-heading"
+												th:text="'Requisition Number. '+${distRequisition.requisitionNumber}">Tracking
+												No. fabcart2025</p>
+											<p class="sub-heading"
+												th:text="'Date: '+${distRequisition.updatedAt}">
+												20-20-2021</p>
+										</div>
+										<div  class="col-6">
+											<p class="sub-heading"
+												th:text="'Distributor Name:  '+${dist.distributorName}"></p>
+											<p class="sub-heading"
+												th:text="'Address:  '+${dist.distributorAddress}"></p>
+											<p class="sub-heading"
+												th:text="'Owner:  '+${dist.distributorOwner}"></p>
+											<p class="sub-heading"
+												th:text="'Contact:  '+${dist.distributorPhone}"></p>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="body-section">
+									<h3 class="heading">Ordered Items</h3>
+									<br>
+									<table class="table-bordered">
+										<thead>
+											<tr>
+												<th hidden=true>Product Id</th>
+												<th>Name</th>
+												<th>Order Quantity</th>
+												<th>Received Quantity</th>
+												<th>Damage</th>
+												<th>Lost</th>
+												<th>Expired</th>
+												<th>Unit Price</th>
+												<th>Total Price</th>
+												<th>Discount</th>
+												<th>Grand total</th>
+
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="count : ${counts}">
+
+												<td hidden=true th:text="${count.productId}"></td>
+												<td th:text="${count.productName}"></td>
+												<td th:text="${count.receivedQty}"></td>
+												
+												<td th:text="${count.toReceive}"></td>
+												<td th:text="${count.damaged}"></td>
+												<td th:text="${count.lost}"></td>
+												<td th:text="${count.dateExpaired}"></td>
+												
+												<td th:text="${count.productUnitPrice}"></td>
+												<td th:text="${count.totalPrice}"></td>
+												<td th:text="${count.discount}"></td>
+												<td th:text="${count.grandTotal}"></td>
+
+											</tr>
+										</tbody>
+									</table>
+									<h3 class="heading">Free Items</h3>
+                                    <br>
+									<table class="table-bordered">
+									<tbody>
+								  <tr th:each="freeItem : ${freeItem}">
+
+                                                <td hidden=true th:text="${freeItem.productId}"></td>
+                                                <td th:text="${freeItem.productName}"></td>
+                                                <td th:text="${freeItem.receivedQty}"></td>
+                                                <td th:text="0"></td>
+                                                <td th:text="0"></td>
+                                                <td th:text="0"></td>
+                                                <td th:text="0"></td>
+
+                                            </tr>
+									</tbody>
+									</table>
+									<br>
+									<table style="margin-left: 75%; width: 25%;">
+										<tr>
+											<td><b>Net Total : <span id="netTotal"
+													th:text="${distRequisition.totalPriceOfDelivery}+ '(TK)'">0
+														TK.</span></b></td>
+										</tr>
+										<tr>
+											<td><b>Net Discount : <span id="netDiscount"
+													th:text="${distRequisition.netDiscountOfDelivery}+ '(TK)'">0
+														TK.</span></b></td>
+										</tr>
+										<tr>
+											<td><b>Grand Total : <span id="netGrandTotal"
+													th:text="${distRequisition.grandTotalOfDelivery}+ '(TK)'">0
+														TK.</span></b></td>
+										</tr>
+									</table>
+									<br>
+
+									<!-- <h3 align="right" style="border-top: 2px #111;" class="heading">Customer's
+										Signature</h3>
+
+ -->
+								</div>
+
+								<div class="body-section">
+									<p>
+										&copy; Copyright 2021 - INovex. All rights reserved. <a
+											href="www.paikar.com" class="float-right">www.inovexidea.com</a>
+									</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div layout:fragment="custom-scripts">
+		<script th:src="@{/dist/js/print.js}"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script th:src="@{/js/distributorConfirmedRequisition.js}"></script>
+		<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var orderId = [ /*[[${orderId}]]*/];
+var distRequisitionStatus = /*[[${distRequisition.status}]]*/;
+if(distRequisitionStatus=='1'){
+	$('#pendingRequisition').hide();
+}else if(distRequisitionStatus=='0'){
+    $('#deliveryDiv').hide();
+}
+
+$(document).ready(function() {
+	setBaseUrl(baseurl);
+});
+
+$(document).ready(function() {
+	$('.select2').select2();
+	getDropDownValue();
+	getAvailableOffer();
+    getAvailableProductWiseOffer();
+
+});
+
+function print() {
+    printJS({
+    printable: 'printTable',
+    type: 'html',
+    targetStyles: ['*']
+ })
+}
+
+document.getElementById('printbutton').addEventListener ("click", print)
+
+$(function () {
+
+    $('#quickForm').validate({
+      rules: {            
+          received_qty: {
+          required: true
+        },
+        unit_price: {
+              required: true
+        }
+        
+      },
+      messages: {
+          received_qty: {
+          required: "Please enter a received_qty"
+        },
+        unit_price: {
+              required: "Please enter a unit_price"
+        }
+        
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+    
+  });
+/*]]>*/
+</script>
+
+	</div>
+</body>
+</html>

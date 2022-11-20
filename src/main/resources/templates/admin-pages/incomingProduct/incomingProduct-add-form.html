@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Add IncomingProduct</title>
+<script th:src="@{/js/incomingProduct.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- <div class="row"> -->
+        <!-- <div class="col-md-6"> -->
+           <div class="box">
+            <div class="box-header">
+            
+              <h3 class="box-title">Add an IncomingProduct</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body"> 
+              <div class="row">
+               
+                <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Product</label>
+               
+                  <div class="col-sm-8">
+                   <!--  <input  class="form-control" id="region_id" placeholder="Region Id..."/> -->
+                 <select class="form-control" id="product_id" name="product_id">
+                  <option value=""> - - Select a Product - - </option>
+                    <option th:each="product : ${product}" th:value="${product.id}"
+                            th:utext="${product.productName}" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+               
+                 <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Received Qty</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="received_qty" placeholder="Received Qty"/>
+                  </div>
+                </div>
+               </div>
+               
+                 <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Purchase price</label>
+
+                  <div class="col-sm-8">
+                    <input  class="form-control" id="purchase_price" placeholder="Product Name"/>
+                  </div>
+                </div>
+               </div>
+               
+               <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Supplier</label>
+               
+                  <div class="col-sm-8">
+                   <!--  <input  class="form-control" id="region_id" placeholder="Region Id..."/> -->
+                 <select class="form-control" id="supplier_id" name="supplier_id">
+                  <option value=""> - - Select a Supplier - - </option>
+                    <option th:each="supplier : ${supplier}" th:value="${supplier.id}"
+                            th:utext="${supplier.name}" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+            
+              <!-- /.box-body -->
+              
+              </div>
+              </div>
+              <div class="box-footer">
+                <a   th:href="@{/admin/incomingProduct}">Cancel</a>
+                <button onclick="submitIncomingProductForm();" class="btn btn-info pull-right">Submit</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        </div>
+    
+
+<div layout:fragment="custom-scripts">
+<!-- <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3hltsx8RJ8bOckcXkm9PjJbr05kNxtow"></script>    -->     
+<script th:inline="javascript">
+/*<![CDATA[*/
+	var baseurl=/*[[${baseurl}]]*/;
+
+$(document).ready(function() {
+	setBaseUrl(baseurl);
+	
+});
+
+
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

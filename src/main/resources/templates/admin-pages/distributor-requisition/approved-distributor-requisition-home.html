@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Processed Requisition</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row">
+
+			<div class="col-md-12">
+				<div class="box">
+					<div class="box-header">
+						<h4 class="box-title">Distributor Requisition List</h4>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+
+						<table id="empTable" class="display" width="100%" cellspacing="0">
+
+							<thead style="color: #111;">
+								<tr>
+									<th>Distributor Name</th>
+									<th>Requisition Number</th>
+									<th>Total Price</th>
+									<th>Net Discount</th>
+									<th>Grand Total</th>
+									<th>Status</th>
+									<th>Delete</th>
+									<th>Edit</th>
+									<!--    <th>#</th> -->
+								</tr>
+							</thead>
+
+						</table>
+					</div>
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+
+	</div>
+	<!-- </div> -->
+	<div layout:fragment="custom-scripts">
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script th:src="@{/js/distributorRequisition.js}"></script>
+		<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+	setBaseUrl(baseurl);
+});
+
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/distributor-requisition-approved-role-list',
+        "sAjaxDataProp" : "",
+        "columns" : [
+        	{
+                data : 'distName'
+               }, 
+                {
+                 data : 'requisitionNumber'
+                },
+                 {
+                 data : 'totalPrice'
+                },
+               {
+                 data : 'netDiscount'
+                }, 
+                {
+                    data : 'grandTotal'
+                   }, 
+                   {
+                       data : 'status'
+                      },
+                      {
+                          data: 'canDelete',
+                          "render": function ( data, type, full, meta ) {
+                              if(data==true) {
+                                  return "<a  style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+full.id+");' href='#'><i class='fa fa-trash'></i></a>";
+                              }else{
+                          
+                                  return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                                
+                              }
+                      }
+                     
+                   },
+                   {
+                       data: 'canEdit',
+                       "render": function ( data, type, full, meta ) {
+                           if(data==true) {
+                               return "<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info orgEdit'  href='"+baseurl+"/admin/approved-requisition-details/"+full.id+"'><i class='fa fa-pencil'></i></a>";
+                           }else{
+                          
+                          	 return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                          	 
+                           }
+                          
+                   }
+                  
+                }
+                                    
+            ]
+        });
+        
+    });
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

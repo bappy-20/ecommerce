@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Processed Requisition Details</title>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.24/r-2.2.7/rr-1.2.7/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.24/r-2.2.7/rr-1.2.7/datatables.min.js"></script>
+ 
+
+
+<style>
+media print { .box-text { font-size:27px!important;
+	color: blue !important;
+	-webkit-print-color-adjust: exact !important;
+}
+
+}
+.container {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.brand-section {
+	background-color: #111;
+	padding: 10px 40px;
+}
+
+.logo {
+	width: 50%;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.col-6 {
+	width: 50%;
+	flex: 0 0 auto;
+}
+
+.text-white {
+	color: #fff;
+}
+
+.company-details {
+	float: right;
+	text-align: right;
+}
+
+.body-section {
+	padding: 16px;
+	border: 1px solid gray;
+}
+
+.heading {
+	font-size: 20px;
+	margin-bottom: 08px;
+}
+
+.sub-heading {
+	color: #262626;
+	margin-bottom: 05px;
+}
+
+table {
+	background-color: #fff;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table thead tr {
+	border: 1px solid #111;
+	background-color: #f2f2f2;
+}
+
+table td {
+	vertical-align: middle !important;
+	text-align: center;
+}
+
+table th, table td {
+	padding-top: 08px;
+	padding-bottom: 08px;
+}
+
+.table-bordered {
+	box-shadow: 0px 0px 5px 0.5px gray;
+}
+
+.table-bordered td, .table-bordered th {
+	border: 1px solid #dee2e6;
+}
+
+.text-right {
+	text-align: end;
+}
+
+.w-20 {
+	width: 20%;
+}
+
+.float-right {
+	float: right;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row" id="box1">
+		          <div class="col-md-4">
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Distributor info.</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-striped">
+
+                            <tbody>
+
+                                <tr>
+                                    <td hidden=true id="dealerId" th:text="${dist.id}"></td>
+                                    <td style="font-size: 15px; font-weight: bold;">Name</td>
+                                    <td style="font-size: 15px;" th:text="${dist.distributorName}"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 15px; font-weight: bold;">Address</td>
+                                    <td style="font-size: 15px;"
+                                        th:text="${dist.distributorAddress}"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 15px; font-weight: bold;">Owner</td>
+                                    <td style="font-size: 15px;" th:text="${dist.distributorOwner}"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 15px; font-weight: bold;">Contact</td>
+                                    <td style="font-size: 15px;" th:text="${dist.distributorPhone}"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 15px; font-weight: bold;">Credit</td>
+                                    <td style="font-size: 15px;"
+                                        th:text="${dist.distributorCredit}"></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+			<div class="col-md-8">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">Available Cashback and Product wise
+							offers</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div id="cashback" hidden=true>
+							<table id="cashBackTable"
+								class="table table-bordered table-condensed table-striped">
+								<thead>
+									<tr>
+										<th hidden=true>Campaign Id</th>
+										<th>Campaign Name</th>
+										<th>Required Invoice Amount</th>
+										<th>Discount Type</th>
+										<th>Discount Amount</th>
+										<th>Start Date</th>
+										<th>End Date</th>
+
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<div id="productwise" hidden=true>
+							<table id="productOfferTable"
+								class="table table-bordered table-condensed table-striped">
+								<thead>
+									<tr>
+										<th hidden=true>Campaign Id</th>
+										<th>Campaign Name</th>
+										<th>Product Name</th>
+										<th>Discount Type</th>
+										<th>Discount Amount</th>
+										<th>Discount On</th>
+										<th>Free Item</th>
+										<th>Quantity</th>
+										<th>Start Date</th>
+										<th>End Date</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row" id="pendingRequisition">
+			<div class="col-md-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">Products Wise Order</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+
+						<table class="table" id="T">
+							<thead>
+								<th hidden=true>Product Id</th>
+								<th>Name</th>
+								<th>Requ.Quantity</th>
+								<th>Stock Quantity</th>
+                                <th>Stock Status</th>
+								<th>Unit Price</th>
+								<th>Total Price</th>
+								<th>Discount</th>
+								<th>Grand Total</th>
+
+
+							</thead>
+
+							<tbody>
+								<form class="form-horizontal">
+									<input id="id" type="hidden" th:value="${distRequisition.id}">
+									<tr th:each="count : ${counts}">
+
+										<td hidden=true><input id="productId" type="text"
+											class="form-control" th:value="${count.productId}" readonly /></td>
+										<td><input type="text" class="form-control"
+											th:value="${count.productName}" readonly /></td>
+										<td><input id="proQuantity" type="text"
+											class="form-control className"
+											th:value="${count.receivedQty}" /></td>
+										<!-- <td th:text="${count.stockQuantity}"></td> -->
+										<td><input id="stockQuantityy" type="text"
+											class="form-control className"
+											th:value="${count.stockQuantity}" readonly /></td>
+                                        <td th:text="${count.stockStatus}"></td>
+										<td hidden=true><input id="previousQuantity" type="text"
+											class="form-control className"
+											th:value="${count.receivedQty}" readonly /></td>
+										<td><input id="unitPrice" type="text"
+											class="form-control" th:value="${count.productUnitPrice}" readonly /></td>
+										<td><input id="totalPrice" type="text"
+											class="form-control" th:value="${count.totalPrice}" readonly /></td>
+										<td><input id="discount" type="text" class="form-control"
+											th:value="${count.discount}" readonly /></td>
+										<td><input id="grandTotal" type="text"
+											class="form-control className2" th:value="${count.grandTotal}" readonly /></td>
+									</tr>
+								</form>
+							</tbody>
+						</table>
+						<table style="margin-left: 45%">
+							<tr>
+								<td><b>Net Total : <span id="netTotal"
+										th:text="${netTotal}+ '(TK)'">0 TK.</span></b></td>
+							</tr>
+							<tr>
+								<td><b>Net Discount : <span id="netDiscount"
+										th:text="${netDiscount}+ '(TK)'">0 TK.</span></b></td>
+							</tr>
+							<tr>
+								<td><b>Grand Total : <span id="netGrandTotal"
+										th:text="${netGrandTotal}+ '(TK)'">0 TK.</span></b></td>
+							</tr>
+							<tr>
+								<td><button onclick="productListSubmitToServerByOperation();"
+										class="btn btn-info" style="margin-right:3px;">Approved</button><button 
+                                        id="btn1" class="btn btn-info">Forward</button></td>
+											</tr>
+						</table>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row" id="deliveryDiv">
+			<div class="col-md-12">
+				<div class="box">
+				
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div class="container">
+					 <div class="row">
+                    <div class="col-md-2">
+                    <button style="margin-left: 0%; margin-top: 10px;"
+                        class="btn btn-default" id="printbutton">Print</button>
+                    </div>
+                    <div class="col-md-8">
+                    <h4 class="card-title" style="margin-left: 40%;">Product
+                            Requisition details</h4>
+                    </div>
+                    </div>
+							<div id="printTable">
+								<div class="brand-section">
+									<div class="row">
+										<div class="col-6">
+											<h1 th:text="${org.orgName}" class="text-white">পাইকার</h1>
+										</div>
+										<div class="col-6">
+											<div class="company-details">
+												<h3 style="color: #fff;" class="heading"
+													th:text="${org.orgName}"></h3>
+												<p class="text-white" th:text="${org.address}"></p>
+												<p class="text-white" th:text="${org.mobile}"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="body-section">
+									<div class="row">
+										<div class="col-6">
+											<p class="sub-heading"
+												th:text="'Requisition Number. '+${distRequisition.requisitionNumber}">Tracking
+												No. fabcart2025</p>
+											<p class="sub-heading"
+												th:text="'Date: '+${distRequisition.updatedAt}">
+												20-20-2021</p>
+										</div>
+										<div  class="col-6">
+											<p class="sub-heading"
+												th:text="'Distributor Name:  '+${dist.distributorName}"></p>
+											<p class="sub-heading"
+												th:text="'Address:  '+${dist.distributorAddress}"></p>
+											<p class="sub-heading"
+												th:text="'Owner:  '+${dist.distributorOwner}"></p>
+											<p class="sub-heading"
+												th:text="'Contact:  '+${dist.distributorPhone}"></p>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="body-section">
+									<h3 class="heading">Ordered Items</h3>
+									<br>
+									<table class="table-bordered">
+										<thead>
+											<tr>
+												<th hidden=true>Product Id</th>
+												<th>Name</th>
+												<th>Requ.Quantity</th>
+												<th>Unit Price</th>
+												<th>Total Price</th>
+												<th>Discount</th>
+												<th>Grand total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="count : ${counts}">
+
+												<td hidden=true th:text="${count.productId}"></td>
+												<td th:text="${count.productName}"></td>
+												<td th:text="${count.receivedQty}"></td>
+												<td th:text="${count.productUnitPrice}"></td>
+												<td th:text="${count.totalPrice}"></td>
+												<td th:text="${count.discount}"></td>
+												<td th:text="${count.grandTotal}"></td>
+
+											</tr>
+										</tbody>
+									</table>
+									 <h3 class="heading">Free Items</h3>
+                                    <br>
+                                    <table class="table-bordered">
+                                    <tbody>
+                                  <tr th:each="freeItem : ${freeItem}">
+
+                                                <td hidden=true th:text="${freeItem.productId}"></td>
+                                                <td th:text="${freeItem.productName}"></td>
+                                                <td th:text="${freeItem.receivedQty}"></td>
+                                                <td th:text="0"></td>
+                                                <td th:text="0"></td>
+                                                <td th:text="0"></td>
+                                                <td th:text="0"></td>
+
+                                            </tr>
+                                    </tbody>
+                                    </table>
+									<br>
+									<table style="margin-left: 75%; width: 25%;">
+										<tr>
+											<td><b>Net Total : <span id="testnetTotal1"
+													th:text="${netTotal}+ '(TK)'">0
+														TK.</span></b></td>
+										</tr>
+										<tr>
+											<td><b>Net Discount : <span id="testnetDiscount1"
+													th:text="${netDiscount}+ '(TK)'">0
+														TK.</span></b></td>
+										</tr>
+										<tr>
+											<td><b>Grand Total : <span id="testnetGrandTotal1"
+													th:text="${netGrandTotal}+ '(TK)'">0
+														TK.</span></b></td>
+										</tr>
+									</table>
+									<br>
+<!-- 
+									<h3 align="right" style="border-top: 2px #111;" class="heading">Customer's
+										Signature</h3> -->
+
+
+								</div>
+
+								<div class="body-section">
+									<p>
+										&copy; Copyright 2021 - INovex. All rights reserved. <a
+											href="www.paikar.com" class="float-right">www.inovexidea.com</a>
+									</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		              <div class="row">
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Forward for modification</h4>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+            <div class="col-sm-10">
+               <form class="form-horizontal">
+              <div class="box-body"> 
+                
+               <div class="form-group">
+                  <label for="amount" class="col-sm-3 control-label">Department </label>                  
+                  <div class="col-sm-8">                 
+                 <select id="dept" name="dept" class="form-control">  
+                  <option value=""> -- Please Select -- </option>               
+                  <option value="supplychain"> Supply Chain </option>
+                  <option value="account"> Account </option>
+                  <!--  <option value="operation"> Operation </option>  -->                 
+                  </select>
+                  </div>
+                </div>
+              
+               </div> 
+             
+              <div class="box-footer">
+                <a   th:href="@{/admin/processed-requisition-home}">Cancel</a>
+                <button onclick="forwardRequisition();" class="btn btn-info pull-right">Submit</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+               </div>
+            </div>
+               
+            </div>
+        </div>
+
+    </div>
+    <!-- /.modal-content -->
+</div>
+        </div>
+	</div>
+	<div layout:fragment="custom-scripts">
+		<script th:src="@{/dist/js/print.js}"></script>
+		<script src="https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>  
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+		<script th:src="@{/js/distributorRequisition.js}"></script>
+		<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var orderId = [ /*[[${orderId}]]*/];
+var distRequisitionStatus = /*[[${distRequisition.status}]]*/;
+var status = [ /*[[${status}]]*/];
+
+if(status=='3'){
+	$('#pendingRequisition').show();
+	$('#box1').show();
+}else {
+    $('#pendingRequisition').hide();
+    $('#box1').hide();
+}
+
+$('#btn1').click(function (event) {
+    event.preventDefault();
+    $('#modal-default').modal('show');
+    
+});
+
+$(document).ready(function() {
+	setBaseUrl(baseurl);
+	getAvailableOffer();
+    getAvailableProductWiseOffer();
+
+});
+
+function print() {
+    printJS({
+    printable: 'printTable',
+    type: 'html',
+    targetStyles: ['*']
+ })
+}
+
+document.getElementById('printbutton').addEventListener ("click", print)
+
+/*]]>*/
+</script>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Product Report</title>
+
+<style type="text/css">
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #e3e3e3;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #337ab7;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: default;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 0 5px;
+}
+/* .bootstrap-select .dropdown-menu {
+max-width:300px !important;
+max-height:175px !important;
+} */
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Primary Inventory</h3>
+            </div>
+         
+            <div class="box-body">
+         
+             <table id="productTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Product Name</th>
+                         <th>onHand</th>                                                           
+                         <th>startingStock</th> 
+                          <th>receivedInventory</th> 
+                          <th>safetyStock</th>
+                          <th>shippedInventory</th>                          
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+         
+        </div>
+       
+      </div>
+
+</div>
+</div>
+<div layout:fragment="custom-scripts">
+<script th:src="@{/js/report.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() { 
+    getDropDownValue();
+    setBaseUrl(baseurl);
+    getPrimaryInventoryCurrentStock()
+
+});
+    
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

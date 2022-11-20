@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+
+<head>
+<meta charset="UTF-8">
+<script th:src="@{/js/organizations.js}"></script>
+<title>Organization Profile</title>
+<style>
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 3px 8px;
+    margin-bottom: -12px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+</style>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="row">
+            <div class="col-md-14">
+                <div class="box">
+                    <div class="box-header" style="text-align: center">
+                        <h3 class="box-title" >My Organization </h3>
+                    </div>
+                    <table class="table"
+                        style="border: 0px solid black; margin-left: 0px; margin-right: 0px;">
+                        <thead class="thead-light" style="text-align: center">
+                            <tr>
+                                <th><img class="profile-user-img img-responsive img-square"
+                                     th:src="@{/api/downloadFile/}+${session.orglogo}"
+                                    alt="Logo">
+                            </tr>
+                            <tr>
+
+                                <td class="row-title"><b>Organization Name : </b><span
+                                    id="orgName"></span></td>
+
+                            </tr>
+                            <tr>
+                                <td class="row-title"><b>Owner name : </b> <span
+                                    id="ownerName"></span></td>
+
+                            </tr>
+                            <tr>
+                                <td class="row-title"><b>Contact Name : </b><span
+                                    id="contactName"></span></td>
+                            <tr>
+                                <td class="row-title"><b>Mobile : </b><span id="mobile"></span></td>
+
+                            </tr>
+                            <tr>
+                                <td class="row-title"><b>Email: </b><span id="email"></span></td>
+
+                            </tr>
+                          
+                            <tr>
+                                <td class="row-title"><b>Website : </b> <span id="website"></span></td>
+
+                            </tr>
+                            <tr>
+                                <td class="row-title"><b>Address : </b><span id="address"></span></td>
+
+                            </tr>
+                            <tr>
+                                <td class="row-title"><b>About : </b> <span id="about"></span></td>
+
+                            </tr>
+                           
+
+                        </thead>
+
+                    </table>
+
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </div>
+
+    
+
+
+    <div layout:fragment="custom-scripts">
+        <script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var id=/*[[${id}]]*/;
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+    getOrgProfile(id);
+    
+
+});
+/*]]>*/
+</script>
+    </div>
+</body>
+</html>

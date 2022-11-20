@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Basic Information of Organization</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="col-md-1">
+    <a id="btn" th:href="@{/admin/add-organization}" style="margin-top: 31%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Create an Organization</a>
+    </div> 
+    </div>
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Org Name</th>
+                        <th>Contact Name</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Subscription Number</th>
+                        <th>Subscription Period</th>
+                        <th>Website</th>
+                        <th>Logo</th>
+                        <th>About</th>
+                        <th>Transport Type</th>
+                        <th>Owner Name</th>
+                        <!-- <th>Collected Amount</th>
+                        <th>Status</th>
+                        <th>Date Receive</th> -->
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/organization',
+        "sAjaxDataProp" : "",
+        "columns" : [
+        	{
+                data : 'orgName'
+               }, 
+                {
+                 data : 'contactName'
+                },
+                 {
+                 data : 'mobile'
+                },
+               {
+                 data : 'email'
+                },
+               {
+                 data : 'address'
+                },
+               {
+                 data : 'subscriptionNumber'
+                }, 
+               {
+                 data : 'subscriptionPeriod'
+                },
+                {
+                data : 'website'
+                },
+               {
+                data : 'logo'
+                },
+               {
+                data : 'about'
+                },
+               {
+                data : 'transportType'
+                },
+               {
+                data : 'ownerName'
+                },  
+               /* {
+                data : 'collectedAmount'
+                 },
+               {
+                data : 'status'
+                },
+               {
+                data : 'dateReceive'
+                },   */
+                
+                 {
+                    data: 'id',
+                    
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+oData.id+");' href='#'><i class='fa fa-trash'></i></a><a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info'  href='"+baseurl+"/admin/edit-organization/"+oData.id+"'><i class='fa fa-pencil'></i></a>");
+               
+ 
+
+                    } 
+                } 
+             
+        
+            ]
+        });
+        
+
+    });
+
+function deleteEntry(id) {
+	let url = "/api/organization/"+id;
+    var baseurl = confirm("Are you sure you want to delete?");
+    
+    if (baseurl){
+    	   $.ajax({
+              type: "DELETE",
+              url: url,
+              contentType: 'application/json; charset=utf-8',
+              dataType: "JSON",
+              success: function (response) {
+                  alert(response);
+            	  window.location.reload();
+              },
+              error: function () {
+                  alert("error");
+              }
+          }); 
+    }
+    	
+                 
+}
+
+
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

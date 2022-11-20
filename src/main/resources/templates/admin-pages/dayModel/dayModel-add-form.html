@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Add DayModel</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- <div class="row"> -->
+        <!-- <div class="col-md-6"> -->
+           <div class="box">
+            <div class="box-header">
+            
+              <h3 class="box-title">Assign Route to employee</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body"> 
+              <div class="row">
+              
+                  <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Employee </label>
+                  
+                  <div class="col-sm-8">
+                  <select class="form-control" id="emp_id" name="emp_id">
+                  <option value=""> - - Select an Employee  - - </option>
+                    <option th:each="user : ${user}" th:value="${user.username}"
+                            th:utext="${user.fullName}" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+                <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Day Name</label>
+
+                  <div class="col-sm-8">
+                   
+                    <select class="form-control" id="day_name" name="day_name">
+                  <option value=""> - - Select a Day  - - </option>
+                  <option th:value="Saturday" th:utext="Saturday" />
+                  <option th:value="Sunday" th:utext="Sunday" />
+                   <option th:value="Monday" th:utext="Monday" />
+                   <option th:value="Tuesday" th:utext="Tuesday" />
+                   <option th:value="Wednesday" th:utext="Wednesday" />
+                    <option th:value="Thursday" th:utext="Thursday" />
+                    <option th:value="Friday" th:utext="Friday" />
+                  </select>
+                  </div>
+                </div>
+               </div> 
+              
+               <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-2 control-label">Select Route </label>
+                   
+                  <div class="col-sm-8">
+                   
+                 <select class="form-control" id="route_id" name="route_id">
+                  <option value=""> - - Select a Route  - - </option>
+                    <option th:each="route : ${route}" th:value="${route.id}"
+                            th:utext="${route.routeName}" />
+                  </select>
+                  </div>
+                </div>
+               </div>
+              </div>
+              </div>
+              <div class="box-footer">
+                <a   th:href="@{/admin/dayModel}">Cancel</a>
+                <button onclick="submitDayModelForm();" class="btn btn-info pull-right">Submit</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        </div>
+     
+
+<div layout:fragment="custom-scripts">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/dayModel.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var baseurl=/*[[${baseurl}]]*/;
+
+$(document).ready(function() {
+    setBaseUrl(baseurl);
+    
+});
+
+
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

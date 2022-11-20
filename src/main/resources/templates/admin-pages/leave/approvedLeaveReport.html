@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Leave Report</title>
+
+<style type="text/css">
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #e3e3e3;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #337ab7;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: default;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 0 5px;
+}
+/* .bootstrap-select .dropdown-menu {
+max-width:300px !important;
+max-height:175px !important;
+} */
+
+</style>
+</head>
+<body>
+<div layout:fragment="content">
+
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Leave List</h3>
+            </div>
+         
+            <div class="box-body">
+         
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Employee Id</th>
+                        <th>Employee Name</th>
+                        <th>Leave Type</th>
+                        <th>From Date</th>                                                           
+                        <th>To Date</th> 
+                        <th>Comment</th> 
+                        <th>Status</th> 
+                       <th>Day Count</th>  
+                      <!--  <th>Delete</th> 
+                       <th>Edit</th>   -->                
+                       <!--  <th>Action</th>  -->   
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+         
+        </div>
+       
+      </div>
+
+</div>
+</div>
+<div layout:fragment="custom-scripts">
+<script th:src="@{/js/leave.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() { 
+   // setBaseUrl(baseurl);
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "destroy":true,
+       /*  "sAjaxSource" : baseUrl+'/api/leave-ReportOfPending',  */
+      /*   "sAjaxSource" : baseurl+'/api/leave-approved', */
+        "sAjaxSource" : baseurl+'/api/leave-approved-list',
+        "sAjaxDataProp" : "",
+        "columns" : [
+            {
+             data : 'employeeId'
+                },
+            {
+             data : 'employeeName'
+                },
+            {
+             data : 'leaveType'
+                },
+            {
+             data : 'fromDate'
+                },
+            {
+             data : 'toDate'
+                },              
+            {
+             data : 'comment'
+                },
+            {
+             data : 'status'
+                },
+                 {
+             data : 'dayCount'
+                },
+/*                 {
+                    data: 'canDelete',
+                    "render": function ( data, type, full, meta ) {
+                        if(data==true) {
+                            return "<a  style='margin-right: 3px;padding: 3px 7px;' class='btn btn-danger' onclick='deleteEntry("+full.id+");' href='#'><i class='fa fa-trash'></i></a>";
+                        }else{
+                    
+                            return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                          
+                        }
+                }
+               
+             },
+ */            /*  {
+                 data: 'canEdit',
+                 "render": function ( data, type, full, meta ) {
+                     if(data==true) {
+                         return "<a style='margin-right: 3px;padding: 3px 7px;' class='btn btn-info orgEdit'  href='"+baseurl+"/admin/edit-PendingLeave/"+full.id+"'><i class='fa fa-pencil'></i></a>";
+                     }else{
+                    
+                    	 return '<i class="fa fa-ban" aria-hidden="true"></i>';
+                    	 
+                     }
+                    
+             }
+            
+          }        */              
+        ]
+    });
+
+});
+
+function deleteEntry(id) {
+    let url = baseurl+"/api/delete-leave/"+id;
+    var msg = confirm("Are you sure you want to delete?");
+    
+    if (msg){
+           $.ajax({
+              type: "DELETE",
+              url: url,
+              contentType: 'application/json; charset=utf-8',
+              dataType: "JSON",
+              success: function (response) {
+                  alert("Entry Deleted");
+                  window.location.reload();
+              },
+              error: function () {
+                  alert("error");
+              }
+          }); 
+    }
+        
+                 
+}
+ 
+
+/*]]>*/
+</script>
+</div>
+</body>
+</html>

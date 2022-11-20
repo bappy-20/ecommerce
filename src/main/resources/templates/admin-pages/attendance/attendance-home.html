@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="row">
+
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"> Attendance list</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+           <!--  <div class="col-md-1">
+    <a id="btn" th:href="@{/admin/add-attendance}" style="margin-top: 31%;" class="btn btn-fill btn-info" ><i class="fa fa-plus-square" aria-hidden="true"></i>Create a Attendance</a>
+    </div>  -->
+    </div>
+             <table id="empTable" class="display" width="100%" cellspacing="0">
+
+                <thead style="color: #111;">
+                    <tr>
+                        <th>Employee Id</th>
+                        <th>In Time</th>
+                        <th>CheckIn Address</th>
+                        <th>Out Time</th>
+                        <th>CheckOut Address</th>
+                        <th>Log Date</th>
+                        <th>Comment</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+            </table> 
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+</div>
+<!-- </div> -->
+<div layout:fragment="custom-scripts">
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+$(document).ready(function() {
+    
+    var table = $('#empTable').dataTable({
+        "deferRender" : true,
+        "sAjaxSource" : baseurl+'/api/assign-Route',
+        "sAjaxDataProp" : "",
+        "columns" : [
+            {
+                data : 'employeeId'
+               }, 
+                {
+                 data : 'inTime'
+                },
+                 {
+                 data : 'checkInAddress'
+                },
+               {
+                 data : 'outTime'
+                },
+               {
+                 data : 'checkOutAddress'
+                },
+               {
+                 data : 'logDate'
+                }, 
+               {
+                 data : 'comment'
+                },
+                {
+                data : 'status'
+                },
+              
+            ]
+        });
+        
+
+    });
+
+
+/*]]>*/
+</script>
+
+</div>
+</body>
+</html>

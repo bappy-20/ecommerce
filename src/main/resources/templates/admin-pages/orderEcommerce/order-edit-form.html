@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/main}">
+<head>
+<meta charset="UTF-8">
+<title>Edit Price</title>
+</head>
+<body>
+<div layout:fragment="content">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Update a Price</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+             <div class="col-md-10">
+            <!-- form start -->
+                   <form class="form-horizontal">
+                   <input id="id" type="hidden">
+            		<div class="box-body"> 
+             	<div class="row"> 
+             	
+             	 <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-3 control-label">Product Name</label>
+               
+                  <div class="col-sm-7">
+                   <input  class="form-control" id="product_name"  readonly/>
+                  </div>
+                </div>
+               </div>
+              
+            
+               <div hidden="true" class="col-sm-6">
+               <div class="form-group">
+                  <label for="amount" class="col-sm-3 control-labe">Product Id</label>
+               
+                  <div class="col-sm-7">
+                   <input  class="form-control" id="product_id"  readonly/>
+                  </div>
+                </div>
+               </div>
+               
+               
+                 <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-3 control-label">Product Buing Price</label>
+
+                  <div class="col-sm-7">
+                    <input type="number" class="form-control" id="product_price" placeholder="Product Price"/>
+                  </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-3 control-label">Dealer Price</label>
+
+                  <div class="col-sm-7">
+                    <input type="number" class="form-control" id="dealer_price" placeholder="Selling Price"/>
+                  </div>
+                </div>
+                </div>    
+                
+                <!--  <div class="col-sm-6">
+               <div class="form-group">
+                  <label for="retailPrice" class="col-sm-2 control-label">Retail Price</label>
+
+                  <div class="col-sm-8">
+                    <input type="number" class="form-control" id="retailPrice" placeholder="Retail Price"/>
+                  </div>
+                </div>
+               </div>
+               
+                <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="amount" class="col-sm-3 control-label">MRP.</label>
+
+                  <div class="col-sm-7">
+                    <input type="number" class="form-control" id="mrp" placeholder="MRP.."/>
+                  </div>
+                </div>
+                </div> -->
+                
+              </div>
+              </div>
+              
+              <div class="box-footer">
+                <a class="btn btn-default" th:href="@{/admin/price}">Cancel</a>
+                <button onclick="submitPriceEditForm();" class="btn btn-info pull-right">Update</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      
+<div layout:fragment="custom-scripts">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/price.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var baseurl=/*[[${baseurl}]]*/;
+var id=/*[[${id}]]*/;
+$(document).ready(function() {	
+    setBaseUrl(baseurl);
+    getPrice(id);
+});
+
+$(function () {
+    $('#quickForm').validate({
+      rules: {            
+          product_price: {
+          required: true
+        },
+        dealer_price: {
+              required: true
+        },
+        retailPrice: {
+           required: true
+         },
+         mrp: {
+                required: true
+              }
+        
+      },
+      messages: {
+          product_price: {
+          required: "Please enter a product_price"
+        },
+        dealer_price: {
+              required: "Please enter a dealer_price"
+        },
+        retailPrice: {
+           required: "Please enter a Retail Price"
+        },
+        mrp: {
+            required: "Please enter a MRP"
+         }
+        
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+
+  });
+/*]]>*/
+</script>
+</div>
+</body>
+</html>
